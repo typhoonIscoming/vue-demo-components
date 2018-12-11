@@ -19,7 +19,7 @@ export default new Router({
     {
       path: '/A',
       name: 'pageA',
-      component: resolve => require([/* webpackChunkName: "pageA" */ '@/pages/pageA.vue'], resolve)
+      component: () => import('@/pages/pageA')
     },
     {
       path: '/B',
