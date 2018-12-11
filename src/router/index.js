@@ -19,22 +19,22 @@ export default new Router({
     {
       path: '/A',
       name: 'pageA',
-      component: () => import('@/pages/pageA')
+      component: resolve => require([/* webpackChunkName: "pageA" */ '@/pages/pageA.vue'], resolve)
     },
     {
       path: '/B',
       name: 'pageB',
-      component: () => import('@/pages/pageB')
+      component: resolve => require([/* webpackChunkName: "pageA" */ '@/pages/pageB.vue'], resolve)
     },
     {
       path: '/C',
       name: 'pageC',
-      component: () => import('@/pages/pageC')
+      component: resolve => require([/* webpackChunkName: "pageA" */ '@/pages/pageC.vue'], resolve)
     },
     {
       path: '/D',
       name: 'pageD',
-      component: () => import('@/pages/pageD')
+      component: resolve => require([/* webpackChunkName: "pageA" */ '@/pages/pageD.vue'], resolve)
     },
   ]
 })

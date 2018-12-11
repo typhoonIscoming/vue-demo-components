@@ -1,4 +1,4 @@
-# demo
+# demo-components
 
 > prictise for vue
 
