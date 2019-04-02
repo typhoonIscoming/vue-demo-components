@@ -1,7 +1,9 @@
 <template>
     <div class="B common">
         <common title="b"></common>
-        <div class="content" />
+        <div class="content">
+          <a :href="'sms:' + linkPeople">发送信息</a>
+        </div>
         <div class="bottom">
             b页面
         </div>
@@ -12,7 +14,9 @@
 import common from "@/components/common";
 export default {
   data() {
-    return {};
+    return {
+      linkPeople: '18502178364'
+    };
   },
   components: {
     common

@@ -12,7 +12,7 @@
           <!-- <rotate
             :list="list"
           /> -->
-          <button @click="test">测试实现debounce，点击第{{ index }}次,显示第{{ showTimes }}次</button>
+          <video id="video"></video>
         </div>
         <div
           class="bottom"
@@ -27,9 +27,6 @@ import common from "@/components/common";
 import select from '@/components/multiSelect';
 import logo from 'pic#/logo.png'
 import rotate from '@/components/rotate'
-
-import debounce from '@/utils/debounce'
-
 export default {
   data() {
     return {
@@ -40,9 +37,6 @@ export default {
       showList: true,
       selected: [],
       logo,
-      index: 0,
-      showTimes: 0,
-      timer: null,
     };
   },
   components: {
@@ -58,35 +52,39 @@ export default {
     console.log('a', a, 'b', b)
   },
   mounted() {
+    this.initPlayer()
   },
   methods: {
     selectEvent() {
       console.log(111111)
       this.showList = true
     },
-    test() {
-      this.index +=1
-      const fn = this.debounce(() => {
-        this.showTimes +=1
-      })
-      fn()
+    initPlayer() {
+      // const url = "rtsp://172.19.9.170:8554/stream1"
+      // const hongkong = 'rtmp://live.hkstv.hk.lxdns.com/live/hks'
+      // const chongqing = 'rtmp://live5.cqnews.net:1935/live/TVFLV15'
+      // const zhuhai = 'rtsp://184.72.239.149/vod/mp4://BigBuckBunny_175k.mov'
+      // new ckplayer({
+      //   // container: '#video',
+      //   variable: 'player01',//该属性必需设置，值等于下面的new chplayer()的对象
+      //   video: url,//视频地址
+      // });
+      var video = document.getElementById('video');
+      if(Hls.isSupported()) {
+          var hls = new Hls();
+          hls.loadSource('https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8');
+          // hls.loadSource('rtmp://live.hkstv.hk.lxdns.com/live/hks')
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED,function() {
+              video.play();
+          });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+          video.addEventListener('loadedmetadata',function() {
+          video.play();
+          });
+      }
     },
-    debounce(fn, delay = 300) {
-    // 定时器，用来 setTimeout
-    var context = this
-    // 返回一个函数，这个函数会在一个时间区间结束后的 delay 毫秒时执行 fn 函数
-    return function () {
-        // 保存函数调用时的上下文和参数，传递给 fn
-        console.log('this.timer', context.timer)
-        // 每次这个返回的函数被调用，就清除定时器，以保证不执行 fn
-        clearTimeout(context.timer)
-        // 当返回的函数被最后一次调用后（也就是用户停止了某个连续的操作），
-        // 再过 delay 毫秒就执行 fn
-        context.timer = setTimeout(function () {
-            fn.apply(context, arguments)
-        }, delay)
-    }
-}
   },
   watch: {
     selected(newvalue) {

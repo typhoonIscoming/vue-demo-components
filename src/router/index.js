@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+// import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: '/home/',
+  base: '/home',
   linkActiveClass: 'is-active',
   routes: [
     {
@@ -24,12 +24,12 @@ export default new Router({
     {
       path: '/B',
       name: 'pageB',
-      component: resolve => require([/* webpackChunkName: "pageA" */ '@/pages/pageB.vue'], resolve)
+      component: () => import('@/pages/pageB.vue')
     },
     {
       path: '/C',
       name: 'pageC',
-      component: resolve => require([/* webpackChunkName: "pageA" */ '@/pages/pageC.vue'], resolve)
+      component: () => import('@/pages/pageC.vue')
     },
     {
       path: '/D',
