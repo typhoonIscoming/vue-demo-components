@@ -2,7 +2,7 @@
     <div class="B common">
         <common title="b"></common>
         <div class="content">
-          <a :href="'sms:' + linkPeople">发送信息</a>
+          <a :href="'sms:' + linkPeople">{{ $t('m.sendSMS') }}</a>
         </div>
         <div class="bottom">
             b页面

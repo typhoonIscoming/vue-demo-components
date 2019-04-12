@@ -13,11 +13,12 @@
             :list="list"
           /> -->
           <button @click="test">测试实现debounce，点击第{{ index }}次,显示第{{ showTimes }}次</button>
+          <button @click="changeLanguage">{{ $t('m.changeLanguage') }}</button>
         </div>
         <div
           class="bottom"
           @click="selectEvent">
-            bottom
+            {{ $t('m.bottom') }}
         </div>
     </div>
 </template>
@@ -55,9 +56,12 @@ export default {
     a = a ^ b;
     b = b ^ a;
     a = a ^ b;
-    console.log('a', a, 'b', b)
+    // console.log('a', a, 'b', b)
   },
   mounted() {
+    const reg = /\d{1,}/
+    let str = 29
+    console.log(reg.test(str))
   },
   methods: {
     selectEvent() {
@@ -70,6 +74,14 @@ export default {
     showTimesDebounce: debounce(function(){
       this.showTimes +=1;
     }),
+    changeLanguage() {
+      const lang = this.$i18n.locale
+      if(lang === 'en') {
+        this.$i18n.locale = 'zh-CN'
+      } else if(lang === 'zh-CN') {
+        this.$i18n.locale = 'en'
+      }
+    },
   },
   watch: {
     selected(newvalue) {
