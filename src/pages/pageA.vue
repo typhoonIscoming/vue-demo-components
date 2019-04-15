@@ -14,6 +14,9 @@
           /> -->
           <button @click="test">测试实现debounce，点击第{{ index }}次,显示第{{ showTimes }}次</button>
           <button @click="changeLanguage">{{ $t('m.changeLanguage') }}</button>
+          <p>
+            <button @click="showConfirm">{{ $t('m.show') + $t('m.frame') }}</button>
+          </p>
         </div>
         <div
           class="bottom"
@@ -29,7 +32,7 @@ import select from '@/components/multiSelect';
 import logo from 'pic#/logo.png'
 import rotate from '@/components/rotate'
 
-import debounce from '@/utils/debounce'
+import { debounce } from '@/utils/debounce'
 
 export default {
   data() {
@@ -59,9 +62,7 @@ export default {
     // console.log('a', a, 'b', b)
   },
   mounted() {
-    const reg = /\d{1,}/
-    let str = 29
-    console.log(reg.test(str))
+    console.log(this.$t('m.bottom'))
   },
   methods: {
     selectEvent() {
@@ -74,13 +75,27 @@ export default {
     showTimesDebounce: debounce(function(){
       this.showTimes +=1;
     }),
-    changeLanguage() {
+    changeLanguage: debounce(function(){
       const lang = this.$i18n.locale
       if(lang === 'en') {
         this.$i18n.locale = 'zh-CN'
       } else if(lang === 'zh-CN') {
         this.$i18n.locale = 'en'
       }
+    }),
+    showConfirm() {
+      this.$vux.confirm.show({
+        title: this.$t('m.title'),
+        content: this.$t('m.content'),
+        confirmText: this.$t('m.confirm'),
+        cancelText: this.$t('m.cancel'),
+        onConfirm: () => {
+          console.log('print', this.$t('m.confirm'))
+        },
+        onCancel: () => {
+          console.log('print', this.$t('m.cancel'))
+        },
+      })
     },
   },
   watch: {

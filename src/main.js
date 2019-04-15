@@ -5,6 +5,11 @@ import App from './App'
 import router from './router'
 
 import VueI18n from 'vue-i18n'
+import  { ConfirmPlugin } from 'vux'
+
+
+
+Vue.use(ConfirmPlugin)
 
 Vue.use(VueI18n)
 

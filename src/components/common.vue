@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="left" @click="back">
-            back
+            {{ $t('m.back') }}
         </div>
         <div class="center">
             {{title}}

@@ -17,4 +17,6 @@ function debounce(fn, delay = 300) {
     }
 }
 
-export default debounce
+export {
+    debounce,
+}

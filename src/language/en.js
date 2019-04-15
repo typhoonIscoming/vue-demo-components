@@ -3,5 +3,11 @@ export const m = {
     bottom: 'bottom',
     top: 'top',
     changeLanguage: 'change-language',
-    sendSMS: 'send message'
+    sendSMS: 'send message',
+    show: 'show',
+    frame: 'frame',
+    title: 'title',
+    confirm: 'confirm',
+    cancel: 'cancel',
+    content: 'content',
 }
