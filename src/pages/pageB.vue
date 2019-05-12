@@ -20,7 +20,9 @@ export default {
   },
   components: {
     common
-  }
+  },
+  created() {
+  },
 };
 </script>
 

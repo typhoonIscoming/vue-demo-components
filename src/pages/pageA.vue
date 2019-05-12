@@ -59,7 +59,7 @@ export default {
     a = a ^ b;
     b = b ^ a;
     a = a ^ b;
-    // console.log('a', a, 'b', b)
+    console.log('a', a, 'b', b)
   },
   mounted() {
     console.log(this.$t('m.bottom'))
@@ -74,7 +74,7 @@ export default {
     },
     showTimesDebounce: debounce(function(){
       this.showTimes +=1;
-    }),
+    }, 300),
     changeLanguage: debounce(function(){
       const lang = this.$i18n.locale
       if(lang === 'en') {
