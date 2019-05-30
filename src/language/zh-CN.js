@@ -10,4 +10,5 @@ export const m = {
     confirm: '确认',
     cancel: '取消',
     content: '内容',
+    page: '页面',
 }

@@ -10,4 +10,5 @@ export const m = {
     confirm: 'confirm',
     cancel: 'cancel',
     content: 'content',
+    page: 'page',
 }
