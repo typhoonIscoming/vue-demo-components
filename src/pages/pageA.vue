@@ -32,6 +32,8 @@ import select from '@/components/multiSelect';
 import logo from 'pic#/logo.png'
 import rotate from '@/components/rotate'
 
+import crypto from 'crypto'
+
 import { debounce } from '@/utils/debounce'
 
 export default {
@@ -59,10 +61,9 @@ export default {
     a = a ^ b;
     b = b ^ a;
     a = a ^ b;
-    console.log('a', a, 'b', b)
   },
   mounted() {
-    console.log(this.$t('m.bottom'))
+    // console.log(this.$t('m.bottom'))
   },
   methods: {
     selectEvent() {
@@ -72,9 +73,10 @@ export default {
       this.index +=1;
       this.showTimesDebounce(123)
     },
-    showTimesDebounce: debounce(function(){
+    showTimesDebounce: debounce(function(data){
       this.showTimes +=1;
-    }, 300),
+      // console.log('data', data)
+    }, 1000, true),
     changeLanguage: debounce(function(){
       const lang = this.$i18n.locale
       if(lang === 'en') {

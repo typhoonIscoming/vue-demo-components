@@ -31,6 +31,11 @@ export default {
       console.log('this fathers components')
     },
   },
+  created() {
+    let str = '13558513096'
+    const reg = /^(\d{3})\d{4}(\d{4})$/; 
+    console.log('telphone hide', str.replace(reg, '$1****$2'))
+  },
 };
 </script>
 

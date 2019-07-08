@@ -2,7 +2,7 @@
   <div class="C common">
     <common title="c"></common>
     <div class="content">
-      <quill-editor
+      <!-- <quill-editor
         class="myQuillEditor"
         v-model="content"
         ref="myQuillEditor"
@@ -10,7 +10,7 @@
         @blur="onEditorBlur($event)"
         @focus="onEditorFocus($event)"
         @change="onEditorChange($event)"
-      />
+      /> -->
     </div>
     <div class="bottom">c页面</div>
   </div>
