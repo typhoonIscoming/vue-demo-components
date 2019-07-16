@@ -63,7 +63,6 @@ export default {
     a = a ^ b;
   },
   mounted() {
-    // console.log(this.$t('m.bottom'))
   },
   methods: {
     selectEvent() {

@@ -7,7 +7,7 @@ import router from './router'
 import VueI18n from 'vue-i18n'
 import  { ConfirmPlugin } from 'vux'
 
-
+console.log('process.env.NODE_ENV', process.env.NODE_ENV)
 
 Vue.use(ConfirmPlugin)
 
