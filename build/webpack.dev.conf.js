@@ -65,11 +65,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
-    new webpack.DllPlugin({
-      path: 'manifest.json',
-      name: '[name]',
-      context: __dirname,
-    }),
+    // new webpack.DllPlugin({
+    //   path: 'manifest.json',
+    //   name: '[name]',
+    //   context: __dirname,
+    // }),
   ]
 })
 
