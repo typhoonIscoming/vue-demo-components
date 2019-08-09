@@ -2,21 +2,15 @@
     <div class="A common">
         <common title="a"></common>
         <div class="content">
-          <!-- <selectList
-            v-if="showList"
-            v-model="selected"
-            :option-list="list"
-            :is-single="false"/>
-          <div class="model-content"></div> -->
-          <!-- <img :src="logo" /> -->
-          <!-- <rotate
-            :list="list"
-          /> -->
+          
           <button @click="test">测试实现debounce，点击第{{ index }}次,显示第{{ showTimes }}次</button>
           <button @click="changeLanguage">{{ $t('m.changeLanguage') }}</button>
           <p>
             <button @click="showConfirm">{{ $t('m.show') + $t('m.frame') }}</button>
           </p>
+          <div class="icon-img">
+
+          </div>
         </div>
         <div
           class="bottom"
@@ -29,7 +23,6 @@
 <script>
 import common from "@/components/common";
 import select from '@/components/multiSelect';
-import logo from 'pic#/logo.png'
 import rotate from '@/components/rotate'
 
 import crypto from 'crypto'
@@ -45,7 +38,6 @@ export default {
       ],
       showList: true,
       selected: [],
-      logo,
       index: 0,
       showTimes: 0,
       timer: null,
@@ -107,12 +99,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import '@/css/common.scss';
+<style lang="scss">
+@import '~@/css/common.scss';
+@import '~@/theme/sprites/sprite.scss';
+@import '~@/theme/sprites/mine/sprite.scss';
 .A{
   #video{
     width: 100%;
     height: 200px;
+  }
+  .icon-img{
+    @include sprite($apple);
   }
 }
 </style>

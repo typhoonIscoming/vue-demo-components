@@ -1,10 +1,3 @@
-{
-  // Default options
-  'functions': true,
-  'variableNameTransforms': ['dasherize']
-}
-
-{{#block "sprites-comment"}}
 // SCSS variables are information about icon's compiled state, stored under its original file name
 //
 // .icon-home {
@@ -16,32 +9,56 @@
 //
 // At the bottom of this section, we provide information about the spritesheet itself
 // $spritesheet: width height image $spritesheet-sprites;
-{{/block}}
-{{#block "sprites"}}
-{{#each sprites}}
-${{strings.name_name}}: '{{name}}';
-${{strings.name_x}}: {{px.x}};
-${{strings.name_y}}: {{px.y}};
-${{strings.name_offset_x}}: {{px.offset_x}}/2;
-${{strings.name_offset_y}}: {{px.offset_y}}/2;
-${{strings.name_width}}: {{px.width}}/2;
-${{strings.name_height}}: {{px.height}}/2;
-${{strings.name_total_width}}: {{px.total_width}}/2;
-${{strings.name_total_height}}: {{px.total_height}}/2;
-${{strings.name_image}}: '{{{escaped_image}}}';
-${{strings.name}}: ({{px.x}}, {{px.y}}, {{px.offset_x}}/2, {{px.offset_y}}/2, {{px.width}}/2, {{px.height}}/2, {{px.total_width}}/2, {{px.total_height}}/2, '{{{escaped_image}}}', '{{name}}', );
-{{/each}}
-{{/block}}
-{{#block "spritesheet"}}
-${{spritesheet_info.strings.name_width}}: {{spritesheet.px.width}};
-${{spritesheet_info.strings.name_height}}: {{spritesheet.px.height}};
-${{spritesheet_info.strings.name_image}}: '{{{spritesheet.escaped_image}}}';
-${{spritesheet_info.strings.name_sprites}}: ({{#each sprites}}${{strings.name}}, {{/each}});
-${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.height}}, '{{{spritesheet.escaped_image}}}', ${{spritesheet_info.strings.name_sprites}}, );
-{{/block}}
+$bankuserinfo-name: 'bankuserinfo';
+$bankuserinfo-x: 0px;
+$bankuserinfo-y: 204px;
+$bankuserinfo-offset-x: 0px/2;
+$bankuserinfo-offset-y: -204px/2;
+$bankuserinfo-width: 38px/2;
+$bankuserinfo-height: 28px/2;
+$bankuserinfo-total-width: 240px/2;
+$bankuserinfo-total-height: 232px/2;
+$bankuserinfo-image: '~assets/sprites/mine/sprite.png';
+$bankuserinfo: (0px, 204px, 0px/2, -204px/2, 38px/2, 28px/2, 240px/2, 232px/2, '~assets/sprites/mine/sprite.png', 'bankuserinfo', );
+$beibao-name: 'beibao';
+$beibao-x: 204px;
+$beibao-y: 40px;
+$beibao-offset-x: -204px/2;
+$beibao-offset-y: -40px/2;
+$beibao-width: 36px/2;
+$beibao-height: 29px/2;
+$beibao-total-width: 240px/2;
+$beibao-total-height: 232px/2;
+$beibao-image: '~assets/sprites/mine/sprite.png';
+$beibao: (204px, 40px, -204px/2, -40px/2, 36px/2, 29px/2, 240px/2, 232px/2, '~assets/sprites/mine/sprite.png', 'beibao', );
+$check-name: 'check';
+$check-x: 204px;
+$check-y: 0px;
+$check-offset-x: -204px/2;
+$check-offset-y: 0px/2;
+$check-width: 36px/2;
+$check-height: 36px/2;
+$check-total-width: 240px/2;
+$check-total-height: 232px/2;
+$check-image: '~assets/sprites/mine/sprite.png';
+$check: (204px, 0px, -204px/2, 0px/2, 36px/2, 36px/2, 240px/2, 232px/2, '~assets/sprites/mine/sprite.png', 'check', );
+$logo-name: 'logo';
+$logo-x: 0px;
+$logo-y: 0px;
+$logo-offset-x: 0px/2;
+$logo-offset-y: 0px/2;
+$logo-width: 200px/2;
+$logo-height: 200px/2;
+$logo-total-width: 240px/2;
+$logo-total-height: 232px/2;
+$logo-image: '~assets/sprites/mine/sprite.png';
+$logo: (0px, 0px, 0px/2, 0px/2, 200px/2, 200px/2, 240px/2, 232px/2, '~assets/sprites/mine/sprite.png', 'logo', );
+$spritesheet-width: 240px;
+$spritesheet-height: 232px;
+$spritesheet-image: '~assets/sprites/mine/sprite.png';
+$spritesheet-sprites: ($bankuserinfo, $beibao, $check, $logo, );
+$spritesheet: (240px, 232px, '~assets/sprites/mine/sprite.png', $spritesheet-sprites, );
 
-{{#block "sprite-functions-comment"}}
-{{#if options.functions}}
 // The provided mixins are intended to be used with the array-like variables
 //
 // .icon-home {
@@ -66,10 +83,6 @@ ${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.
 //
 // // HTML
 // <i class="icon icon-home"></i>
-{{/if}}
-{{/block}}
-{{#block "sprite-functions"}}
-{{#if options.functions}}
 @mixin sprite-width($sprite) {
   width: nth($sprite, 5);
 }
@@ -102,19 +115,11 @@ ${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.
   @include sprite-background-size($sprite);
   background-repeat: no-repeat;
 }
-{{/if}}
-{{/block}}
 
-{{#block "spritesheet-functions-comment"}}
-{{#if options.functions}}
 // The `sprites` mixin generates identical output to the CSS template
 //   but can be overridden inside of SCSS
 //
 // @include sprites($spritesheet-sprites);
-{{/if}}
-{{/block}}
-{{#block "spritesheet-functions"}}
-{{#if options.functions}}
 @mixin sprites($sprites) {
   @each $sprite in $sprites {
     $sprite-name: nth($sprite, 10);
@@ -123,5 +128,3 @@ ${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.
     }
   }
 }
-{{/if}}
-{{/block}}

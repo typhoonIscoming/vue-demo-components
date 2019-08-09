@@ -77,7 +77,7 @@ export default {
             height: 50px;
             border: 1px solid black;
             @extend .absolute_pointer;
-            background: url('~@/assets/logo.png')no-repeat center center;
+            // background: url('~@/assets/logo.png')no-repeat center center;
             background-size: contain;
         }
         .content{

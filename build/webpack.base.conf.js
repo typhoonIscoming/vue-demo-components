@@ -27,6 +27,8 @@ const webpackConfig = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       'pic#': resolve('src/assets'),
+      'theme': resolve('src/theme'),
+      'assets': resolve('src/assets'),
     }
   },
   module: {
@@ -45,7 +47,8 @@ const webpackConfig = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 1000,
+          outputPath: 'images/',
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
