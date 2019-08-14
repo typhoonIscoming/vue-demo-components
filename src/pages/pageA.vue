@@ -28,6 +28,7 @@ import rotate from '@/components/rotate'
 import crypto from 'crypto'
 
 import { debounce } from '@/utils/debounce'
+import { setTimeout, clearTimeout } from 'timers';
 
 export default {
   data() {
@@ -55,8 +56,26 @@ export default {
     a = a ^ b;
   },
   mounted() {
+    document.addEventListener("visibilitychange", () => {
+      console.log('hidden', document.hidden, +new Date())
+      if (document.hidden) {   //处于当前页面
+        console.log('页面被切换了')
+        this.titleTips()
+      } else {
+        clearTimeout(this.timer)
+      }
+    });
   },
   methods: {
+    titleTips() {
+      this.timer = setTimeout(() => {
+        if(document.title === '_') {
+          document.title = '消息'
+        } else document.title = '_'
+        this.titleTips()
+      }, 500)
+      
+    },
     selectEvent() {
       this.showList = true
     },
