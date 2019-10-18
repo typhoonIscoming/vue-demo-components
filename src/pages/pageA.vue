@@ -9,8 +9,9 @@
             <button @click="showConfirm">{{ $t('m.show') + $t('m.frame') }}</button>
           </p>
           <div class="icon-img">
-            <img :src="sprite" alt="sprite.png">
+            <!-- <img :src="sprite" alt="sprite.png"> -->
           </div>
+          <img :src="sprite" alt="sprite.png">
         </div>
         <div
           class="bottom"

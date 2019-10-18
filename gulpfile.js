@@ -48,17 +48,10 @@ gulp.task('default', function () {
         }))
         .pipe(gulp.dest(spirteDest))
         .on('finish', () => {
-          const tmpSrc = path.join(spirteDest, 'sprite.scss')
-          const tmpDst = path.join(scssDest, 'sprite.scss')
-          if(!fs.existsSync(scssDest)) {
-            // child_process.execSync(`mkdir -p ${scssDest}`)
-            mkdirp.sync(scssDest)
-          }
-          // child_process.execSync(`mv ${src} ${scssDest}`)
-          // mv(tmpSrc, scssDest, {mkdirp: true}, (e) => {
-          //   console.log(e)
-          // })
-          fs.renameSync(tmpSrc, tmpDst)
+            const tmpSrc = path.join(spirteDest, 'sprite.scss')
+            const tmpDst = path.join(scssDest, 'sprite.scss')
+            if(!fs.existsSync(scssDest)) mkdirp.sync(scssDest)
+            fs.renameSync(tmpSrc, tmpDst)
         })
     }
 
