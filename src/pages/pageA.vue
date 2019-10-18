@@ -9,7 +9,7 @@
             <button @click="showConfirm">{{ $t('m.show') + $t('m.frame') }}</button>
           </p>
           <div class="icon-img">
-
+            <img :src="sprite" alt="sprite.png">
           </div>
         </div>
         <div
@@ -25,7 +25,7 @@ import common from "@/components/common";
 import select from '@/components/multiSelect';
 import rotate from '@/components/rotate'
 
-import crypto from 'crypto'
+import sprite from 'pic#/sprites/sprite.png'
 
 import { debounce } from '@/utils/debounce'
 import { setTimeout, clearTimeout } from 'timers';
@@ -42,6 +42,7 @@ export default {
       index: 0,
       showTimes: 0,
       timer: null,
+      sprite,
     };
   },
   components: {
