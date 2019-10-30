@@ -1,72 +1,57 @@
-const path = require('path')
-const gulp = require('gulp');
-const spritesmith = require('gulp.spritesmith');
+const gulp = require('gulp')
+const spriteSmith = require('gulp.spritesmith')
 const fs = require('fs')
-const del = require('del')
-// const child_process = require('child_process')
-const mv = require('mv')
+const path = require('path')
 const mkdirp = require('mkdirp')
-const rmfr = require('rmfr')
 
-// 待处理的icon图片根目录
-const ICON_SOURCE = path.resolve(__dirname, 'src/assets/icons')
-// 生成的sprite图片根目录
-const SPRITE_DEST = path.resolve(__dirname, 'src/assets/sprites')
-// 生成的scss文件根根目录
-const SPRITE_SCSS = path.resolve(__dirname, 'src/theme/sprites')
+const icons = path.resolve(__dirname, 'src/assets/icons')
+console.log('icon', icons)
+const spriteImagePath = path.resolve(__dirname, 'src/assets/sprites')
 
-if (!fs.existsSync(SPRITE_DEST)) {
-    // child_process.execSync(`mkdir -p ${SPRITE_DEST}`)
-    mkdirp.sync(SPRITE_DEST)
-}
-if (!fs.existsSync(SPRITE_SCSS)) {
-    // child_process.execSync(`mkdir -p ${}`)
-    mkdirp.sync(SPRITE_SCSS)
-}
+const scssPath = path.resolve(__dirname, 'src/theme/sprites')
 
-gulp.task('default', function () {
-    readDirSync(ICON_SOURCE)
+if (!fs.existsSync(spriteImagePath)) mkdirp.sync(spriteImagePath)
+if (!fs.existsSync(scssPath)) mkdirp.sync(scssPath)
 
-    function readDirSync(dir) {
+// algorithm: 'binary-tree',
+
+gulp.task('sprite', () => {
+    spriteFactory(icons)
+    function spriteFactory(dir) {
         const files = fs.readdirSync(dir)
-        const pngs = files.filter(file => /\.png/.test(file))
-        if (pngs.length >= 1) {
-            // 获取当前文件相对于ICON_SOURCE的路径
-            const relativePath = path.relative(ICON_SOURCE, dir)
-            const spirteDest = path.resolve(SPRITE_DEST, relativePath)
-            // scss文件中引用的sprite图片地址
-            const scssImgDest = path.relative(__dirname, spirteDest).replace(/^src\//ig, '~')
-            // scss文件存放的地址
-            const scssDest = path.resolve(SPRITE_SCSS, relativePath)
+        const pngs = files.filter(item => /\.png/.test(item))
+        console.log('pngs', pngs)
+        if (pngs.length > 0) {
+            // 获取文件路径及设置生成的精灵图片的路径和样式文件的路径
+            const currentFileRelativePath = path.relative(icons, dir)
+            console.log('currentFileRelativePath', currentFileRelativePath)
+            // 生成的精灵图片的位置
+            const spriteDestPath = path.resolve(spriteImagePath, currentFileRelativePath)
+            const scssUsedImgFilePath = path.relative(__dirname, spriteDestPath).replace(/src\//ig, '~')
+            console.log('scssUsedImgPath', scssUsedImgFilePath)
+            const scssFilePath = path.resolve(scssPath, currentFileRelativePath)
             gulp.src(`${dir}/*.png`)
-                .pipe(spritesmith({
+                .pipe(spriteSmith({
                     imgName: 'sprite.png',
                     cssName: 'sprite.scss',
                     padding: 4,
-                    imgPath: `${scssImgDest}/sprite.png`,
+                    imgPath: `${scssUsedImgFilePath}/sprite.png`,
                     cssTemplate: 'gulp_templates/scss.2x.template.handlebars',
+                    algorithm: 'diagonal',
                 }))
-                .pipe(gulp.dest(spirteDest))
+                .pipe(gulp.dest(spriteDestPath))
                 .on('finish', () => {
-                    const tmpSrc = path.join(spirteDest, 'sprite.scss')
-                    const tmpDst = path.join(scssDest, 'sprite.scss')
-                    if (!fs.existsSync(scssDest)) mkdirp.sync(scssDest)
-                    fs.renameSync(tmpSrc, tmpDst)
+                    console.log('finish')
+                    const oldPath = path.join(spriteDestPath, 'sprite.scss')
+                    const newPath = path.join(scssFilePath, 'sprite.scss')
+                    if (!fs.existsSync(scssFilePath)) mkdirp.sync(scssFilePath)
+                    fs.renameSync(oldPath, newPath)
                 })
         }
-
-        files.forEach(function (ele) {
-            const curPath = `${dir}/${ele}`
-            const info = fs.statSync(curPath)
-            if (info.isDirectory()) {
-                return readDirSync(curPath)
-            }
+        files.forEach(item => {
+            const currentPath = `${dir}/${item}`
+            const info = fs.statSync(currentPath)
+            if (info.isDirectory()) spriteFactory(currentPath)
         })
     }
-})
-
-gulp.task('clearSprite', function () {
-    // child_process.execSync(`rm -rf ${SPRITE_DEST} ${SPRITE_SCSS}`)
-    rmfr(SPRITE_DEST)
-    rmfr(SPRITE_SCSS)
 })

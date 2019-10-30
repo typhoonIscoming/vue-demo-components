@@ -11,7 +11,10 @@
             @focus="onEditorFocus($event)"
             @change="onEditorChange($event)"
             />-->
-            <textarea type="textarea" class="c-textarea" wrap="hard" v-model="inputContent">
+            <textarea type="textarea" class="c-textarea" wrap="hard"
+                v-model="inputContent"
+                @keyup="keyup"
+            >
             </textarea>
             <pre v-html="preContent" />
         </div>
@@ -50,9 +53,21 @@ export default {
         console.log('el', el.value)
     },
     methods: {
-        onEditorBlur() {},
-        onEditorFocus() {},
-        onEditorChange() {},
+        keyup(e) {
+            var input_val = this.inputContent;
+            let caretPos
+            const ctrl = e.target
+            console.log(e)
+            if (document.selection) {
+                var sel = document.selection.createRange();
+                sel.moveStart ('character', -input_val.length);
+                caretPos = Sel.text.length;
+            } else if (ctrl.selectionStart || ctrl.selectionStart == '0') {
+                caretPos = ctrl.selectionStart
+            }
+            
+            console.log('caretPos', caretPos)
+        },
         parse2(str) {
             str = this.transferObjectToString(str)
             // 设置缩进为2个空格
@@ -92,7 +107,12 @@ export default {
         },
         inputContent(newval, oldval) {
             console.log('newval', newval)
-            console.log('oldval', oldval)
+            try{
+                this.inputContent = this.parse1(newval)
+            }catch(e){
+                console.log(e)
+            }
+            
         },
     }
 };
