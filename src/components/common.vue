@@ -29,7 +29,7 @@ export default {
   width: 100%;
   height: 40px;
   line-height: 40px;
-  background-color: rgb(100, 231, 60);
+  /* background-color: rgb(100, 231, 60); */
 }
 .clearfix {
   overflow: auto;
