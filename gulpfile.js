@@ -1,57 +1,54 @@
+// 根目录下面新建gulpfile.js的文件
+// 同时下载gulp、 gulp.spritesmith
+// npm i gulp 、 gulp.spritesmith --save-dev
 const gulp = require('gulp')
 const spriteSmith = require('gulp.spritesmith')
-const fs = require('fs')
 const path = require('path')
+const fs = require('fs')
 const mkdirp = require('mkdirp')
 
 const icons = path.resolve(__dirname, 'src/assets/icons')
-console.log('icon', icons)
-const spriteImagePath = path.resolve(__dirname, 'src/assets/sprites')
 
-const scssPath = path.resolve(__dirname, 'src/theme/sprites')
+const spriteDest = path.resolve(__dirname, 'src/assets/sprites')
 
-if (!fs.existsSync(spriteImagePath)) mkdirp.sync(spriteImagePath)
-if (!fs.existsSync(scssPath)) mkdirp.sync(scssPath)
+const scssDest = path.resolve(__dirname, 'src/theme/sprites')
 
-// algorithm: 'binary-tree',
-
-gulp.task('sprite', () => {
-    spriteFactory(icons)
-    function spriteFactory(dir) {
+gulp.task('default', () => {
+    spriteFctory(icons)
+    function spriteFctory(dir) {
         const files = fs.readdirSync(dir)
         const pngs = files.filter(item => /\.png/.test(item))
-        console.log('pngs', pngs)
+        console.log(pngs)
         if (pngs.length > 0) {
-            // 获取文件路径及设置生成的精灵图片的路径和样式文件的路径
             const currentFileRelativePath = path.relative(icons, dir)
             console.log('currentFileRelativePath', currentFileRelativePath)
-            // 生成的精灵图片的位置
-            const spriteDestPath = path.resolve(spriteImagePath, currentFileRelativePath)
-            const scssUsedImgFilePath = path.relative(__dirname, spriteDestPath).replace(/src\//ig, '~')
-            console.log('scssUsedImgPath', scssUsedImgFilePath)
-            const scssFilePath = path.resolve(scssPath, currentFileRelativePath)
+            const scssImagePath = path.resolve(spriteDest, currentFileRelativePath)
+            console.log('scssImagePath', scssImagePath)
+            const imageRelativePath = path.relative(__dirname, scssImagePath).replace(/^src\//ig, '~')
+            console.log('imageRelativePath', imageRelativePath)
+            const scssPath = path.resolve(scssDest, currentFileRelativePath)
+            console.log('scssPath', scssPath)
             gulp.src(`${dir}/*.png`)
                 .pipe(spriteSmith({
                     imgName: 'sprite.png',
                     cssName: 'sprite.scss',
                     padding: 4,
-                    imgPath: `${scssUsedImgFilePath}/sprite.png`,
+                    imgPath: `${imageRelativePath}/sprite.png`,
                     cssTemplate: 'gulp_templates/scss.2x.template.handlebars',
-                    algorithm: 'diagonal',
+                    algorithms: 'diagonal'
                 }))
-                .pipe(gulp.dest(spriteDestPath))
+                .pipe(gulp.dest(scssImagePath))
                 .on('finish', () => {
-                    console.log('finish')
-                    const oldPath = path.join(spriteDestPath, 'sprite.scss')
-                    const newPath = path.join(scssFilePath, 'sprite.scss')
-                    if (!fs.existsSync(scssFilePath)) mkdirp.sync(scssFilePath)
+                    const oldPath = path.join(scssImagePath, 'sprite.scss')
+                    const newPath = path.join(scssPath, 'sprite.scss')
+                    if (!fs.existsSync(scssPath)) mkdirp.sync(scssPath)
                     fs.renameSync(oldPath, newPath)
                 })
         }
         files.forEach(item => {
             const currentPath = `${dir}/${item}`
             const info = fs.statSync(currentPath)
-            if (info.isDirectory()) spriteFactory(currentPath)
+            if (info.isDirectory()) spriteFctory(currentPath)
         })
     }
 })
