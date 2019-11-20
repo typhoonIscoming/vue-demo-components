@@ -24,7 +24,7 @@ gulp.task('default', () => {
             console.log('currentFileRelativePath', currentFileRelativePath)
             const scssImagePath = path.resolve(spriteDest, currentFileRelativePath)
             console.log('scssImagePath', scssImagePath)
-            const imageRelativePath = path.relative(__dirname, scssImagePath).replace(/^src\//ig, '~')
+            const imageRelativePath = path.relative(__dirname, scssImagePath).replace(/^src\//ig, '~@/')
             console.log('imageRelativePath', imageRelativePath)
             const scssPath = path.resolve(scssDest, currentFileRelativePath)
             console.log('scssPath', scssPath)
