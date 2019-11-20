@@ -18,16 +18,11 @@ gulp.task('default', () => {
     function spriteFctory(dir) {
         const files = fs.readdirSync(dir)
         const pngs = files.filter(item => /\.png/.test(item))
-        console.log(pngs)
         if (pngs.length > 0) {
             const currentFileRelativePath = path.relative(icons, dir)
-            console.log('currentFileRelativePath', currentFileRelativePath)
             const scssImagePath = path.resolve(spriteDest, currentFileRelativePath)
-            console.log('scssImagePath', scssImagePath)
             const imageRelativePath = path.relative(__dirname, scssImagePath).replace(/^src\//ig, '~@/')
-            console.log('imageRelativePath', imageRelativePath)
             const scssPath = path.resolve(scssDest, currentFileRelativePath)
-            console.log('scssPath', scssPath)
             gulp.src(`${dir}/*.png`)
                 .pipe(spriteSmith({
                     imgName: 'sprite.png',

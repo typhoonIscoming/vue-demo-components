@@ -1,0 +1,130 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$bgcolor-name: 'bgcolor';
+$bgcolor-x: 0px;
+$bgcolor-y: 101px;
+$bgcolor-offset-x: 0px/2;
+$bgcolor-offset-y: -101px/2;
+$bgcolor-width: 66px/2;
+$bgcolor-height: 66px/2;
+$bgcolor-total-width: 190px/2;
+$bgcolor-total-height: 167px/2;
+$bgcolor-image: '~@/assets/sprites/others/sprite.png';
+$bgcolor: (0px, 101px, 0px/2, -101px/2, 66px/2, 66px/2, 190px/2, 167px/2, '~@/assets/sprites/others/sprite.png', 'bgcolor', );
+$decorate-name: 'decorate';
+$decorate-x: 0px;
+$decorate-y: 0px;
+$decorate-offset-x: 0px/2;
+$decorate-offset-y: 0px/2;
+$decorate-width: 118px/2;
+$decorate-height: 43px/2;
+$decorate-total-width: 190px/2;
+$decorate-total-height: 167px/2;
+$decorate-image: '~@/assets/sprites/others/sprite.png';
+$decorate: (0px, 0px, 0px/2, 0px/2, 118px/2, 43px/2, 190px/2, 167px/2, '~@/assets/sprites/others/sprite.png', 'decorate', );
+$time-name: 'time';
+$time-x: 0px;
+$time-y: 47px;
+$time-offset-x: 0px/2;
+$time-offset-y: -47px/2;
+$time-width: 94px/2;
+$time-height: 50px/2;
+$time-total-width: 190px/2;
+$time-total-height: 167px/2;
+$time-image: '~@/assets/sprites/others/sprite.png';
+$time: (0px, 47px, 0px/2, -47px/2, 94px/2, 50px/2, 190px/2, 167px/2, '~@/assets/sprites/others/sprite.png', 'time', );
+$video-name: 'video';
+$video-x: 122px;
+$video-y: 0px;
+$video-offset-x: -122px/2;
+$video-offset-y: 0px/2;
+$video-width: 68px/2;
+$video-height: 68px/2;
+$video-total-width: 190px/2;
+$video-total-height: 167px/2;
+$video-image: '~@/assets/sprites/others/sprite.png';
+$video: (122px, 0px, -122px/2, 0px/2, 68px/2, 68px/2, 190px/2, 167px/2, '~@/assets/sprites/others/sprite.png', 'video', );
+$spritesheet-width: 190px;
+$spritesheet-height: 167px;
+$spritesheet-image: '~@/assets/sprites/others/sprite.png';
+$spritesheet-sprites: ($bgcolor, $decorate, $time, $video, );
+$spritesheet: (190px, 167px, '~@/assets/sprites/others/sprite.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-background-size($sprite) {
+  background-size: nth($sprite, 7) nth($sprite, 8);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+  @include sprite-background-size($sprite);
+  background-repeat: no-repeat;
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}
