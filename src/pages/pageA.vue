@@ -26,10 +26,7 @@ import common from "@/components/common";
 import select from '@/components/multiSelect';
 import rotate from '@/components/rotate'
 
-import sprite from 'pic#/sprites/sprite.png'
-
 import { debounce } from '@/utils/debounce'
-import { setTimeout, clearTimeout } from 'timers';
 
 export default {
   data() {
@@ -43,7 +40,6 @@ export default {
       index: 0,
       showTimes: 0,
       timer: null,
-      sprite,
     };
   },
   components: {
@@ -122,15 +118,12 @@ export default {
 
 <style lang="scss">
 @import '~@/css/common.scss';
-@import '~@/theme/sprites/sprite.scss';
-@import '~@/theme/sprites/mine/sprite.scss';
 .A{
   #video{
     width: 100%;
     height: 200px;
   }
   .icon-img{
-    @include sprite($apple);
   }
 }
 </style>
