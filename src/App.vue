@@ -1,116 +1,113 @@
 <template>
-  <div id="app">
-    <div class="nav-bar">
-      <router-link to="/A" @click.native="clickLink">A</router-link>
-      <router-link to="/B" @click.native="clickLink">B</router-link>
-      <router-link to="/C" @click.native="clickLink">C</router-link>
-      <router-link to="/D" @click.native="clickLink">D</router-link>
+    <div id="app">
+        <div class="nav-bar">
+            <router-link to="/A" @click.native="clickLink">A</router-link>
+            <router-link to="/B" @click.native="clickLink">B</router-link>
+            <router-link to="/C" @click.native="clickLink">C</router-link>
+            <router-link to="/D" @click.native="clickLink">D</router-link>
+            <router-link to="/E" @click.native="clickLink">E</router-link>
+        </div>
+        <transition :name="trsnsname">
+            <router-view/>
+        </transition>
     </div>
-    <transition :name="trsnsname">
-      <router-view/>
-    </transition>
-  </div>
 </template>
 
 <script>
 export default {
-  name: "App",
-  data() {
-    return {
-      trsnsname: 'turn-on',
-    };
-  },
-  methods: {
-    clickLink() {
-      this.trsnsname = "turn-on"
+    name: "App",
+    data() {
+        return {
+            trsnsname: "turn-on"
+        };
+    },
+    methods: {
+        clickLink() {
+            this.trsnsname = "turn-on";
+        }
+    },
+    mounted() {
+        var _this = this;
+        window.addEventListener("popstate", function(e) {
+            _this.trsnsname = "turn-off";
+        }, false);
     }
-  },
-  mounted() {
-    var _this = this;
-    window.addEventListener(
-      "popstate",
-      function(e) {
-        _this.trsnsname = "turn-off"
-      },
-      false
-    );
-  }
 };
 </script>
 
 <style lang="scss">
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 .btn {
-  width: 50%;
+    width: 50%;
 }
 html,
 body,
 #app {
-  height: 100%;
+    height: 100%;
 }
-#app{
-  position: relative;
-  box-sizing: border-box;
+#app {
+    position: relative;
+    box-sizing: border-box;
 }
 .turn-on-enter {
-  transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
 }
 .turn-on-leave-to {
-  /* transform: translate3d(-20%, 0, 0); */
+    transform: translate3d(-20%, 0, 0);
 }
 .turn-on-enter-active,
-.turn-on-leave-active {
-  transition: transform 1.4s ease;
-}
-.turn-off-enter {
-  /* transform: translate3d(-20%, 0, 0); */
-}
-.turn-off-leave-to {
-  transform: translate3d(100%, 0, 0);
-}
+.turn-on-leave-active,
 .turn-off-enter-active,
 .turn-off-leave-active {
-  transition: transform 1.4s ease;
+    transition: transform .4s ease;
+}
+.turn-off-enter {
+    transform: translate3d(-20%, 0, 0);
+}
+.turn-off-leave-to {
+    transform: translate3d(100%, 0, 0);
 }
 .turn-off-leave-active {
-  z-index: 2;
+    z-index: 2;
 }
-.nav-bar{
-  position: absolute;
-  width: 100%;
-  top: 0;
-  z-index: 10;
-  background: white;
-  display: flex;
-  a{
-    flex: 1;
-    text-align: center;
-    // border-right: 1px solid gray;
-    box-sizing: border-box;
-    position: relative;
-    text-decoration: none;
-    &:after{
-      content: '';
-      border-right: 1px solid #666;
-      height: 10px;
-      width: 2px;
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
+.nav-bar {
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    top: 0;
+    z-index: 10;
+    background: white;
+    display: flex;
+    a {
+        flex: 1;
+        text-align: center;
+        // border-right: 1px solid gray;
+        box-sizing: border-box;
+        position: relative;
+        text-decoration: none;
+        &:after {
+            content: "";
+            border-right: 1px solid #666;
+            height: 10px;
+            width: 2px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        &:last-child {
+            &:after {
+                border: none;
+            }
+        }
+        &.is-active {
+            color: red;
+        }
     }
-    &:last-child{
-      &:after{
-        border: none;
-      }
-    }
-    &.is-active{
-      color: red;
-    }
-  }
 }
 </style>
