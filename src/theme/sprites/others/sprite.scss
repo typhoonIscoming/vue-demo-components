@@ -31,6 +31,28 @@ $decorate-total-width: 216px/2;
 $decorate-total-height: 165px/2;
 $decorate-image: '~@/assets/sprites/others/sprite.png';
 $decorate: (98px, 0px, -98px/2, 0px/2, 118px/2, 43px/2, 216px/2, 165px/2, '~@/assets/sprites/others/sprite.png', 'decorate', );
+$decorate5-name: 'decorate5';
+$decorate5-x: 107px;
+$decorate5-y: 114px;
+$decorate5-offset-x: -107px/2;
+$decorate5-offset-y: -114px/2;
+$decorate5-width: 65px/2;
+$decorate5-height: 30px/2;
+$decorate5-total-width: 216px/2;
+$decorate5-total-height: 165px/2;
+$decorate5-image: '~@/assets/sprites/others/sprite.png';
+$decorate5: (107px, 114px, -107px/2, -114px/2, 65px/2, 30px/2, 216px/2, 165px/2, '~@/assets/sprites/others/sprite.png', 'decorate5', );
+$decorate9-name: 'decorate9';
+$decorate9-x: 56px;
+$decorate9-y: 114px;
+$decorate9-offset-x: -56px/2;
+$decorate9-offset-y: -114px/2;
+$decorate9-width: 47px/2;
+$decorate9-height: 46px/2;
+$decorate9-total-width: 216px/2;
+$decorate9-total-height: 165px/2;
+$decorate9-image: '~@/assets/sprites/others/sprite.png';
+$decorate9: (56px, 114px, -56px/2, -114px/2, 47px/2, 46px/2, 216px/2, 165px/2, '~@/assets/sprites/others/sprite.png', 'decorate9', );
 $number-name: 'number';
 $number-x: 98px;
 $number-y: 60px;
@@ -67,7 +89,7 @@ $title: (0px, 114px, 0px/2, -114px/2, 52px/2, 51px/2, 216px/2, 165px/2, '~@/asse
 $spritesheet-width: 216px;
 $spritesheet-height: 165px;
 $spritesheet-image: '~@/assets/sprites/others/sprite.png';
-$spritesheet-sprites: ($bgcolor, $decorate, $number, $time, $title, );
+$spritesheet-sprites: ($bgcolor, $decorate, $decorate5, $decorate9, $number, $time, $title, );
 $spritesheet: (216px, 165px, '~@/assets/sprites/others/sprite.png', $spritesheet-sprites, );
 
 // The provided mixins are intended to be used with the array-like variables
