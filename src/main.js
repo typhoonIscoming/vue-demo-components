@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 
 // 可拖拽组件
 import VueDraggableResizable from 'vue-draggable-resizable';
@@ -33,6 +34,7 @@ new Vue({
   el: '#app',
   router,
   i18n,
+  store,
   components: { App },
   template: '<App/>'
 })

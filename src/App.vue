@@ -79,7 +79,6 @@ body,
     height: 60px;
     line-height: 60px;
     top: 0;
-    z-index: 10;
     background: white;
     display: flex;
     a {

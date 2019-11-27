@@ -1,9 +1,20 @@
 <template>
-    <div class="page-e common">
-        <div style="height: 100%; width: 100%; border: 1px solid red; position: relative;">
+    <div class="page-e">
+        <div class="draggable-menu">
+            <div
+                v-for="item in 10"
+                :key="item"
+                :draggable="true"
+                class="draggable-item"
+                :data-component-id="item"
+            >
+                {{ item }}
+            </div>
+        </div>
+        <div class="draggable-container">
             <vue-draggable-resizable
-                :w="100"
-                :h="100"
+                :w="200"
+                :h="200"
                 :parent="true"
                 @dragging="onDrag"
                 @resizing="onResize"
@@ -21,8 +32,8 @@ export default {
         return {
             x: 0,
             y: 0,
-            width: 0,
-            height: 0,
+            width: 200,
+            height: 200,
         }
     },
     methods: {
@@ -43,4 +54,34 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/css/common.scss";
+.page-e{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding-top: 60px;
+    box-sizing: border-box;
+    .draggable-menu{
+        width: 200px;
+        height: 100%;
+        margin-right: 10px;
+        padding: 0 10px;
+        .draggable-item{
+            height: 30px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            &+.draggable-item{
+                margin-top: 10px;
+            }
+        }
+    }
+    .draggable-container{
+        height: 100%;
+        flex: 1;
+        border: 1px solid red;
+        position: relative;
+    }
+}
 </style>
