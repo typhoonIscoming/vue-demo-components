@@ -16,6 +16,7 @@
 <script>
 import common from "@/components/common";
 import selectItem from '@/components/pageB/selected'
+
 export default {
   data() {
     return {

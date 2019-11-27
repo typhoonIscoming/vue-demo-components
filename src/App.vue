@@ -81,6 +81,7 @@ body,
     top: 0;
     background: white;
     display: flex;
+    z-index: 10;
     a {
         flex: 1;
         text-align: center;

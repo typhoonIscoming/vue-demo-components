@@ -17,8 +17,6 @@
 
 <script>
 import common from "@/components/common";
-import select from "@/components/multiSelect";
-import rotate from "@/components/rotate";
 
 import { debounce } from "@/utils/debounce";
 
@@ -38,8 +36,6 @@ export default {
     },
     components: {
         common,
-        selectList: select,
-        rotate
     },
     created() {
         let a = 9,
