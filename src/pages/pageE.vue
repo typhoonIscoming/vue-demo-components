@@ -42,50 +42,50 @@
                 >
                     <es-let-component
                         v-if="item.componentType === 'let'"
-                        :content="menuType[index].content"
+                        :content="showContent(item.componentType)"
                         :style="{'transform': `translate(${item.x}px, ${item.y}px);`}"
                     />
                     <div v-if="item.componentType === 'const'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'destructuring'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'string'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'number'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'object'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'array'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'set'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'map'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'proxy'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'reflect'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'promise'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'generator'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'async'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <div v-if="item.componentType === 'class'">
-                        {{ item.content }}
+                        {{ showContent(item.componentType) }}
                     </div>
                     <v-chart
                         v-if="item.componentType === 'VChart'"
@@ -159,6 +159,7 @@ export default {
             'setDeactivitedComponent', 'setCurrentDragElementType', 'setCurrentComponentSize',
             'setCurrentComponentLocation']),
         onDrag(x, y) {
+            console.log(x, y)
             this.setCurrentComponentLocation({ x, y })
         },
         onResize(left, top, width, height) {
@@ -240,6 +241,9 @@ export default {
                 })
             chart.render()
         },
+        showContent(type) {
+            return this.menuType.filter(item => item.type === type)[0].content
+        },
     },
 }
 </script>
@@ -276,7 +280,7 @@ export default {
         position: relative;
         box-sizing: border-box;
         transform-origin: 0 0;
-        transform: scale(0.7);
+        // transform: scale(1);
         .drag-item{
             left: 0 !important;
             top: 0 !important;
