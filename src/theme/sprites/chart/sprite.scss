@@ -20,6 +20,17 @@ $bar-total-width: 450px/2;
 $bar-total-height: 298px/2;
 $bar-image: '~@/assets/sprites/chart/sprite.png';
 $bar: (127px, 0px, -127px/2, 0px/2, 121px/2, 91px/2, 450px/2, 298px/2, '~@/assets/sprites/chart/sprite.png', 'bar', );
+$funnel-name: 'funnel';
+$funnel-x: 358px;
+$funnel-y: 96px;
+$funnel-offset-x: -358px/2;
+$funnel-offset-y: -96px/2;
+$funnel-width: 57px/2;
+$funnel-height: 39px/2;
+$funnel-total-width: 450px/2;
+$funnel-total-height: 298px/2;
+$funnel-image: '~@/assets/sprites/chart/sprite.png';
+$funnel: (358px, 96px, -358px/2, -96px/2, 57px/2, 39px/2, 450px/2, 298px/2, '~@/assets/sprites/chart/sprite.png', 'funnel', );
 $line-name: 'line';
 $line-x: 0px;
 $line-y: 0px;
@@ -111,7 +122,7 @@ $worldcloud: (252px, 0px, -252px/2, 0px/2, 102px/2, 96px/2, 450px/2, 298px/2, '~
 $spritesheet-width: 450px;
 $spritesheet-height: 298px;
 $spritesheet-image: '~@/assets/sprites/chart/sprite.png';
-$spritesheet-sprites: ($bar, $line, $pie, $radar, $ranklist, $ring, $scroll, $water, $worldcloud, );
+$spritesheet-sprites: ($bar, $funnel, $line, $pie, $radar, $ranklist, $ring, $scroll, $water, $worldcloud, );
 $spritesheet: (450px, 298px, '~@/assets/sprites/chart/sprite.png', $spritesheet-sprites, );
 
 // The provided mixins are intended to be used with the array-like variables
