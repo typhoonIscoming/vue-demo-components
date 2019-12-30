@@ -1,24 +1,8 @@
 <template>
-    <div class="D common">
+    <div class="D common page-d-container">
         <common title="d"></common>
         <div class="content">
-            <div class="total">
-                <!-- 扫码区域 -->
-                <div id="outdiv" class="scanning_frame">
-                    <video id="v" autoplay></video>
-                    <canvas id="qr-canvas"></canvas>
-                    <!--加载动画-->
-                    <div class="spinner" id="loading">
-                        <div class="double-bounce1"></div>
-                        <div class="double-bounce2"></div>
-                    </div>
-                </div>
-                <div class="infor">请扫描车上的二维码</div>
-                <!-- 展示扫码结果 -->
-                <div>
-                    <p id="result"></p>
-                </div>
-            </div>
+            <div id="container"></div>
         </div>
         <div class="bottom">D页面</div>
     </div>
@@ -26,77 +10,76 @@
 
 <script>
 import common from "@/components/common";
+import G6 from '@antv/g6';
+
 export default {
     data() {
-        return {};
+        return {
+            graph: null,
+            initData: {
+                nodes: [
+                    { id: 'node1', label: 'Circle1', x: 150, y: 150 },
+                    { id: 'node2', label: 'Circle2', x: 400, y: 150 }
+                ],
+                edges: [
+                    { source: 'node1', target: 'node2' }
+                ]
+            }
+        };
     },
     components: {
         common
     },
     created() {
-        const originObject = {
-            count: 1,
-            str: 'this is origin object',
-            arr: [1, 2, 3],
-            obj: {
-                objName: 'obj data',
-                objCount: 10,
-            },
-        }
-        const objProxy = new Proxy(originObject, {
-            get: function(target, key, receiver) {
-                return Reflect.get(target, key, receiver)
-            },
-            set: function(target, key, value, receiver) {
-                return Reflect.set(target, key, value, receiver)
-            }
-        })
-        objProxy.obj.objName = 'new obj'
-        objProxy.arr[0] = 9
-        setTimeout(() => {
-            console.log(objProxy.arr)
-        }, 1000);
+        
     },
     mounted() {
-        const originObject = {
-            count: 0,
-            obj: {
-                str: 'hello',
-                deepObj: {
-                    deepStr: 'deep hello'
+        this.initG6()
+    },
+    methods: {
+        initG6() {
+            const width = document.getElementById('container').clientWidth;
+            const height = document.getElementById('container').clientHeight;
+            console.log(width, height)
+            this.graph = new G6.Graph({
+                container: 'container',
+                width,
+                height,
+                defaultNode: {
+                    shape: 'rect',
+                    size: [ 100 ],
+                    color: '#5B8FF9',
+                    style: {
+                    fill: '#9EC9FF',
+                    lineWidth: 3
+                    },
+                    labelCfg: {
+                    style: {
+                        fill: '#fff',
+                        fontSize: 20
+                    }
+                    }
                 },
-            },
-            arr: [1, 2, 3],
-        }
-        function observer(obj) {
-            Object.keys(obj).forEach(key => {
-                if (typeof obj[key] === 'object') {
-                    observer(obj[key])
+                defaultEdge: {
+                    style: {
+                    stroke: '#e2e2e2'
+                    }
                 }
-                defineReactive(obj, key, obj[key])
             })
-        }
-        function defineReactive(obj, key, val) {
-            Object.defineProperty(obj, key, {
-                enumerable: true,
-                configurable: true,
-                get: function() {
-                    return val
-                },
-                set: function(newval) {
-                    val = newval
-                    console.log(newval)
-                },
-            })
-        }
-        observer(originObject)
-        setTimeout(() => {
-            originObject.obj.deepObj.deepStr = 'deep world'
-        }, 2000);
+            this.graph.data(this.initData);
+            this.graph.render();
+            console.log(this.graph.getEdges())
+        },
     },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/css/common.scss";
+.page-d-container{
+    #container{
+        width: 100%;
+        height: 100%;
+    }
+}
 </style>
