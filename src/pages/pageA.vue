@@ -19,7 +19,8 @@
 import common from "@/components/common";
 
 import { debounce } from "@/utils/debounce";
-// import { debounce } from 'lodash'
+import { throttle, debounce } from 'lodash'
+
 
 export default {
     data() {
@@ -46,7 +47,7 @@ export default {
         a = a ^ b;
     },
     mounted() {
-        document.addEventListener("visibilitychange", this.linsteningEvent);
+        // document.addEventListener("visibilitychange", this.linsteningEvent);
     },
     methods: {
         titleTips() {
@@ -71,7 +72,7 @@ export default {
         },
         test() {
             this.index += 1;
-            this.showTimesDebounce(123);
+            this.showTimesDebounce();
         },
         showTimesDebounce: debounce(
             function(data) {
