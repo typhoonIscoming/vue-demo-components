@@ -19,6 +19,7 @@
 import common from "@/components/common";
 
 import { debounce } from "@/utils/debounce";
+// import { debounce } from 'lodash'
 
 export default {
     data() {
@@ -75,7 +76,7 @@ export default {
         showTimesDebounce: debounce(
             function(data) {
                 this.showTimes += 1;
-                // console.log('data', data)
+                console.log('data', data)
             },
             1000,
             true
