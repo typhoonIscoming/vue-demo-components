@@ -2,7 +2,13 @@
     <div class="A common">
         <common title="a"></common>
         <div class="content">
-            
+            <button @click="isExpand = !isExpand">展开</button>
+            <el-collapse-transition>
+                <div v-show="isExpand" class="expend">
+                    <div class="changeable-container">我的高度可以改变</div>
+                </div>
+                
+            </el-collapse-transition>
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
     </div>
@@ -14,23 +20,27 @@ import common from "@/components/common";
 // import { debounce } from "@/utils/debounce";
 import { throttle, debounce } from 'lodash'
 import axios from 'axios'
+import XhTransition from '@/components/transition/transition'
+
 
 export default {
     data() {
         return {
-        list: [
-            { id: 1, relation: "子女", mobile: "13558513096" },
-            { id: 2, relation: "子女", mobile: "13558513095" }
-        ],
-        showList: true,
-        selected: [],
-        index: 0,
-        showTimes: 0,
-        timer: null
+            list: [
+                { id: 1, relation: "子女", mobile: "13558513096" },
+                { id: 2, relation: "子女", mobile: "13558513095" }
+            ],
+            showList: true,
+            selected: [],
+            index: 0,
+            showTimes: 0,
+            timer: null,
+            isExpand: false,
         };
     },
     components: {
         common,
+        [XhTransition.name]: XhTransition,
     },
     created() {
         let a = 9,
@@ -109,10 +119,17 @@ export default {
 
 <style lang="scss">
 @import "~@/css/common.scss";
+@import '~@/components/transition/transition.scss';
+
 .A {
-    #video {
-        width: 100%;
+    .changeable-container{
         height: 200px;
+        width: 100%;
+        background-color: greenyellow;
+        &.expend-changeable-container{
+            height: 500px;
+            background-color: red;
+        }
     }
 }
 </style>
