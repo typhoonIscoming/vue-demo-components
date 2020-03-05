@@ -2,14 +2,7 @@
     <div class="A common">
         <common title="a"></common>
         <div class="content">
-            <button @click="test">测试实现debounce，点击第{{ index }}次,显示第{{ showTimes }}次</button>
-            <button @click="changeLanguage">{{ $t('m.changeLanguage') }}</button>
-            <p>
-                <button @click="showConfirm">{{ $t('m.show') + $t('m.frame') }}</button>
-            </p>
-            <div class="icon-img">
-                <!-- <img :src="sprite" alt="sprite.png"> -->
-            </div>
+            
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
     </div>
@@ -20,7 +13,7 @@ import common from "@/components/common";
 
 // import { debounce } from "@/utils/debounce";
 import { throttle, debounce } from 'lodash'
-
+import axios from 'axios'
 
 export default {
     data() {
@@ -77,7 +70,7 @@ export default {
         showTimesDebounce: debounce(
             function(data) {
                 this.showTimes += 1;
-                // console.log('data', data)
+                console.log('data', data)
             },
             1000,
             true
