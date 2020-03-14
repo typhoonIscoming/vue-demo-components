@@ -9,6 +9,14 @@
                 </div>
                 
             </el-collapse-transition>
+            <p>weufihwfhiowjfoi</p>
+            <cus-ruler
+                :maxScale="50"
+                :minScale="0"
+                :startValue="startValue"
+                @rulervalue="rulervalue"
+                class="rulevalue">
+            </cus-ruler>
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
     </div>
@@ -21,6 +29,7 @@ import common from "@/components/common";
 import { throttle, debounce } from 'lodash'
 import axios from 'axios'
 import XhTransition from '@/components/transition/transition'
+import ruler from '@/components/rule';
 
 
 export default {
@@ -36,11 +45,13 @@ export default {
             showTimes: 0,
             timer: null,
             isExpand: false,
+            startValue: 0,
         };
     },
     components: {
         common,
         [XhTransition.name]: XhTransition,
+        'cus-ruler': ruler,
     },
     created() {
         let a = 9,
@@ -53,6 +64,9 @@ export default {
         // document.addEventListener("visibilitychange", this.linsteningEvent);
     },
     methods: {
+        rulervalue(value) {
+            this.rulerValue = value
+        },
         titleTips() {
             this.timer = setTimeout(() => {
                 if (document.title === "_") {

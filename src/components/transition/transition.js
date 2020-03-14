@@ -68,7 +68,7 @@ export default {
     name: 'ElCollapseTransition',
     functional: true,
     render(h, { children }) {
-        console.log(children)
+        // console.log(children)
         const data = {
             on: new Transition()
         };
