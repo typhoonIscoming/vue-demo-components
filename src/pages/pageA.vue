@@ -17,6 +17,7 @@
                 @rulervalue="rulervalue"
                 class="rulevalue">
             </cus-ruler>
+            <cus-camera />
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
     </div>
@@ -30,6 +31,7 @@ import { throttle, debounce } from 'lodash'
 import axios from 'axios'
 import XhTransition from '@/components/transition/transition'
 import ruler from '@/components/rule';
+import camera from '@/components/camera';
 
 
 export default {
@@ -52,6 +54,7 @@ export default {
         common,
         [XhTransition.name]: XhTransition,
         'cus-ruler': ruler,
+        'cus-camera': camera,
     },
     created() {
         let a = 9,
