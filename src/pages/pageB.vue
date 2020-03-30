@@ -2,13 +2,16 @@
     <div class="B common">
         <common title="b"></common>
         <div class="content">
-          <a :href="'sms:' + linkPeople">{{ $t('m.sendSMS') }}</a>
-          <select-item
-            class="select-item"
-            @click.native="comEvent"/>
+            <a :href="'sms:' + linkPeople">{{ $t('m.sendSMS') }}</a>
+            <select-item
+                class="select-item"
+                @click.native="comEvent"/>
+            <child-one />
+            <child-two />
+            <child-three :text = linkPeople />
         </div>
         <div class="bottom">
-          b{{ $t('m.page') }}
+            b{{ $t('m.page') }}
         </div>
     </div>
 </template>
@@ -20,7 +23,7 @@ import selectItem from '@/components/pageB/selected'
 export default {
   data() {
     return {
-      linkPeople: '18502178364'
+        linkPeople: '18502178364'
     };
   },
   components: {

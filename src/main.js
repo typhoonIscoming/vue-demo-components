@@ -13,6 +13,10 @@ Vue.use(ElementUI);
 import VueDraggableResizable from 'vue-draggable-resizable';
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
+// 工程化引入所有的组件
+import webpackComponents from '@/webpackComponents'
+Vue.use(webpackComponents)
+
 import VueI18n from 'vue-i18n'
 import  { ConfirmPlugin } from 'vux'
 
