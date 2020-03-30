@@ -7,7 +7,6 @@
                 <div v-show="isExpand" class="expend">
                     <div class="changeable-container">我的高度可以改变</div>
                 </div>
-                
             </el-collapse-transition>
             <p>weufihwfhiowjfoi</p>
             <cus-ruler
@@ -17,7 +16,26 @@
                 @rulervalue="rulervalue"
                 class="rulevalue">
             </cus-ruler>
-            <cus-camera />
+            <div>
+                <el-button @click="manageCamera">打开/关闭摄像头</el-button>
+            </div>
+            <div class="live-container">
+                <div class="camera-container-box">
+                    <cus-camera
+                        :is-open="isOpenCamera"
+                        @takePicture="takePicture"
+                    />
+                </div>
+                <div class="snapshot-container">
+                    <div
+                        v-for="(item, index) in imagesList"
+                        :key="index"
+                        class="picture-container">
+                        <img :src="item.src" />
+                    </div>
+                </div>
+            </div>
+            
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
     </div>
@@ -48,6 +66,8 @@ export default {
             timer: null,
             isExpand: false,
             startValue: 0,
+            isOpenCamera: false,
+            imagesList: [],
         };
     },
     components: {
@@ -123,10 +143,15 @@ export default {
                     console.log("print", this.$t("m.cancel"));
                 }
             });
-        }
+        },
+        manageCamera() {
+            this.isOpenCamera = !this.isOpenCamera
+        },
+        takePicture(img) {
+            this.imagesList = this.imagesList.concat([{ src: img }])
+        },
     },
     beforeDestroy() {
-        console.log(111)
         // 要移除事件的监听，这里的传参必须和监听事件的传参一样，即：('visibilitychange', this.linsteningEvent)
         // 否则无法清楚监听
         document.removeEventListener('visibilitychange', this.linsteningEvent)
@@ -146,6 +171,33 @@ export default {
         &.expend-changeable-container{
             height: 500px;
             background-color: red;
+        }
+    }
+    .live-container{
+        width: 100%;
+        height: 300px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        display: flex;
+        .camera-container-box{
+            width: 300px;
+            height: 300px;
+        }
+        .snapshot-container{
+            flex: 1;
+            height: 100%;
+            overflow-y: auto;
+            .picture-container{
+                width: 100px;
+                height: 100px;
+                padding: 10px;
+                box-sizing: border-box;
+                float: left;
+                >img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
         }
     }
 }

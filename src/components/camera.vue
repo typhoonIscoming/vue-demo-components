@@ -13,17 +13,25 @@ export default {
     data() {
         return {
             stream: null,
+            video: null,
         }
     },
+    props: {
+        isOpen: {
+            type: Boolean,
+            default: false,
+        },
+    },
     mounted() {
-        this.init()
+        const pzBtn = document.getElementById("btn_snap");
+        pzBtn.addEventListener('click', () => {
+            this.takePicture()
+        })
     },
     methods: {
         init() {
             const _this = this
             var canvas = document.getElementById("canvas"),
-                pzBtn = document.getElementById("btn_snap"),
-                context = canvas.getContext("2d"),
                 video = document.getElementById("video");
             // 旧版本浏览器可能根本不支持mediaDevices，我们首先设置一个空对象
             if (navigator.mediaDevices === undefined) {
@@ -49,8 +57,10 @@ export default {
             }
             var constraints = { audio: false, video: {width: 720,height:720} }
             var video = document.querySelector('video');
+            this.video = video
             navigator.mediaDevices.getUserMedia(constraints)
             .then(function (stream) {
+                console.log(stream)
                 // 旧的浏览器可能没有srcObject
                 if ("srcObject" in video) {
                     video.srcObject = stream;
@@ -66,34 +76,38 @@ export default {
             .catch(function (err) {
                 console.log(err.name + ": " + err.message);
             });
-            pzBtn.addEventListener("click", function () {
-                // 点击，canvas画图
-                context.drawImage(video, 0, 0, 300, 300);
-                // 获取图片base64链接
-                var image = canvas.toDataURL('image/png');
-                // 定义一个img
-                var img = new Image();
-                //设置属性和src
-                img.id = "imgBoxxx";
-                img.src = image;
-                //将图片添加到页面中
-                document.body.appendChild(img);
-
-                // base64转文件
-                function dataURLtoFile(dataurl, filename) {
-                    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-                        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-                    while (n--) {
-                        u8arr[n] = bstr.charCodeAt(n);
-                    }
-                    return new File([u8arr], filename, {type: mime});
-                }
-                console.log(dataURLtoFile(image, 'aa.png'));
-                if (_this.stream) {
-                    _this.stream.getTracks()[0].stop()
-                }
-            });
-            
+        },
+        takePicture() {
+            const context = canvas.getContext("2d");
+            // 点击，canvas画图
+            context.drawImage(this.video, 0, 0, 300, 300);
+            // 获取图片base64链接
+            var image = canvas.toDataURL('image/png');
+            // 定义一个img
+            // var img = new Image();
+            // //设置属性和src
+            // img.id = "imgBoxxx";
+            // img.src = image;
+            //将图片添加到页面中
+            this.$emit('takePicture', image)
+            // // base64转文件
+            // function dataURLtoFile(dataurl, filename) {
+            //     var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            //         bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            //     while (n--) {
+            //         u8arr[n] = bstr.charCodeAt(n);
+            //     }
+            //     return new File([u8arr], filename, {type: mime});
+            // }
+        },
+        closeCamera() {
+            this.stream && this.stream.getTracks()[0].stop()
+        },
+    },
+    watch: {
+        isOpen(newval) {
+            if (newval) this.init()
+            else this.closeCamera()
         },
     },
 };
@@ -101,7 +115,7 @@ export default {
 <style lang="scss" scoped>
 .camera-container{
     .camera-content{
-        text-align: center;
+        // text-align: center;
     }
 }
 </style>
