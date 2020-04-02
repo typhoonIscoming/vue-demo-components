@@ -3,11 +3,14 @@
         <common title="a"></common>
         <div class="content">
             <button @click="isExpand = !isExpand">展开</button>
-            <el-collapse-transition>
+            <xh-transition
+                class="define"
+                time="10"
+            >
                 <div v-show="isExpand" class="expend">
                     <div class="changeable-container">我的高度可以改变</div>
                 </div>
-            </el-collapse-transition>
+            </xh-transition>
             <p>weufihwfhiowjfoi</p>
             <cus-ruler
                 :maxScale="50"
@@ -165,13 +168,16 @@ export default {
 
 .A {
     .changeable-container{
-        height: 200px;
+        height: 100px;
         width: 100%;
         background-color: greenyellow;
         &.expend-changeable-container{
             height: 500px;
             background-color: red;
         }
+    }
+    .content{
+        overflow-y: auto;
     }
     .live-container{
         width: 100%;
