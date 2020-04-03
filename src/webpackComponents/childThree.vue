@@ -1,7 +1,10 @@
 <template>
     <div>
-        this is child three
-        <p>传入的参数{{ text }}</p>
+        <p>你真的需要vuex吗？</p>
+        <p>    缺点：引起不必要的体积</p>
+        <p>
+            打包优化：
+        </p>
     </div>
 </template>
 

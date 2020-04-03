@@ -9,6 +9,7 @@
             <child-one />
             <child-two />
             <child-three :text = linkPeople />
+            <child-four />
         </div>
         <div class="bottom">
             b{{ $t('m.page') }}
