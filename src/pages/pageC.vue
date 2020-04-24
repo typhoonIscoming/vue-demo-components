@@ -17,6 +17,13 @@
             >
             </textarea>
             <pre v-html="preContent" />
+            <div class="stack-wrapper">
+                <stack
+                    :pages="someList"
+                    :stackinit="stackinit"
+                >
+                </stack>
+            </div>
         </div>
         <div class="bottom">c页面</div>
     </div>
@@ -29,6 +36,16 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import content from '@/utils/mock'
+import stack from 'vue-tantan-stack'
+
+const initList = () => ([
+    {
+        html: '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586334704289&di=fd3f173f7fc2c00a7fac50e688fff3ce&imgtype=0&src=http%3A%2F%2Fa4.att.hudong.com%2F21%2F09%2F01200000026352136359091694357.jpg" />'
+    },
+    {
+        html: '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586334704287&di=b88cb798b9fcb56eb9e5cedfe25d3d22&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F64%2F76%2F20300001349415131407760417677.jpg" />'
+    },
+])
 
 export default {
     data() {
@@ -37,11 +54,17 @@ export default {
             content: '',
             preContent: '',
             inputContent: '',
+            someList: [],
+            stackinit: {
+                visible: 1,
+                currentPage: 1,
+            },
         };
     },
     components: {
         common,
-        quillEditor
+        quillEditor,
+        stack,
     },
     created() {
         this.preContent = this.parse2(content)
@@ -50,14 +73,17 @@ export default {
     mounted() {
         const el = document.getElementsByClassName('c-textarea')[0]
         el.value = this.parse1(content)
-        console.log('el', el.value)
+        // console.log('el', el.value)
+        setTimeout(() => {
+            this.someList = initList()
+        }, 2000)
     },
     methods: {
         keyup(e) {
             var input_val = this.inputContent;
             let caretPos
             const ctrl = e.target
-            console.log(e)
+            // console.log(e)
             if (document.selection) {
                 var sel = document.selection.createRange();
                 sel.moveStart ('character', -input_val.length);
@@ -126,8 +152,18 @@ export default {
 }
 .c-page{
     .c-textarea{
-        height: 300px;
+        height: 100px;
         width: 500px;
+    }
+    .stack-wrapper{
+        margin: 0 auto;
+        position: relative;
+        z-index: 1000;
+        width: 320px;
+        height: 320px;
+        padding: 0;
+        list-style: none;
+        pointer-events: none;
     }
 }
 </style>
