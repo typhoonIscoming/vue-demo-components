@@ -2,8 +2,8 @@
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
-const path = require('path')
-const getLocalIp = require('./localIp')
+const path = require('path');
+const getLocalIp = require('./localIp');
 
 module.exports = {
   dev: {
@@ -23,8 +23,8 @@ module.exports = {
 
     // Various Dev Server settings
     // host: '172.20.10.2', // can be overwritten by process.env.HOST
-    // host: getLocalIp(),
-    host: 'localhost',
+    host: getLocalIp(),
+    // host: 'localhost',
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
@@ -54,7 +54,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

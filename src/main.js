@@ -13,12 +13,16 @@ Vue.use(ElementUI);
 import VueDraggableResizable from 'vue-draggable-resizable';
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+Vue.use(VueAwesomeSwiper)
+
 // 工程化引入所有的组件
 import webpackComponents from '@/webpackComponents'
 Vue.use(webpackComponents)
 
 import VueI18n from 'vue-i18n'
-import  { ConfirmPlugin } from 'vux'
+import { ConfirmPlugin } from 'vux'
 
 Vue.use(ConfirmPlugin)
 Vue.use(VueI18n)
@@ -26,11 +30,11 @@ Vue.use(VueI18n)
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 const i18n = new VueI18n({
-  locale: 'zh-CN',
-  messages: {
-    'en': require('@/language/en'),
-    'zh-CN': require('@/language/zh-CN')
-  },
+    locale: 'zh-CN',
+    messages: {
+        'en': require('@/language/en'),
+        'zh-CN': require('@/language/zh-CN')
+    },
 })
 
 
@@ -39,10 +43,10 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  i18n,
-  store,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    i18n,
+    store,
+    components: { App },
+    template: '<App/>'
 })
