@@ -6,6 +6,7 @@
             <router-link to="/C" @click.native="clickLink">C</router-link>
             <router-link to="/D" @click.native="clickLink">D</router-link>
             <router-link to="/E" @click.native="clickLink">E</router-link>
+            <router-link to="/F" @click.native="clickLink">F</router-link>
         </div>
         <transition :name="trsnsname">
             <router-view/>
