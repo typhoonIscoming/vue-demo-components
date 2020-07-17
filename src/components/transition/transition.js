@@ -73,7 +73,7 @@ export default {
     functional: true,
     render(h, params) {
         const { children, data } = params
-        console.log('params', params, data.staticClass)
+        // console.log('params', params, data.staticClass)
         const props = {
             on: new Transition(),
             staticClass: data.staticClass,

@@ -53,6 +53,7 @@ import axios from 'axios'
 import XhTransition from '@/components/transition/transition'
 import ruler from '@/components/rule';
 import camera from '@/components/camera';
+import { getUrlPrams } from '@/utils/hashString';
 
 
 export default {
@@ -88,6 +89,8 @@ export default {
     },
     mounted() {
         // document.addEventListener("visibilitychange", this.linsteningEvent);
+        const getparams = getUrlPrams('a')
+        console.log('getparams', getparams)
     },
     methods: {
         rulervalue(value) {

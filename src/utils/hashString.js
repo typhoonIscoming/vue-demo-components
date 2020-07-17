@@ -9,4 +9,6 @@ function randomString(len) {
     return pwd;
 }
 
+export const getUrlPrams = (name) => decodeURIComponent((new RegExp(`[?|&]${name}=([^&;]+?)(&|#|;|$)`).exec(location.href) || [, ''])[1].replace(/\+/g, '%20'))
+
 export default randomString
