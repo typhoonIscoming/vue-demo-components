@@ -64,6 +64,7 @@
         "friendly-errors-webpack-plugin": "^1.6.1",
         "gulp": "^3.9.1",
         "html-webpack-plugin": "^2.30.1",
+        "husky": "^4.3.0",
         "less": "^3.9.0",
         "less-loader": "^4.1.0",
         "lint-staged": "^10.4.1",
@@ -76,7 +77,6 @@
         "postcss-import": "^11.0.0",
         "postcss-loader": "^2.0.8",
         "postcss-url": "^7.2.1",
-        "pre-commit": "^1.2.2",
         "rimraf": "^2.6.0",
         "rmfr": "^2.0.0",
         "sass-loader": "^7.1.0",
@@ -103,11 +103,13 @@
         "last 2 versions",
         "not ie <= 8"
     ],
-    "lint-staged": {
-        "linters": {
-            "**/*.js": "eslint --ignore-path .gitignore",
-            "**/*.vue": "eslint  --ignore-path .gitignore --ext .vue"
-        },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint:staged"
+        }
     },
-    "pre-commit": "lint:staged"
+    "lint-staged": {
+        "**/*.js": "eslint --ext .js",
+        "**/*.vue": "eslint --ext .vue"
+    }
 }
