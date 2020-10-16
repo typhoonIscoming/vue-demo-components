@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-Vue.use(Vuex)
 
 import draggable from './modules/draggable'
+
+Vue.use(Vuex)
 
 
 const store = new Vuex.Store({

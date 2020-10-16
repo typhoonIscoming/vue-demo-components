@@ -36,7 +36,7 @@
                 <div
                     class="delete-picture"
                     @click="clearImg">删除图片</div>
-            
+
                 <div class="get-picture-btn">
                     <input
                         ref="inputMultiple"
@@ -60,22 +60,16 @@
 </template>
 
 <script>
-import common from "@/components/common";
-import { quillEditor } from "vue-quill-editor"; //调用编辑器
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
+import common from '@/components/common';
+import { quillEditor } from 'vue-quill-editor'; // 调用编辑器
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css';
+import 'quill/dist/quill.bubble.css';
 import content from '@/utils/mock'
 import stack from 'vue-tantan-stack'
 import getImageTag from '@/utils/origination';
 
 const initList = () => ([
-    {
-        html: '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586334704289&di=fd3f173f7fc2c00a7fac50e688fff3ce&imgtype=0&src=http%3A%2F%2Fa4.att.hudong.com%2F21%2F09%2F01200000026352136359091694357.jpg" />'
-    },
-    {
-        html: '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586334704287&di=b88cb798b9fcb56eb9e5cedfe25d3d22&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F64%2F76%2F20300001349415131407760417677.jpg" />'
-    },
 ])
 
 export default {
@@ -92,7 +86,7 @@ export default {
             },
             swiperOptions: {
                 pagination: {
-                    el: '.swiper-pagination'
+                    el: '.swiper-pagination',
                 },
             },
             imgSrc: null,
@@ -113,19 +107,19 @@ export default {
         const self = this
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
-                function(ev){ //step3：用经纬度描述具体位置
-                    self.position = ev.coords.latitude + ',' + ev.coords.longitude; 
+                (ev) => { // step3：用经纬度描述具体位置
+                    self.position = `${ev.coords.latitude},${ev.coords.longitude}`;
                     console.log('ev', ev)
                     // document.getElementById('geo').innerHTML = '纬度：'+ev.coords.latitude+' 经度：'+ev.coords.longitude;
                 },
-                function(err){
-                    self.position = err.code + '失败'
+                (err) => {
+                    self.position = `${err.code}失败`
                     // document.getElementById('geo').innerHTML = err.code+':'+err.message;
                     console.log('err', err.code)
                 }, {
-                    enableHighAcuracy : true, // 指示浏览器获取高精度的位置，默认为false  
-                    timeout : 5000, // 指定获取地理位置的超时时间，默认不限时，单位为毫秒  
-                    maximumAge : 2000, // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
+                    enableHighAcuracy: true, // 指示浏览器获取高精度的位置，默认为false
+                    timeout: 5000, // 指定获取地理位置的超时时间，默认不限时，单位为毫秒
+                    maximumAge: 2000, // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
                 })
         } else {
             self.position = '不支持'
@@ -136,34 +130,33 @@ export default {
         // }, function ( e ) {
         //     console.log( "Geolocation error: " + e.message );
         // } ,{provider:'baidu'});
-
     },
     methods: {
         keyup(e) {
-            var input_val = this.inputContent;
+            const input_val = this.inputContent;
             let caretPos
             const ctrl = e.target
             // console.log(e)
             if (document.selection) {
-                var sel = document.selection.createRange();
-                sel.moveStart ('character', -input_val.length);
-                caretPos = Sel.text.length;
-            } else if (ctrl.selectionStart || ctrl.selectionStart == '0') {
+                const sel = document.selection.createRange();
+                sel.moveStart('character', -input_val.length);
+                caretPos = sel.text.length;
+            } else if (ctrl.selectionStart || ctrl.selectionStart === '0') {
                 caretPos = ctrl.selectionStart
             }
-            
-            // console.log('caretPos', caretPos)
+
+            console.log('caretPos', caretPos)
         },
         parse2(str) {
-            str = this.transferObjectToString(str)
+            let newstr = this.transferObjectToString(str)
             // 设置缩进为2个空格
-            str = JSON.stringify(JSON.parse(str), null, 4);
-            str = str
+            newstr = JSON.stringify(JSON.parse(newstr), null, 4);
+            newstr = newstr
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;');
-            return str.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-                var cls = 'number';
+            return newstr.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) => {
+                let cls = 'number';
                 if (/^"/.test(match)) {
                     if (/:$/.test(match)) {
                         cls = 'key';
@@ -175,14 +168,14 @@ export default {
                 } else if (/null/.test(match)) {
                     cls = 'null';
                 }
-                return '<span class="' + cls + '">' + match + '</span>';
+                return `<span class="${cls}">${match}</span>`;
             });
         },
         parse1(str) {
-            str = this.transferObjectToString(str)
-            return JSON.stringify(JSON.parse(str), null, 4);
+            const newstr = this.transferObjectToString(str)
+            return JSON.stringify(JSON.parse(newstr), null, 4);
         },
-        transferObjectToString (obj) {
+        transferObjectToString(obj) {
             if (obj !== null && typeof obj === 'object') return JSON.stringify(obj)
             return obj
         },
@@ -196,7 +189,7 @@ export default {
                 image.src = base64
                 image.onload = () => {
                     getImageTag(file).then((result) => {
-                        this.result = result + ''
+                        this.result = `${result}`
                         console.log('result', result)
                         const img = this.getRotateImg(image, result)
                         this.imgSrc = img
@@ -216,22 +209,23 @@ export default {
             ctx.drawImage(img, 0, 0, width, height);
             let resultImage
             console.log('or', or)
-            switch(or) {
-                case 6: // 顺时针旋转90度
-                    resultImage = this.rotateImg(img, 'right', canvas);
-                    break;
-                case 8: // 逆时针旋转90度
-                    resultImage = this.rotateImg(img, 'left', canvas);
-                    break;
-                case 3: // 顺时针旋转180度
-                    resultImage = this.rotateImg(img, 'right', canvas, 2);
-                    break;
-                default:
-                    resultImage = this.rotateImg(img, 'top', canvas);
-                    break;
+            switch (or) {
+            case 6: // 顺时针旋转90度
+                resultImage = this.rotateImg(img, 'right', canvas);
+                break;
+            case 8: // 逆时针旋转90度
+                resultImage = this.rotateImg(img, 'left', canvas);
+                break;
+            case 3: // 顺时针旋转180度
+                resultImage = this.rotateImg(img, 'right', canvas, 2);
+                break;
+            default:
+                resultImage = this.rotateImg(img, 'top', canvas);
+                break;
             }
             return resultImage
         },
+        /* eslint-disable */
         rotateImg(img, dir = 'right', canvas, s = 1) {
             const MIN_STEP = 0;
             const MAX_STEP = 3;
@@ -280,6 +274,7 @@ export default {
             console.log('===', result)
             return result
         },
+        /* eslint-enable */
         clearImg() {
             this.$nextTick(() => {
                 this.imgSrc = ''
@@ -288,18 +283,17 @@ export default {
     },
     watch: {
         content(newval) {
-            console.log("newval", newval);
+            console.log('newval', newval);
         },
-        inputContent(newval, oldval) {
+        inputContent(newval) {
             console.log('newval', newval)
-            try{
+            try {
                 this.inputContent = this.parse1(newval)
-            }catch(e){
+            } catch (e) {
                 console.log(e)
             }
-            
         },
-    }
+    },
 };
 </script>
 

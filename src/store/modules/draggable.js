@@ -33,7 +33,7 @@ const getters = {
         return state.currentActivitedComponentId
     },
     // 获取当前拖得元素的type
-    getCurrentDragType: state => state.currentDragElementType
+    getCurrentDragType: state => state.currentDragElementType,
 }
 
 const actions = {
@@ -46,7 +46,7 @@ const actions = {
                 componentType: obj.componentType,
                 x: obj.x,
                 y: obj.y,
-            })
+            }),
         }
         commit('ADD_COMPONENT_MUTATION', initObj)
     },
@@ -56,7 +56,7 @@ const actions = {
     setActivitedComponent({ commit }, id) {
         commit('SET_ACTIVITED_COMPONENT_ID', id)
     },
-    setDeactivitedComponent({ commit }, id) {
+    setDeactivitedComponent({ commit }) {
         commit('SET_DEACTIVITED_COMPONENT_ID')
     },
     // 设置当前拖动的元素的信息，这里主要是获取拖动元素的 componentType

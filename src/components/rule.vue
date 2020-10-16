@@ -9,7 +9,7 @@
 export default {
     data() {
         return {
-            value: ""
+            value: '',
         };
     },
 
@@ -23,53 +23,54 @@ export default {
     watch: {
         value: {
             handler() {
-                this.$emit("rulervalue", this.value);
-            }
+                this.$emit('rulervalue', this.value);
+            },
         },
         startValue: {
             handler() {
                 this.init();
-            }
-        }
+            },
+        },
     },
     props: {
         startValue: {
             type: Number,
-            default: 0
+            default: 0,
         },
         maxScale: {
             type: Number,
-            default: 0
+            default: 0,
         },
         minScale: {
             type: Number,
-            default: 0
-        }
+            default: 0,
+        },
     },
     methods: {
-        //调用刻度尺方法
+        // 调用刻度尺方法
         init() {
             // var rulerText3 = document.getElementById('rulerText3')
             // rulerText3.value = 20
-            //调用刻度尺方法
-            let _this = this;
+            // 调用刻度尺方法
+            const that = this;
             this.initPlugin({
-                el: "ruler", //容器id
-                height: 50, //刻度尺高度
-                maxScale: this.maxScale, //最大刻度
-                startValue: this.startValue, //刻度开始的初始值
-                region: [this.minScale, this.maxScale], //选择刻度的区间范围
+                el: 'ruler', // 容器id
+                height: 50, // 刻度尺高度
+                maxScale: this.maxScale, // 最大刻度
+                startValue: this.startValue, // 刻度开始的初始值
+                region: [this.minScale, this.maxScale], // 选择刻度的区间范围
                 // background: '#ffa43c', //刻度尺背景色
-                color: "#fff", //刻度线和字体的颜色
-                markColor: "#fff", //中心刻度标记颜色
-                isConstant: true, //是否不断地获取值
-                success: function(res) {
-                    _this.value = res;
-                }
+                color: '#fff', // 刻度线和字体的颜色
+                markColor: '#fff', // 中心刻度标记颜色
+                isConstant: true, // 是否不断地获取值
+                success(res) {
+                    that.value = res;
+                },
             });
         },
+        /* eslint-disable */
         initPlugin(params) {
-            var initParams = {
+            const initParams = {
                 el: params.el,
                 height: params.height || 60,
                 maxScale: params.maxScale,
@@ -77,20 +78,20 @@ export default {
                 region: params.region || false,
                 background: params.background || false,
                 color: params.color || false,
-                markColor: params.markColor || "#FFCC33",
-                isConstant: params.isConstant || false
+                markColor: params.markColor || '#FFCC33',
+                isConstant: params.isConstant || false,
             };
 
             if (!initParams.el) {
-                console.warn("没有容器元素的参数");
+                console.warn('没有容器元素的参数');
                 return false;
             }
 
-            var rulerWrap = document.getElementById(initParams.el); //获取容器
+            const rulerWrap = document.getElementById(initParams.el); // 获取容器
             rulerWrap.style.height =
-                initParams.height < 50 ? 50 + "px" : initParams.height + "px";
+                initParams.height < 50 ? `${50}px` : `${initParams.height}px`;
 
-            //最大刻度的小值是50
+            // 最大刻度的小值是50
             initParams.maxScale =
                 initParams.maxScale < 50 ? 50 : initParams.maxScale;
 
@@ -98,32 +99,32 @@ export default {
                 initParams.startValue = initParams.maxScale;
             }
 
-            var minSildeNum = 0; //最小滑动的值
-            var maxSildeNum = initParams.maxScale; //最大滑动的值
+            let minSildeNum = 0; // 最小滑动的值
+            let maxSildeNum = initParams.maxScale; // 最大滑动的值
 
             if (initParams.region) {
                 minSildeNum = Math.floor(initParams.region[0]);
                 maxSildeNum = Math.floor(initParams.region[1]);
             }
 
-            var count = initParams.startValue; //初始值
+            let count = initParams.startValue; // 初始值
 
-            var winWidth = rulerWrap.offsetWidth; //容器宽度
-            var division = winWidth / 16; //每个刻度的距离 分割线
-            //刻度值数组
-            var scaleValueList = [];
-            for (var i = 0; i <= initParams.maxScale; i += 5) {
+            const winWidth = rulerWrap.offsetWidth; // 容器宽度
+            const division = winWidth / 16; // 每个刻度的距离 分割线
+            // 刻度值数组
+            const scaleValueList = [];
+            for (let i = 0; i <= initParams.maxScale; i += 5) {
                 scaleValueList.push(i);
             }
-            var canvas = rulerWrap.getElementsByTagName("canvas")[0]; //获取容器下的canvas标签
-            //没有canvas就创建一个
+            let canvas = rulerWrap.getElementsByTagName('canvas')[0]; // 获取容器下的canvas标签
+            // 没有canvas就创建一个
             if (!canvas) {
-                canvas = document.createElement("canvas"); //创建canvas标签
+                canvas = document.createElement('canvas'); // 创建canvas标签
                 canvas.width = winWidth;
                 canvas.height = initParams.height;
                 rulerWrap.appendChild(canvas);
             }
-            var cxt = canvas.getContext("2d");
+            const cxt = canvas.getContext('2d');
 
             if (window.devicePixelRatio) {
                 canvas.width = window.devicePixelRatio * winWidth;
@@ -131,32 +132,32 @@ export default {
                 cxt.scale(window.devicePixelRatio, window.devicePixelRatio);
             }
 
-            //画刻度尺
+            // 画刻度尺
             function drawRuler(count) {
-                count = count - 8;
+                count -= 8;
 
-                //清空画布
+                // 清空画布
                 cxt.clearRect(0, 0, winWidth, initParams.height);
 
-                //刻度尺背景
+                // 刻度尺背景
                 if (initParams.background) {
                     cxt.fillStyle = initParams.background;
                     cxt.fillRect(0, 0, canvas.width, initParams.height);
                 }
 
-                //画刻度线
-                for (var i = 0; i < initParams.maxScale; i++) {
+                // 画刻度线
+                for (let i = 0; i < initParams.maxScale; i++) {
                     cxt.beginPath();
                     cxt.save();
                     cxt.strokeStyle = initParams.color
                         ? initParams.color
-                        : "#bbb";
+                        : '#bbb';
                     cxt.lineWidth = 2;
-                    cxt.lineCap = "round";
+                    cxt.lineCap = 'round';
                     cxt.moveTo(division * i - count * division, 0);
                     cxt.lineTo(
                         division * i - count * division,
-                        Math.floor(initParams.height * 0.3)
+                        Math.floor(initParams.height * 0.3),
                     );
 
                     // if (i % 2 === 0) {
@@ -166,10 +167,10 @@ export default {
                     if (i % 5 === 0) {
                         cxt.strokeStyle = initParams.color
                             ? initParams.color
-                            : "#666";
+                            : '#666';
                         cxt.lineTo(
                             division * i - count * division,
-                            Math.floor(initParams.height * 0.5)
+                            Math.floor(initParams.height * 0.5),
                         );
                     }
 
@@ -178,27 +179,27 @@ export default {
                     cxt.closePath();
                 }
 
-                //添加体重数字
+                // 添加体重数字
                 cxt.beginPath();
-                cxt.font = "14px Arial";
-                cxt.fillStyle = initParams.color ? initParams.color : "#333";
-                cxt.textAlign = "center";
-                cxt.textBaseline = "middle";
-                scaleValueList.forEach(function(num, i) {
+                cxt.font = '14px Arial';
+                cxt.fillStyle = initParams.color ? initParams.color : '#333';
+                cxt.textAlign = 'center';
+                cxt.textBaseline = 'middle';
+                scaleValueList.forEach((num, i) => {
                     cxt.fillText(
-                        num.toString() + "岁",
+                        `${num.toString()}岁`,
                         division * i * 5 - count * division,
-                        Math.floor(initParams.height * 0.78)
+                        Math.floor(initParams.height * 0.78),
                     );
                 });
                 cxt.closePath();
 
-                //中心刻度线
+                // 中心刻度线
                 cxt.beginPath();
                 cxt.save();
                 cxt.strokeStyle = initParams.markColor;
                 cxt.lineWidth = 2;
-                cxt.lineCap = "round";
+                cxt.lineCap = 'round';
                 cxt.moveTo(winWidth / 2, 0);
                 cxt.lineTo(winWidth / 2, Math.floor(initParams.height * 0.35));
                 cxt.stroke();
@@ -208,99 +209,99 @@ export default {
 
             if (window.devicePixelRatio) {
                 canvas.style.transform =
-                    "scale(" + 1 / window.devicePixelRatio + ")";
-                canvas.style.transformOrigin = "left top";
+                    `scale(${1 / window.devicePixelRatio})`;
+                canvas.style.transformOrigin = 'left top';
             }
 
             drawRuler(count);
 
-            //滑动相关
-            var initX = 0, //初始x 距离
-                endX = 0, //结束x 距离
-                distanceX = 0, //移动距离
+            // 滑动相关
+            let initX = 0, // 初始x 距离
+                endX = 0, // 结束x 距离
+                distanceX = 0, // 移动距离
                 _distanceX = 0, // 判断用的移动距离
-                lastX = count; //上次移动距离
+                lastX = count; // 上次移动距离
 
             if (!canvas) return false;
 
-            //手指按下
+            // 手指按下
             canvas.addEventListener(
-                "touchstart",
-                function(e) {
+                'touchstart',
+                (e) => {
                     initX = e.targetTouches[0].pageX;
                 },
-                false
+                false,
             );
 
-            //手指滑动
+            // 手指滑动
             canvas.addEventListener(
-                "touchmove",
-                function(e) {
+                'touchmove',
+                (e) => {
                     endX = e.targetTouches[0].pageX;
                     moveEvent();
                 },
-                false
+                false,
             );
 
-            //手指抬起
+            // 手指抬起
             canvas.addEventListener(
-                "touchend",
-                function(e) {
+                'touchend',
+                (e) => {
                     lastX = count;
                     overEvent();
                 },
-                false
+                false,
             );
 
-            var isMouseDown = false; //鼠标是否按下
+            let isMouseDown = false; // 鼠标是否按下
 
-            //鼠标按下
+            // 鼠标按下
             canvas.addEventListener(
-                "mousedown",
-                function(e) {
+                'mousedown',
+                (e) => {
                     isMouseDown = true;
                     initX = e.layerX;
                 },
-                false
+                false,
             );
 
-            //鼠标移动
+            // 鼠标移动
             canvas.addEventListener(
-                "mousemove",
-                function(e) {
+                'mousemove',
+                (e) => {
                     if (!isMouseDown) {
                         return false;
                     }
                     endX = e.layerX;
                     moveEvent();
                 },
-                false
+                false,
             );
 
-            //鼠标抬起&离开
+            // 鼠标抬起&离开
             canvas.addEventListener(
-                "mouseup",
-                function(e) {
+                'mouseup',
+                (e) => {
                     lastX = count;
                     isMouseDown = false;
                     overEvent();
                 },
-                false
+                false,
             );
 
             canvas.addEventListener(
-                "mouseleave",
-                function(e) {
+                'mouseleave',
+                (e) => {
                     if (isMouseDown) {
                         lastX = count;
                         isMouseDown = false;
                         overEvent();
                     }
                 },
-                false
+                false,
             );
 
-            //手指&鼠标移动事件
+            // 手指&鼠标移动事件
             function moveEvent() {
                 // console.log('initX - endX', initX - endX)
                 distanceX = Math.floor((initX - endX) / (winWidth / 30));
@@ -321,7 +322,7 @@ export default {
                 }
             }
 
-            //手指&鼠标结束事件
+            // 手指&鼠标结束事件
             function overEvent() {
                 if (count > maxSildeNum) {
                     lastX = count = count > maxSildeNum ? maxSildeNum : count;
@@ -330,11 +331,12 @@ export default {
                 }
                 drawRuler(count);
 
-                //返回最后的值
+                // 返回最后的值
                 params.success && params.success(count);
             }
-        }
-    }
+        },
+        /* eslint-enable */
+    },
 };
 </script>
 

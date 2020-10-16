@@ -38,18 +38,18 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
     </div>
 </template>
 
 <script>
-import common from "@/components/common";
+import common from '@/components/common';
 
 // import { debounce } from "@/utils/debounce";
-import { throttle, debounce } from 'lodash'
-import axios from 'axios'
+import { debounce } from 'lodash'
+// import axios from 'axios'
 import XhTransition from '@/components/transition/transition'
 import ruler from '@/components/rule';
 import camera from '@/components/camera';
@@ -60,8 +60,8 @@ export default {
     data() {
         return {
             list: [
-                { id: 1, relation: "子女", mobile: "13558513096" },
-                { id: 2, relation: "子女", mobile: "13558513095" }
+                { id: 1, relation: '子女', mobile: '13558513096' },
+                { id: 2, relation: '子女', mobile: '13558513095' },
             ],
             showList: true,
             selected: [],
@@ -81,11 +81,11 @@ export default {
         'cus-camera': camera,
     },
     created() {
-        let a = 9,
-        b = 5;
-        a = a ^ b;
-        b = b ^ a;
-        a = a ^ b;
+        // let a = 9,
+        //     b = 5;
+        // a ^= b;
+        // b ^= a;
+        // a ^= b;
     },
     mounted() {
         // document.addEventListener("visibilitychange", this.linsteningEvent);
@@ -98,9 +98,9 @@ export default {
         },
         titleTips() {
             this.timer = setTimeout(() => {
-                if (document.title === "_") {
-                document.title = "消息";
-                } else document.title = "_";
+                if (document.title === '_') {
+                    document.title = '消息';
+                } else document.title = '_';
                 this.titleTips();
             }, 500);
         },
@@ -109,8 +109,8 @@ export default {
         },
         linsteningEvent() {
             if (document.hidden) {
-                //处于当前页面
-                console.log("页面被切换了");
+                // 处于当前页面
+                console.log('页面被切换了');
                 this.titleTips();
             } else {
                 clearTimeout(this.timer);
@@ -121,33 +121,33 @@ export default {
             this.showTimesDebounce();
         },
         showTimesDebounce: debounce(
-            function(data) {
+            function name(data) {
                 this.showTimes += 1;
                 console.log('data', data)
             },
             1000,
-            true
+            true,
         ),
-        changeLanguage: debounce(function() {
+        changeLanguage: debounce(function name() {
             const lang = this.$i18n.locale;
-            if (lang === "en") {
-                this.$i18n.locale = "zh-CN";
-            } else if (lang === "zh-CN") {
-                this.$i18n.locale = "en";
+            if (lang === 'en') {
+                this.$i18n.locale = 'zh-CN';
+            } else if (lang === 'zh-CN') {
+                this.$i18n.locale = 'en';
             }
         }),
         showConfirm() {
             this.$vux.confirm.show({
-                title: this.$t("m.title"),
-                content: this.$t("m.content"),
-                confirmText: this.$t("m.confirm"),
-                cancelText: this.$t("m.cancel"),
+                title: this.$t('m.title'),
+                content: this.$t('m.content'),
+                confirmText: this.$t('m.confirm'),
+                cancelText: this.$t('m.cancel'),
                 onConfirm: () => {
-                    console.log("print", this.$t("m.confirm"));
+                    console.log('print', this.$t('m.confirm'));
                 },
                 onCancel: () => {
-                    console.log("print", this.$t("m.cancel"));
-                }
+                    console.log('print', this.$t('m.cancel'));
+                },
             });
         },
         manageCamera() {

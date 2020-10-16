@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-    name: 'Tree'
+    name: 'Tree',
 }
 </script>
 <style lang="scss" scoped>

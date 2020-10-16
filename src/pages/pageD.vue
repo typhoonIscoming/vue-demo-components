@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import common from "@/components/common";
+import common from '@/components/common';
 import scrollIndex from '@/components/scrollIndex';
 
 export default {
@@ -27,9 +27,10 @@ export default {
         'xh-scroll-index': scrollIndex,
     },
     created() {
-        
+
     },
     mounted() {
+        console.log(123)
     },
     methods: {
         selectedImage(event) {
@@ -40,7 +41,7 @@ export default {
                 console.log('转换后', files)
             })
         },
-        compressFile(file,callback) {
+        compressFile(file, callback) {
             if (!file || !callback) {
                 callback(null)
                 return
@@ -75,7 +76,7 @@ export default {
                     callback(files) // 回调
                 }
             }
-        }
+        },
     },
 };
 </script>

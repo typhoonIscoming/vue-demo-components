@@ -16,23 +16,23 @@
 
 <script>
 export default {
-    name: "App",
+    name: 'App',
     data() {
         return {
-            trsnsname: "turn-on"
+            trsnsname: 'turn-on',
         };
     },
     methods: {
         clickLink() {
-            this.trsnsname = "turn-on";
-        }
+            this.trsnsname = 'turn-on';
+        },
     },
     mounted() {
-        var _this = this;
-        window.addEventListener("popstate", function(e) {
-            _this.trsnsname = "turn-off";
+        const that = this;
+        window.addEventListener('popstate', () => {
+            that.trsnsname = 'turn-off';
         }, false);
-    }
+    },
 };
 </script>
 

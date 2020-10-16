@@ -1,6 +1,6 @@
 import { addClass, removeClass } from '@/utils/domTool';
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 function Transition() {
     _classCallCheck(this, Transition);
@@ -21,7 +21,7 @@ Transition.prototype.beforeEnter = function beforeEnter(el) {
 Transition.prototype.enter = function enter(el) {
     el.dataset.oldOverflow = el.style.overflow;
     if (el.scrollHeight !== 0) {
-        el.style.height = el.scrollHeight + 'px';
+        el.style.height = `${el.scrollHeight}px`;
         el.style.paddingTop = el.dataset.oldPaddingTop;
         el.style.paddingBottom = el.dataset.oldPaddingBottom;
     } else {
@@ -46,7 +46,7 @@ Transition.prototype.beforeLeave = function beforeLeave(el) {
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
     el.dataset.oldOverflow = el.style.overflow;
 
-    el.style.height = el.scrollHeight + 'px';
+    el.style.height = `${el.scrollHeight}px`;
     el.style.overflow = 'hidden';
 }
 
@@ -60,7 +60,7 @@ Transition.prototype.leave = function leave(el) {
     }
 }
 
-Transition.prototype.afterLeave = function afterLeave(el){
+Transition.prototype.afterLeave = function afterLeave(el) {
     removeClass(el, 'collapse-transition');
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
@@ -79,5 +79,5 @@ export default {
             staticClass: data.staticClass,
         };
         return h('transition', { ...props }, children);
-    }
+    },
 };

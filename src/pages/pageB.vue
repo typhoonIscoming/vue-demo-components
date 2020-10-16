@@ -18,29 +18,29 @@
 </template>
 
 <script>
-import common from "@/components/common";
+import common from '@/components/common';
 import selectItem from '@/components/pageB/selected'
 
 export default {
-  data() {
-    return {
-        linkPeople: '18502178364'
-    };
-  },
-  components: {
-    common,
-    'select-item': selectItem,
-  },
-  methods: {
-    comEvent() {
-      console.log('this fathers components')
+    data() {
+        return {
+            linkPeople: '18502178364',
+        };
     },
-  },
-  created() {
-    let str = '13558513096'
-    const reg = /^(\d{3})\d{4}(\d{4})$/; 
-    console.log('telphone hide', str.replace(reg, '$1****$2'))
-  },
+    components: {
+        common,
+        'select-item': selectItem,
+    },
+    methods: {
+        comEvent() {
+            console.log('this fathers components')
+        },
+    },
+    created() {
+        const str = '13558513096'
+        const reg = /^(\d{3})\d{4}(\d{4})$/;
+        console.log('telphone hide', str.replace(reg, '$1****$2'))
+    },
 };
 </script>
 

@@ -10,7 +10,7 @@ function upperFileName(fileName) {
 const install = (Vue) => {
     // 通过这种方式也能管理routes，根据业务来将很大的routes分割成多个文件，这样方便维护
     // 拿到引入的文件的所有的name
-    requiredComponents.keys().forEach(fileName => {
+    requiredComponents.keys().forEach((fileName) => {
         // 此时的filename是一个带相对路径的字符串：./childOne.vue
         const realFileName = fileName.replace(/\.\//, '').replace(/\.\w+$/, '');
         const formatterFileName = upperFileName(realFileName)
@@ -24,5 +24,5 @@ const install = (Vue) => {
 
 
 export default {
-    install
+    install,
 }

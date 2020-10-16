@@ -23,16 +23,15 @@ export default {
         },
     },
     mounted() {
-        const pzBtn = document.getElementById("btn_snap");
+        const pzBtn = document.getElementById('btn_snap');
         pzBtn.addEventListener('click', () => {
             this.takePicture()
         })
     },
     methods: {
         init() {
-            const _this = this
-            var canvas = document.getElementById("canvas"),
-                video = document.getElementById("video");
+            const that = this
+            const video = document.getElementById('video');
             // 旧版本浏览器可能根本不支持mediaDevices，我们首先设置一个空对象
             if (navigator.mediaDevices === undefined) {
                 navigator.mediaDevices = {};
@@ -41,54 +40,54 @@ export default {
             // 使用getUserMedia，因为它会覆盖现有的属性。
             // 这里，如果缺少getUserMedia属性，就添加它。
             if (navigator.mediaDevices.getUserMedia === undefined) {
-                navigator.mediaDevices.getUserMedia = function (constraints) {
+                navigator.mediaDevices.getUserMedia = function name(constraints) {
                     // 首先获取现存的getUserMedia(如果存在)
-                    var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+                    const getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
                     // 有些浏览器不支持，会返回错误信息
                     // 保持接口一致
                     if (!getUserMedia) {
                         return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
                     }
-                    //否则，使用Promise将调用包装到旧的navigator.getUserMedia
-                    return new Promise(function (resolve, reject) {
+                    // 否则，使用Promise将调用包装到旧的navigator.getUserMedia
+                    return new Promise(((resolve, reject) => {
                         getUserMedia.call(navigator, constraints, resolve, reject);
-                    });
+                    }));
                 }
             }
-            var constraints = { audio: false, video: {width: 720,height:720} }
-            var video = document.querySelector('video');
+            const constraints = { audio: false, video: { width: 720, height: 720 } }
             this.video = video
             navigator.mediaDevices.getUserMedia(constraints)
-            .then(function (stream) {
-                console.log(stream)
-                // 旧的浏览器可能没有srcObject
-                if ("srcObject" in video) {
-                    video.srcObject = stream;
-                } else {
-                    //避免在新的浏览器中使用它，因为它正在被弃用。
-                    video.src = window.URL.createObjectURL(stream);
-                }
-                _this.stream = stream
-                video.onloadedmetadata = function (e) {
-                    video.play();
-                };
-            })
-            .catch(function (err) {
-                console.log(err.name + ": " + err.message);
-            });
+                .then((stream) => {
+                    console.log(stream)
+                    // 旧的浏览器可能没有srcObject
+                    if ('srcObject' in video) {
+                        video.srcObject = stream;
+                    } else {
+                    // 避免在新的浏览器中使用它，因为它正在被弃用。
+                        video.src = window.URL.createObjectURL(stream);
+                    }
+                    that.stream = stream
+                    video.onloadedmetadata = function name() {
+                        video.play();
+                    };
+                })
+                .catch((err) => {
+                    console.log(`${err.name}: ${err.message}`);
+                });
         },
         takePicture() {
-            const context = canvas.getContext("2d");
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
             // 点击，canvas画图
             context.drawImage(this.video, 0, 0, 300, 300);
             // 获取图片base64链接
-            var image = canvas.toDataURL('image/png');
+            const image = canvas.toDataURL('image/png');
             // 定义一个img
             // var img = new Image();
             // //设置属性和src
             // img.id = "imgBoxxx";
             // img.src = image;
-            //将图片添加到页面中
+            // 将图片添加到页面中
             this.$emit('takePicture', image)
             // // base64转文件
             // function dataURLtoFile(dataurl, filename) {
@@ -101,7 +100,7 @@ export default {
             // }
         },
         closeCamera() {
-            this.stream && this.stream.getTracks()[0].stop()
+            if (this.stream) this.stream.getTracks()[0].stop()
         },
     },
     watch: {

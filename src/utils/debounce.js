@@ -1,7 +1,10 @@
 function debounce(func, wait = 300, immediate = true) {
-    let timeout, args, context, timestamp;
+    let timeout,
+        args,
+        context,
+        timestamp;
 
-    const later = function() {
+    const later = function () {
         // 据上一次触发时间间隔
         const last = +new Date() - timestamp;
         // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
@@ -16,7 +19,7 @@ function debounce(func, wait = 300, immediate = true) {
         }
     };
 
-    return function() {
+    return function () {
         context = this;
         args = arguments
         timestamp = +new Date();

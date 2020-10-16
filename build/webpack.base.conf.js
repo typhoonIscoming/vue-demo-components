@@ -9,6 +9,18 @@ const vuxLoader = require("vux-loader");
 function resolve(dir) {
     return path.join(__dirname, "..", dir);
 }
+
+const createLintingRule = () => ({
+    test: /\.(js|vue)$/,
+    loader: 'eslint-loader',
+    enforce: 'pre',
+    include: [resolve('src'), resolve('test')],
+    options: {
+        formatter: require('eslint-friendly-formatter'),
+        emitWarning: !config.dev.showEslintErrorsInOverlay
+    }
+})
+
 const webpackConfig = {
     context: path.resolve(__dirname, "../"),
     entry: {
@@ -34,6 +46,7 @@ const webpackConfig = {
     },
     module: {
         rules: [
+            ...(config.dev.useEslint ? [createLintingRule()] : []),
             {
                 test: /\.vue$/,
                 loader: "vue-loader",

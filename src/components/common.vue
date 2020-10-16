@@ -11,16 +11,16 @@
 
 <script>
 export default {
-  data() {
-    return {};
-  },
-  props: ["title"],
-  methods: {
-    back() {
-    //   this.$store.commit("setTransition", "turn-off");
-      this.$router.back(-1);
-    }
-  }
+    data() {
+        return {};
+    },
+    props: ['title'],
+    methods: {
+        back() {
+            //   this.$store.commit("setTransition", "turn-off");
+            this.$router.back(-1);
+        },
+    },
 };
 </script>
 

@@ -13,38 +13,38 @@ export default new Router({
             path: '/',
             name: 'HelloWorld',
             redirect: {
-                name: 'pageA'
+                name: 'pageA',
             },
         },
         {
             path: '/A',
             name: 'pageA',
-            component: () => import(/* webpackChunkName: "pageA" */ '@/pages/pageA')
+            component: () => import(/* webpackChunkName: "pageA" */ '@/pages/pageA'),
         },
         {
             path: '/B',
             name: 'pageB',
-            component: () => import(/* webpackChunkName: "pageB" */ '@/pages/pageB.vue')
+            component: () => import(/* webpackChunkName: "pageB" */ '@/pages/pageB.vue'),
         },
         {
             path: '/C',
             name: 'pageC',
-            component: () => import(/* webpackChunkName: "pageC" */ '@/pages/pageC.vue')
+            component: () => import(/* webpackChunkName: "pageC" */ '@/pages/pageC.vue'),
         },
         {
             path: '/D',
             name: 'pageD',
-            component: () => import(/* webpackChunkName: "pageD" */ '@/pages/pageD.vue')
+            component: () => import(/* webpackChunkName: "pageD" */ '@/pages/pageD.vue'),
         },
         {
             path: '/E',
             name: 'pageE',
-            component: () => import(/* webpackChunkName: "pageE" */ '@/pages/pageE.vue')
+            component: () => import(/* webpackChunkName: "pageE" */ '@/pages/pageE.vue'),
         },
         {
             path: '/F',
             name: 'pageF',
-            component: () => import(/* webpackChunkName: "pageF" */ '@/pages/pageF.vue')
+            component: () => import(/* webpackChunkName: "pageF" */ '@/pages/pageF.vue'),
         },
-    ]
+    ],
 })
