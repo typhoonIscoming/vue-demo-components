@@ -35,7 +35,6 @@ export default {
     methods: {
         selectedImage(event) {
             const file = event.target.files[0];
-            console.log('转换前', file)
             this.compressFile(file, (files) => {
                 this.file = window.URL.createObjectURL(files);
                 console.log('转换后', files)

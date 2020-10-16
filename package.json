@@ -10,7 +10,8 @@
         "start": "npm run dev",
         "build": "node build/build.js",
         "dll": "webpack --config dll.config.js",
-        "lint": "eslint --ext .js,.vue src --fix"
+        "lint": "eslint --ext .js,.vue src --fix",
+        "lint:staged": "lint-staged"
     },
     "dependencies": {
         "@antv/g6": "^3.2.4",
@@ -101,5 +102,12 @@
         "> 1%",
         "last 2 versions",
         "not ie <= 8"
-    ]
+    ],
+    "lint-staged": {
+        "linters": {
+            "**/*.js": "eslint --ignore-path .gitignore",
+            "**/*.vue": "eslint  --ignore-path .gitignore --ext .vue"
+        },
+    },
+    "pre-commit": "lint:staged"
 }
