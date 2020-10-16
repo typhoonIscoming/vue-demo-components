@@ -30,7 +30,8 @@ export default {
 
     },
     mounted() {
-        console.log(123)
+        const a = 123
+        console.log(a)
     },
     methods: {
         selectedImage(event) {

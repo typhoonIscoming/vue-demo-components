@@ -109,7 +109,6 @@
         }
     },
     "lint-staged": {
-        "**/*.js": "eslint --ext .js",
-        "**/*.vue": "eslint --ext .vue"
+        "src/**/*.[js,vue]": "eslint --ext .js,.vue"
     }
 }
