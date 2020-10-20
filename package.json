@@ -10,8 +10,9 @@
         "start": "npm run dev",
         "build": "node build/build.js",
         "dll": "webpack --config dll.config.js",
-        "lint": "eslint --ext .js,.vue src --fix",
-        "lint:staged": "lint-staged"
+        "lint": "eslint --ext src .js,.vue src",
+        "lint:staged": "lint-staged",
+        "verify": "echo 'Pre-commit checks...' && exit 0"
     },
     "dependencies": {
         "@antv/g6": "^3.2.4",
@@ -105,10 +106,12 @@
     ],
     "husky": {
         "hooks": {
-            "pre-commit": "npm run lint:staged"
+            "pre-commit": "npm run lint:staged",
+            "commit-msg": "npm run verify"
         }
     },
     "lint-staged": {
-        "src/**/*.[js,vue]": "eslint --ext .js,.vue"
+        "src/**/*.js": "eslint --ext .js",
+        "src/**/*.vue": "eslint --ext .vue"
     }
 }

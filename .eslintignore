@@ -1,6 +1,5 @@
 /build/
 /config/
 /dist/
-/*.js
 /src/utils/
 transition.js
