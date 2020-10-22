@@ -133,13 +133,13 @@ export default {
     },
     methods: {
         keyup(e) {
-            const input_val = this.inputContent;
+            const inputVal = this.inputContent;
             let caretPos
             const ctrl = e.target
             // console.log(e)
             if (document.selection) {
                 const sel = document.selection.createRange();
-                sel.moveStart('character', -input_val.length);
+                sel.moveStart('character', -inputVal.length);
                 caretPos = sel.text.length;
             } else if (ctrl.selectionStart || ctrl.selectionStart === '0') {
                 caretPos = ctrl.selectionStart

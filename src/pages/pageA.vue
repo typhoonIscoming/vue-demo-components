@@ -1,5 +1,5 @@
 <template>
-    <div class="A common">
+    <div class="A page-a common">
         <common title="a"></common>
         <div class="content">
             <button @click="isExpand = !isExpand">展开</button>
@@ -22,7 +22,7 @@
             <div>
                 <el-button @click="manageCamera">打开/关闭摄像头</el-button>
             </div>
-            <div class="live-container">
+            <!-- <div class="live-container">
                 <div class="camera-container-box">
                     <cus-camera
                         :is-open="isOpenCamera"
@@ -37,8 +37,13 @@
                         <img :src="item.src" />
                     </div>
                 </div>
-            </div>
-
+            </div> -->
+            <p v-for="(value, key) in getAllAttribute" :key="key">
+                <span >{{ key }} = {{ value }}</span>
+            </p>
+            <p @click="operator">
+                <span v-for="(item, index) in arrayList" :key="index">{{ item }}</span>
+            </p>
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
     </div>
@@ -54,7 +59,6 @@ import XhTransition from '@/components/transition/transition'
 import ruler from '@/components/rule';
 import camera from '@/components/camera';
 import { getUrlPrams } from '@/utils/hashString';
-
 
 export default {
     data() {
@@ -72,6 +76,11 @@ export default {
             startValue: 0,
             isOpenCamera: false,
             imagesList: [],
+            getAllAttribute: {
+                name: 'pudong',
+                address: 'shanghai',
+            },
+            arrayList: [1, 2, 3],
         };
     },
     components: {
@@ -95,6 +104,9 @@ export default {
     methods: {
         rulervalue(value) {
             this.rulerValue = value
+        },
+        operator() {
+            this.arrayList = this.operator.reverse()
         },
         titleTips() {
             this.timer = setTimeout(() => {
@@ -165,11 +177,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~@/css/common.scss";
 @import '~@/components/transition/transition.scss';
 
-.A {
+.page-a {
+    padding-bottom: 50px;
+    box-sizing: border-box;
     .changeable-container{
         height: 100px;
         width: 100%;

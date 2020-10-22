@@ -7,6 +7,10 @@ module.exports = {
     env: {
         browser: true
     },
+    // ecmaVersion: 6,
+    ecmaFeatures: {
+        "modules": false
+    },
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     extends: ["plugin:vue/essential", "airbnb-base"],
@@ -23,15 +27,14 @@ module.exports = {
     // add your custom rules here
     rules: {
         "no-useless-escape": 0,
-        "camelcase": 0,
-        "no-param-reassign": [1, { "props": false }],
+        "camelcase": 1,
         "no-mixed-operators": 0,
         "import/prefer-default-export": 0,
         "linebreak-style": ["off", "windows"],
         "max-len": [1, 200],
         "no-console": 0,
-        semi: 0,
-        indent: [1, 4],
+        "semi": 0,
+        "indent": [1, 4],
         // don't require .vue extension when importing
         "import/extensions": [
             "error",
@@ -44,12 +47,12 @@ module.exports = {
         // disallow reassignment of function parameters
         // disallow parameter object manipulation except for specific exclusions
         "no-param-reassign": [
-            "error",
+            "warn",
             {
                 props: true,
                 ignorePropertyModificationsFor: [
                     "state", // for vuex state
-                    "acc", // for reduce accumulators
+                    "total", // for reduce accumulators
                     "e" // for e.returnvalue
                 ]
             }
