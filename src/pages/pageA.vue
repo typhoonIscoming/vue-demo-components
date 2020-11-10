@@ -11,7 +11,7 @@
                     <div class="changeable-container">我的高度可以改变</div>
                 </div>
             </xh-transition>
-            <p>weufihwfhiowjfoi</p>
+            <center>weufihwfhiowjfoi</center>
             <cus-ruler
                 :maxScale="50"
                 :minScale="0"

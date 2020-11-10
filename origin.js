@@ -2,9 +2,9 @@ const path = require('path')
 const gulp = require('gulp');
 const spritesmith = require('gulp.spritesmith');
 const fs = require('fs')
-const del = require('del')
+// const del = require('del')
 // const child_process = require('child_process')
-const mv = require('mv')
+// const mv = require('mv')
 const mkdirp = require('mkdirp')
 const rmfr = require('rmfr')
 
@@ -24,8 +24,7 @@ if (!fs.existsSync(SPRITE_SCSS)) {
     mkdirp.sync(SPRITE_SCSS)
 }
 
-gulp.task('default', function () {
-    readDirSync(ICON_SOURCE)
+gulp.task('default', () => {
 
     function readDirSync(dir) {
         const files = fs.readdirSync(dir)
@@ -55,7 +54,7 @@ gulp.task('default', function () {
                 })
         }
 
-        files.forEach(function (ele) {
+        files.forEach((ele) => {
             const curPath = `${dir}/${ele}`
             const info = fs.statSync(curPath)
             if (info.isDirectory()) {
@@ -63,9 +62,10 @@ gulp.task('default', function () {
             }
         })
     }
+    readDirSync(ICON_SOURCE)
 })
 
-gulp.task('clearSprite', function () {
+gulp.task('clearSprite', () => {
     // child_process.execSync(`rm -rf ${SPRITE_DEST} ${SPRITE_SCSS}`)
     rmfr(SPRITE_DEST)
     rmfr(SPRITE_SCSS)
