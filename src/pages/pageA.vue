@@ -95,6 +95,8 @@ export default {
         // a ^= b;
         // b ^= a;
         // a ^= b;
+        const a = '123'
+        console.log(a.padStart(4, 0))
     },
     mounted() {
         // document.addEventListener("visibilitychange", this.linsteningEvent);
