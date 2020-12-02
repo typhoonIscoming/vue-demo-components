@@ -1,7 +1,10 @@
 <template>
     <div class="container common f-page">
         <xh-common title="f" />
-        <pdf :src="src" />
+        <!-- <pdf :src="src" /> -->
+        <div class="content">
+
+        </div>
     </div>
 </template>
 
@@ -33,5 +36,8 @@ export default {
 @import "~@/css/common.scss";
 .f-page{
     background-color: #07c160;
+    .content{
+        background: white;
+    }
 }
 </style>

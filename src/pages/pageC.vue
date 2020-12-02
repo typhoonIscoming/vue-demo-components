@@ -54,6 +54,9 @@
             </div>
             <p>方向值是{{ result }}</p>
             <p>定位{{ position }}</p>
+            <div class="list" @click="changeList" style="background: red;">
+                <span v-for="(item, index) in list" :key="index">{{ item }},</span>
+            </div>
         </div>
         <div class="bottom">c页面</div>
     </div>
@@ -92,6 +95,7 @@ export default {
             imgSrc: null,
             result: '',
             position: '',
+            list: [1, 2, 3, 4],
         };
     },
     components: {
@@ -125,13 +129,16 @@ export default {
             self.position = '不支持'
             console.log('不支持')
         }
-        // plus.geolocation.getCurrentPosition( function ( p ) {
-        //     console.log( "Geolocation\nLatitude:" + p.coords.latitude + "\nLongitude:" + p.coords.longitude +'/'+ p.timestamp );
-        // }, function ( e ) {
-        //     console.log( "Geolocation error: " + e.message );
-        // } ,{provider:'baidu'});
     },
     methods: {
+        changeList() {
+            const random = window.parseInt(Math.random() * 100)
+            const index = window.parseInt(Math.random() * (this.list.length + 1))
+            // this.list[2] = random;
+            // this.$set(this.list, 2, random)
+            this.list.splice(index, index >= this.list.length ? 0 : 1, random)
+            console.log('this.list', this.list, index)
+        },
         keyup(e) {
             const inputVal = this.inputContent;
             let caretPos
@@ -144,7 +151,6 @@ export default {
             } else if (ctrl.selectionStart || ctrl.selectionStart === '0') {
                 caretPos = ctrl.selectionStart
             }
-
             console.log('caretPos', caretPos)
         },
         parse2(str) {
@@ -271,7 +277,7 @@ export default {
                 break;
             }
             const result = canvas.toDataURL('image/png');
-            console.log('===', result)
+            // console.log('===', result)
             return result
         },
         /* eslint-enable */
