@@ -44,6 +44,7 @@
             <p @click="operator">
                 <span v-for="(item, index) in arrayList" :key="index">{{ item }}</span>
             </p>
+            <p @click="changeStorage">chnage localstorage's value</p>
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
     </div>
@@ -58,7 +59,7 @@ import { debounce } from 'lodash'
 import XhTransition from '@/components/transition/transition'
 import ruler from '@/components/rule';
 import camera from '@/components/camera';
-import { getUrlPrams } from '@/utils/hashString';
+// import { getUrlPrams } from '@/utils/hashString';
 
 export default {
     data() {
@@ -100,10 +101,19 @@ export default {
     },
     mounted() {
         // document.addEventListener("visibilitychange", this.linsteningEvent);
-        const getparams = getUrlPrams('a')
-        console.log('getparams', getparams)
+        // const getparams = getUrlPrams('a')
+        // console.log('getparams', getparams)
+        window.addEventListener('storage', (e) => {
+            console.log('e', e)
+        })
     },
     methods: {
+        changeStorage() {
+            const value = (Math.random().toString().substr(3) * 1).toString(36)
+            console.log('value', value)
+            const params = { random: value }
+            localStorage.setItem('root', JSON.stringify(params))
+        },
         rulervalue(value) {
             this.rulerValue = value
         },

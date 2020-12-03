@@ -48,6 +48,7 @@ export default {
             }
             this.editor.create()
         }
+        localStorage.setItem('root', JSON.stringify({ random: (Math.random().toString().substr(3) * 1).toString(36) }))
     },
     methods: {
         getdata() {
