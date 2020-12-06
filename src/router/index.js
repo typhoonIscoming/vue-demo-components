@@ -22,6 +22,11 @@ export default new Router({
             component: () => import(/* webpackChunkName: "pageA" */ '@/pages/pageA'),
         },
         {
+            path: '/subA',
+            name: 'subA',
+            component: () => import(/* webpackChunkName: "subA" */ '@/pages/subA'),
+        },
+        {
             path: '/B',
             name: 'pageB',
             component: () => import(/* webpackChunkName: "pageB" */ '@/pages/pageB.vue'),

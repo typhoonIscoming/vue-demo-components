@@ -26,6 +26,7 @@ module.exports = {
     },
     // add your custom rules here
     rules: {
+        "no-param-reassign": 0,
         "no-useless-escape": 0,
         "camelcase": 1,
         "no-mixed-operators": 0,
@@ -46,17 +47,17 @@ module.exports = {
         ],
         // disallow reassignment of function parameters
         // disallow parameter object manipulation except for specific exclusions
-        "no-param-reassign": [
-            "warn",
-            {
-                props: true,
-                ignorePropertyModificationsFor: [
-                    "state", // for vuex state
-                    "total", // for reduce accumulators
-                    "e" // for e.returnvalue
-                ]
-            }
-        ],
+        // "no-param-reassign": [
+        //     "warn",
+        //     {
+        //         props: true,
+        //         ignorePropertyModificationsFor: [
+        //             "state", // for vuex state
+        //             "total", // for reduce accumulators
+        //             "e" // for e.returnvalue
+        //         ]
+        //     }
+        // ],
         // allow optionalDependencies
         "import/no-extraneous-dependencies": [
             "error",

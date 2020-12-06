@@ -38,13 +38,18 @@
                     </div>
                 </div>
             </div> -->
-            <p v-for="(value, key) in getAllAttribute" :key="key">
-                <span >{{ key }} = {{ value }}</span>
-            </p>
-            <p @click="operator">
-                <span v-for="(item, index) in arrayList" :key="index">{{ item }}</span>
-            </p>
-            <p @click="changeStorage">chnage localstorage's value</p>
+            <div class="left">
+                <p v-for="(value, key) in getAllAttribute" :key="key">
+                    <span >{{ key }} = {{ value }}</span>
+                </p>
+                <p @click="operator">
+                    <span v-for="(item, index) in arrayList" :key="index">{{ item }}</span>
+                </p>
+                <p @click="changeStorage">chnage localstorage's value</p>
+            </div>
+            <div class="right">
+                <p @click="$router.push('/subA')">跳转subA</p>
+            </div>
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
     </div>
