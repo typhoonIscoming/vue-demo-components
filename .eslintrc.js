@@ -35,7 +35,7 @@ module.exports = {
         "max-len": [1, 200],
         "no-console": 0,
         "semi": 0,
-        "indent": [1, 4],
+        "indent": [0, 4],
         // don't require .vue extension when importing
         "import/extensions": [
             "error",

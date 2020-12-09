@@ -4,7 +4,8 @@
             <div class="left-container">
                 <draggable
                     class="dragArea list-group"
-                    v-model="list"
+                    :list="list"
+                    handle=".handle"
                     :group="{ name: 'people', pull: pullFunction }"
                     v-bind="dragOptions"
                     :options="{sort: false, group: {name: 'field', pull:'clone',put: false}}"

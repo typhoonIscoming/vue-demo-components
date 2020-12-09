@@ -15,8 +15,12 @@
     /* position: fixed; */
     bottom: 0px;
 }
-  .content{
+.content{
     width: 100%;
     flex: 1;
     overflow-y: auto;
+}
+
+.flex{
+    display: flex;
 }

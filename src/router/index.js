@@ -32,6 +32,11 @@ export default new Router({
             component: () => import(/* webpackChunkName: "subAa" */ '@/pages/subAa'),
         },
         {
+            path: '/draggable',
+            name: 'draggable',
+            component: () => import(/* webpackChunkName: "draggable" */ '@/pages/draggable'),
+        },
+        {
             path: '/B',
             name: 'pageB',
             component: () => import(/* webpackChunkName: "pageB" */ '@/pages/pageB.vue'),
