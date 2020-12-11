@@ -8,7 +8,8 @@
                 <div id="editor" class="text-container"></div>
             </div>
             <div class="operator">
-                <button @click="getdata">get Json</button>
+                <button @click="getData">get Json</button>
+                <button @click="$router.push('/subB')">to subB page</button>
             </div>
         </div>
         <div class="bottom">
@@ -21,6 +22,7 @@
 import E from 'wangeditor'
 import common from '@/components/common';
 import selectItem from '@/components/pageB/selected'
+
 
 export default {
     data() {
@@ -40,20 +42,48 @@ export default {
     },
     mounted() {
         if (!this.editor) {
-            this.editor = new E('#editor')
-            this.editor.config.showLinkImg = false; // 即可隐藏插入网络图片的功能，即只保留上传本地图片
-            this.editor.config.linkCheck = function linkCheck(text, link) {
+            const editor = new E('#editor')
+            const keyupEvent = (editorEvent) => {
+                console.log(111, editorEvent, editor.txt.getJSON())
+            }
+            const deleteupEvent = (event) => {
+                console.log(222, event, editor.txt.getJSON())
+                return false
+            }
+            editor.config.showLinkImg = false; // 即可隐藏插入网络图片的功能，即只保留上传本地图片
+            editor.config.linkCheck = function linkCheck(text, link) {
                 console.log(text, link)
                 return true
             }
-            this.editor.create()
+            // editor.config.onchange = () => {
+            //     // const text = editor.txt.text();
+            //     // console.log('text', text)
+            //     // console.log('html', html)
+            //     const json = editor.txt.getJSON()
+            //     console.log('json', json)
+            // }
+            editor.config.onchangeTimeout = 500 // 修改为 500ms
+            // editor.config.deleteUpEvents = [(e) => {
+            //     console.log('e', e)
+            // }]
+            editor.txt.eventHooks.keyupEvents.push(keyupEvent)
+            editor.txt.eventHooks.deleteUpEvents.push(deleteupEvent)
+            editor.config.pasteTextHandle = (pasteStr) => {
+                console.log('====', pasteStr)
+                return pasteStr
+            }
+            editor.create()
+            this.editor = editor
         }
         localStorage.setItem('root', JSON.stringify({ random: (Math.random().toString().substr(3) * 1).toString(36) }))
     },
     methods: {
-        getdata() {
+        getData() {
             const json = this.editor.txt.getJSON()
             console.log('json', json)
+        },
+        appendData() {
+
         },
     },
 };

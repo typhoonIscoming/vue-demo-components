@@ -57,6 +57,9 @@
             <div class="list" @click="changeList" style="background: red;">
                 <span v-for="(item, index) in list" :key="index">{{ item }},</span>
             </div>
+            <div>
+                <button @click="$router.push('/subC')">跳转subC</button>
+            </div>
         </div>
         <div class="bottom">c页面</div>
     </div>
