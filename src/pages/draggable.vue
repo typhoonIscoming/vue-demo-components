@@ -43,24 +43,26 @@
                 </template>
             </div>
             <div class="center-board">
-                <draggable
-                    class="drawing-board"
-                    v-model="getDashboradList"
-                    v-bind="{ ghostClass: 'ghostClass', animation: 300 }"
-                    group="componentsGroup"
-                >
-                    <draggableItem
-                        v-for="(element, index) in getList"
-                        :key="index"
-                        :item="element"
-                        :oIndex="index"
-                        :class="[ getActivedItem.id === element.id ? 'actived-component-item' : '' ]"
-                        class="drawing-component-item"
-                        @activeItem="activeFormItem"
-                        @copyItem="drawingItemCopy"
-                        @deleteItem="drawingItemDelete"
-                    />
-                </draggable>
+                <div class="board-container">
+                    <draggable
+                        class="drawing-board"
+                        v-model="getDashboradList"
+                        v-bind="{ ghostClass: 'ghostClass', animation: 300 }"
+                        group="componentsGroup"
+                    >
+                        <draggableItem
+                            v-for="(element, index) in getList"
+                            :key="index"
+                            :item="element"
+                            :oIndex="index"
+                            :class="[ getActivedItem.id === element.id ? 'actived-component-item' : '' ]"
+                            class="drawing-component-item"
+                            @activeItem="activeFormItem"
+                            @copyItem="drawingItemCopy"
+                            @deleteItem="drawingItemDelete"
+                        />
+                    </draggable>
+                </div>
             </div>
         </div>
         <div class="footer">
@@ -130,7 +132,7 @@ export default {
             const item = componentFactory(component)
 
             this.addListItem({ item, index: index > -1 ? index : len })
-            this.activeFormItem(item)
+            this.setActivedItem(item)
         },
         activeFormItem(item) {
             this.setActivedItem(item)
@@ -144,12 +146,13 @@ export default {
         getData() {
             console.log('===', this.getList)
         },
-        handleChange(e) {
-            console.log('changed', e);
+        handleChange() {
+            // console.log('changed', e);
             // e.item.innerHTML = '<div class="defined-ghost-item" style="background: red;height: 200px;width: 100%;"></div>'
         },
         inputChanged(value) {
             this.activeNames = value;
+            // console.log('inputChanged', value)
         },
         getComponentData() {
             return {
@@ -199,12 +202,19 @@ export default {
         height: 100%;
         overflow-y: auto;
         padding-right: 13px;
+        margin-right: 15px;
         box-sizing: border-box;
     }
     .center-board{
-        flex: 1;
-        margin-left: 20px;
+        width: 375px;
+        height: 100%;
+        overflow-x: hidden;
         border: 1px solid black;
+    }
+    .board-container{
+        height: 100%;
+        margin: 0 -15px;
+        overflow-y: auto;
     }
 }
  </style>

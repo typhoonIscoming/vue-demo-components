@@ -1,16 +1,17 @@
 
 <script>
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import { menuItemAuthority } from '@/configure/componentAuthority';
 import { baseTableList, mediaList, filledInfo } from '@/configure/tableList'
+import RenderItem from '@/dragComponents'
+
+Vue.use(RenderItem)
 
 const componentTypes = baseTableList.concat(mediaList).concat(filledInfo)
 
 export default {
     name: 'DraggableItem',
-    data() {
-        return {}
-    },
     props: {
         item: {
             type: Object,
@@ -21,7 +22,8 @@ export default {
             default: 0,
         },
     },
-    render() {
+    render(h) {
+        const { componentName: tag } = this.item
         return (
             <div
                 class="drawing-draggable-item"
@@ -33,7 +35,7 @@ export default {
                     }
                 }
             >
-                { this.item.label }
+                { h(tag, { props: { obj: this.item } }) }
                 { this.copyComtent(this.item) }
             </div>
         )
@@ -87,7 +89,7 @@ $theme: #409EFF;
 
 .drawing-draggable-item{
     min-height: 50px;
-    padding: 10px 20px;
+    padding: 10px;
     box-sizing: border-box;
     line-height: 2;
     background: white;

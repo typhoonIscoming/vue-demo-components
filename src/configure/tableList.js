@@ -40,7 +40,7 @@ export const baseTableList = [
         iconName: 'iconfont',
     },
     {
-        componentName: 'tsePosition',
+        componentName: 'tseLocation',
         label: '位置',
         iconName: 'iconfont',
     },

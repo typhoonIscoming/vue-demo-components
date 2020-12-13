@@ -5,5 +5,5 @@ export const componentFactory = (item) => {
     const { componentName } = item;
     const uuid = generateUUID();
     const attr = componentAttribute[componentName] || {}
-    return { ...item, id: uuid, attributes: attr }
+    return { ...item, id: uuid, ...attr }
 }
