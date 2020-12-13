@@ -1,147 +1,130 @@
 export const baseTableList = [
     {
-        componentName: 'text', // 组件名称
+        componentName: 'tseText', // 组件名称
         label: '单行文本', // 组件标题
         iconName: 'iconfont', // 组件icon名称
-        configClass: 'textType', // 组件配置名称
     },
     {
-        componentName: 'multiLineText',
+        componentName: 'tseMultiLineText',
         label: '多行文本',
         iconName: 'iconfont',
-        configClass: 'muiltTextType',
     },
     {
-        componentName: 'number',
+        componentName: 'tseNumber',
         label: '数字',
         iconName: 'iconfont',
-        configClass: 'numberType',
     },
     {
-        componentName: 'date',
+        componentName: 'tseDate',
         label: '日期',
         iconName: 'iconfont',
-        configClass: 'dateType',
     },
     {
-        componentName: 'time',
+        componentName: 'tseTime',
         label: '时间',
         iconName: 'iconfont',
-        configClass: 'timeType',
     },
     {
-        componentName: 'radio',
+        componentName: 'tseRadio',
         label: '单选项',
         iconName: 'iconfont',
-        configClass: 'radioType',
     },
     {
-        componentName: 'multipleOptions',
+        componentName: 'tseMultipleOptions',
         label: '多选项',
         iconName: 'iconfont',
-        configClass: 'multiOptionsType',
     },
     {
-        componentName: 'checkPoints',
+        componentName: 'tseCheckPoints',
         label: '检查项',
         iconName: 'iconfont',
-        configClass: 'checkPointType',
     },
     {
-        componentName: 'position',
-        label: '检查项',
+        componentName: 'tsePosition',
+        label: '位置',
         iconName: 'iconfont',
-        configClass: 'checkPointType',
-        alt: '该组件已被添加，只可添加一次',
     },
     {
-        componentName: 'address',
+        componentName: 'tseAddress',
         label: '地址',
         iconName: 'iconfont',
-        configClass: 'addressType',
+        authority: ['once'],
     },
     {
-        componentName: 'table',
+        componentName: 'tseTable',
         label: '表格',
         iconName: 'iconfont',
-        configClass: 'tableType',
     },
     {
-        componentName: 'signature',
+        componentName: 'tseSignature',
         label: '手写签名',
         iconName: 'iconfont',
-        configClass: 'signatureType',
     },
     {
-        componentName: 'multiLevelSelect',
+        componentName: 'tseMultiLevelSelect',
         label: '多级选择',
         iconName: 'iconfont',
-        configClass: 'multiLevelSelectType',
     },
 ]
 // 多媒体类
 export const mediaList = [
     {
-        componentName: 'picture',
+        componentName: 'tsePicture',
         label: '图片',
         iconName: 'iconfont',
-        configClass: 'pictureType',
     },
     {
-        componentName: 'audio',
+        componentName: 'tseAudio',
         label: '录音',
         iconName: 'iconfont',
-        configClass: 'audioType',
     },
     {
-        componentName: 'video',
+        componentName: 'tseVideo',
         label: '视频',
         iconName: 'iconfont',
-        configClass: 'videoType',
     },
 ]
 // 填表人信息
 export const filledInfo = [
     {
-        componentName: 'userName',
+        componentName: 'tseUserName',
         label: '姓名',
         iconName: 'iconfont',
-        configClass: 'userNameType',
+        authority: ['once'],
     },
     {
-        componentName: 'wechatName',
+        componentName: 'tseWechatName',
         label: '微信名',
         iconName: 'iconfont',
-        configClass: 'wechatNameType',
+        authority: ['once'],
     },
     {
-        componentName: 'employeeNumber',
+        componentName: 'tseEmployeeNumber',
         label: '工号',
         iconName: 'iconfont',
-        configClass: 'employeeNumberType',
+        authority: ['once'],
     },
     {
-        componentName: 'mobilePhone',
+        componentName: 'tseMobilePhone',
         label: '手机',
         iconName: 'iconfont',
-        configClass: 'mobilePhoneType',
+        authority: ['once'],
     },
     {
-        componentName: 'idCard',
+        componentName: 'tseIdCard',
         label: '身份证',
         iconName: 'iconfont',
-        configClass: 'idCardType',
+        authority: ['once'],
     },
     {
-        componentName: 'license',
+        componentName: 'tseLicense',
         label: '车牌',
         iconName: 'iconfont',
-        configClass: 'licenseType',
     },
     {
-        componentName: 'gender',
+        componentName: 'tseGender',
         label: '性别',
         iconName: 'iconfont',
-        configClass: 'genderType',
+        authority: ['once'],
     },
 ]

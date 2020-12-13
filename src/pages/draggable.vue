@@ -1,5 +1,5 @@
  <template>
-    <div class="table-configure-container common">
+    <div class="table-configure-container common flex-column">
         <div class="panel flex">
             <div class="left-board">
                 <template v-for="(item, index) in menu">
@@ -10,22 +10,34 @@
                         <draggable
                             class="components-draggable"
                             :list="item.children"
-                            :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+                            v-bind="{
+                                group: {
+                                    name: 'componentsGroup',
+                                    pull: 'clone',
+                                    put: false,
+                                },
+                                filter: '.undraggable',
+                                choseClass: 'chose-item',
+                                dragClass: 'dragClass',
+                            }"
                             :clone="cloneComponent"
+                            :component-data="getComponentData()"
                             draggable=".components-item"
                             :sort="false"
-                            @end="onEnd"
                         >
-                            <div
-                                v-for="(element, listIndex) in item.children"
-                                :key="listIndex"
-                                class="components-item"
-                                @click="addComponent(element)"
-                            >
-                                <div class="components-body">
-                                    {{ element.label }}
+                            <template>
+                                <div
+                                    v-for="(element, listIndex) in item.children"
+                                    :key="listIndex"
+                                    class="components-item"
+                                    :class="{ 'undraggable': !draggableDisabled(element) }"
+                                    @click="addComponent(element)"
+                                >
+                                    <div class="components-body">
+                                        {{ element.label }}
+                                    </div>
                                 </div>
-                            </div>
+                            </template>
                         </draggable>
                     </div>
                 </template>
@@ -33,16 +45,17 @@
             <div class="center-board">
                 <draggable
                     class="drawing-board"
-                    :list="drawingList"
-                    :animation="340"
+                    v-model="getDashboradList"
+                    v-bind="{ ghostClass: 'ghostClass', animation: 300 }"
                     group="componentsGroup"
                 >
                     <draggableItem
-                        v-for="(element, index) in drawingList"
+                        v-for="(element, index) in getList"
                         :key="index"
-                        :drawing-list="drawingList"
-                        :active-id="activeId"
                         :item="element"
+                        :oIndex="index"
+                        :class="[ getActivedItem.id === element.id ? 'actived-component-item' : '' ]"
+                        class="drawing-component-item"
                         @activeItem="activeFormItem"
                         @copyItem="drawingItemCopy"
                         @deleteItem="drawingItemDelete"
@@ -50,13 +63,24 @@
                 </draggable>
             </div>
         </div>
+        <div class="footer">
+            <div class="get-list-btn" @click="getData">
+                get List
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import draggable from 'vuedraggable'
 import { baseTableList, mediaList, filledInfo } from '@/configure/tableList'
+import { menuItemAuthority } from '@/configure/componentAuthority';
+
 import draggableItem from '../components/draggableItem';
+import { componentFactory } from '../configure/draggableFactory'
+
+const componentTypes = baseTableList.concat(mediaList).concat(filledInfo)
 
 export default {
     data() {
@@ -67,36 +91,84 @@ export default {
                 { title: '填表人信息', children: filledInfo },
             ],
             drawingList: [],
-            activeId: null,
+            activeNames: '',
         }
     },
     components: {
         draggable,
         draggableItem,
     },
+    computed: {
+        ...mapGetters('dragList', ['getList', 'getActivedItem']),
+        getDashboradList: {
+            get() {
+                return this.getList
+            },
+            set(list) {
+                this.updateList(list)
+            },
+        },
+    },
     created() {
-        console.log(this.menu)
+        // console.log(this.menu)
     },
     methods: {
+        ...mapActions('dragList', ['updateList', 'setActivedItem', 'deleteItem', 'addListItem']),
         cloneComponent(component) {
-            console.log('cloneComponent', component)
-            return component
+            const item = componentFactory(component)
+            // console.log('cloneComponent', component)
+            return { ...item }
         },
         onEnd(component) {
             console.log('onEnd', component)
         },
         addComponent(component) {
-            console.log('component', component)
-            this.drawingList.push(component)
+            const status = this.draggableDisabled(component)
+            if (!status) return
+            const len = this.getDashboradList.length;
+            const index = this.getDashboradList.findIndex(item => item.id === this.getActivedItem.id)
+            const item = componentFactory(component)
+
+            this.addListItem({ item, index: index > -1 ? index : len })
+            this.activeFormItem(item)
         },
         activeFormItem(item) {
-            console.log('item', item)
+            this.setActivedItem(item)
         },
         drawingItemCopy(item) {
             console.log('item', item)
         },
-        drawingItemDelete(item) {
-            console.log('item', item)
+        drawingItemDelete(index) {
+            this.deleteItem(index)
+        },
+        getData() {
+            console.log('===', this.getList)
+        },
+        handleChange(e) {
+            console.log('changed', e);
+            // e.item.innerHTML = '<div class="defined-ghost-item" style="background: red;height: 200px;width: 100%;"></div>'
+        },
+        inputChanged(value) {
+            this.activeNames = value;
+        },
+        getComponentData() {
+            return {
+                on: {
+                    change: this.handleChange,
+                    input: this.inputChanged,
+                },
+                attrs: {
+                    wrap: true,
+                },
+                props: {
+                    value: this.activeNames,
+                },
+            }
+        },
+        draggableDisabled(obj) {
+            const menuItem = componentTypes.find(item => item.componentName === obj.componentName);
+            const { authResult } = menuItemAuthority(menuItem, this.getList)
+            return authResult
         },
     },
 }
@@ -104,42 +176,35 @@ export default {
 
 <style scoped lang="scss">
 @import "~@/css/common.scss";
+@import "~@/css/draggable.scss";
 
 .table-configure-container{
-    width: 100%;
     .panel{
         width: 100%;
+        flex: 1;
         padding: 20px;
         box-sizing: border-box;
+        overflow-y: auto;
     }
-    .components-group{
-        border: 1px solid black;
-        margin-bottom: 20px;
-        .components-title{
-            text-align: center;
-        }
-        .components-draggable{
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            grid-gap: 20px;
-        }
-        .components-item{
-            text-align: center;
-            line-height: 25px;
-        }
+    .footer{
+        height: 80px;
+    }
+    .components-draggable{
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: #fafafa;
     }
     .left-board{
         width: 375px;
+        height: 100%;
+        overflow-y: auto;
+        padding-right: 13px;
+        box-sizing: border-box;
     }
     .center-board{
         flex: 1;
         margin-left: 20px;
         border: 1px solid black;
-        .drawing-board{
-            width: 100%;
-            height: 100%;
-        }
     }
 }
  </style>

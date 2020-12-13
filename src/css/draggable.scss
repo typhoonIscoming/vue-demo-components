@@ -1,0 +1,61 @@
+.table-configure-container{
+    .components-group{
+        border: 1px solid black;
+        margin-bottom: 20px;
+        .components-title{
+            text-align: center;
+        }
+        .components-draggable{
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-gap: 20px;
+        }
+        .components-item{
+            text-align: center;
+            line-height: 25px;
+            cursor: move;
+            touch-action: manipulation;
+            background-color: white;
+            // padding: 5px 0;
+            box-sizing: border-box;
+            color: #595959;
+            &.undraggable{
+                cursor: no-drop;
+                color: red;
+            }
+        }
+    }
+    .drawing-board{
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        .actived-component-item{
+            border: 2px solid $theme;
+        }
+    }
+    .dragClass{
+        background: red;
+    }
+    .ghostClass{ // 拖拽中占位的元素的类名
+        opacity: 1;
+        background: white;
+        position: relative;
+        &::before{
+            content: ' ';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            // background: #F4F4F4;
+            background-color: yellowgreen;
+            z-index: 9;
+            left: 0;
+            top: 0;
+        }
+    }
+    .drawing-component-item{
+        cursor: grab;
+    }
+}
