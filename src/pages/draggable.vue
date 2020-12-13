@@ -36,6 +36,9 @@
                                     <div class="components-body">
                                         {{ element.label }}
                                     </div>
+                                    <div class="drop-item" :class="element.componentName">
+                                        {{ element.label }}
+                                    </div>
                                 </div>
                             </template>
                         </draggable>
@@ -209,7 +212,8 @@ export default {
         width: 375px;
         height: 100%;
         overflow-x: hidden;
-        border: 1px solid black;
+        border: 1px solid #9c9999;
+        box-sizing: border-box;
     }
     .board-container{
         height: 100%;

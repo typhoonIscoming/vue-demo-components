@@ -13,4 +13,8 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+.tse-text-container{
+    height: 80px;
+    background: red;
+}
 </style>

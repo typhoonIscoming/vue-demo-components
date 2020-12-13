@@ -20,16 +20,30 @@
             // padding: 5px 0;
             box-sizing: border-box;
             color: #595959;
+            position: relative;
+            overflow: hidden;
             &.undraggable{
                 cursor: no-drop;
                 color: red;
+            }
+            .drop-item{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 9;
+                left: 0;
+                top: 0;
+                background-color: yellowgreen;
+                &.tseText{
+                    height: 50px;
+                }
             }
         }
     }
     .drawing-board{
         width: 100%;
-        // height: 100%;
-        padding: 5px 15px;
+        height: 100%;
+        padding: 5px 20px;
         box-sizing: border-box;
         // overflow-y: auto;
         .actived-component-item{
