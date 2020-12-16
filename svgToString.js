@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 // const mkdirp = require('mkdirp')
-const readline = require('readline')
+// const readline = require('readline')
 
 function resolve(dir) {
     return path.resolve(__dirname, 'src/assets', dir)
@@ -37,18 +37,16 @@ fs.stat(writeFileName, (err) => {
         fs.writeFileSync(writeFileName, '')
     }
     svgToString()
-    let str = '\n'
-    let tempstr = JSON.stringify(fileContent).slice(1, -1).split(',')
-    // let tempstr = JSON.stringify(fileContent).replace(/\\/g, '')
-    // console.log('===', tempstr)
+    let str = '\n\t\t'
+    const tempstr = JSON.stringify(fileContent).slice(1, -1).split(',')
     tempstr.forEach((item) => {
         const itemStr = item.split(/:(?=[^//])/)
-        str += itemStr[0] + `:'${itemStr[1]}',\n`
+        str += itemStr[0].replace('.svg', '').replace(/"/g, '') + `: '${itemStr[1]}',\n\t`; // eslint-disable-line
     })
     // console.log(`{${str.replace(/\\/g, '').replace(/('"|"')/g, "'")}}`)
     const res = `{${str.replace(/\\/g, '').replace(/('"|"')/g, "'")}}`
 
-    const writeString = "window.tinymce.IconManager.add('default', {\n icons: " + res + "\n})"
+    const writeString = "window.tinymce.IconManager.add('default', {\n\ticons: " + res + "\n})"; // eslint-disable-line
 
     fs.writeFileSync(writeFileName, writeString)
 })
