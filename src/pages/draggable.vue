@@ -36,9 +36,9 @@
                                     <div class="components-body">
                                         {{ element.label }}
                                     </div>
-                                    <div class="drop-item" :class="element.componentName">
+                                    <!-- <div class="drop-item" :class="element.componentName">
                                         {{ element.label }}
-                                    </div>
+                                    </div> -->
                                 </div>
                             </template>
                         </draggable>
