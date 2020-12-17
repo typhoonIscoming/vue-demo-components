@@ -3,3 +3,5 @@
 /dist/
 /src/utils/
 transition.js
+svgToString.js
+src/assets/tinyIcon.js

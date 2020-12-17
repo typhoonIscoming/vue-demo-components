@@ -5,3 +5,12 @@ plugins:
     attrs:
       - 'fill'
       - 'fill-rule'
+
+- inlineStyles: true
+- removeDoctype: true
+- removeStyleElement: true
+- removeXMLNS: true
+- removeEmptyContainers: true
+- removeViewBox: true
+- removeDesc: true
+- removeEmptyText: true

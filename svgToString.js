@@ -41,7 +41,7 @@ fs.stat(writeFileName, (err) => {
     const tempstr = JSON.stringify(fileContent).slice(1, -1).split(',')
     tempstr.forEach((item) => {
         const itemStr = item.split(/:(?=[^//])/)
-        str += itemStr[0].replace('.svg', '').replace(/"/g, '') + `: '${itemStr[1]}',\n\t`; // eslint-disable-line
+        str += itemStr[0].replace('.svg', '').replace(/"/g, '') + `: '${itemStr[1]}',\n\t\t`; // eslint-disable-line
     })
     // console.log(`{${str.replace(/\\/g, '').replace(/('"|"')/g, "'")}}`)
     const res = `{${str.replace(/\\/g, '').replace(/('"|"')/g, "'")}}`

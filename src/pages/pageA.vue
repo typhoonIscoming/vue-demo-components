@@ -48,6 +48,7 @@
                 <p @click="changeStorage">chnage localstorage's value</p>
             </div>
             <div class="right">
+                <svg-icon class-name="download-icon" icon-class="download" />
                 <p @click="$router.push('/subA')">跳转subA</p>
                 <p @click="$router.push('/subAa')">跳转subAa</p>
                 <p @click="$router.push('/draggable')">跳转draggable</p>

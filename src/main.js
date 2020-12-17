@@ -19,6 +19,8 @@ import webpackComponents from '@/webpackComponents'
 import VueI18n from 'vue-i18n'
 import { ConfirmPlugin } from 'vux'
 
+import './components/svg'
+
 import App from './App'
 import router from './router'
 import store from './store'
