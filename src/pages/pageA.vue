@@ -243,5 +243,8 @@ export default {
             }
         }
     }
+    .right{
+        background: url('../assets/svgsOutput/next.svg') no-repeat 50% 50%;
+    }
 }
 </style>
