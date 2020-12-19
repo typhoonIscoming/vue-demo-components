@@ -100,8 +100,8 @@ export default {
         padding: 50px;
         box-sizing: border-box;
     }
-    .text-container{
-        height: 300px;
-    }
+    // .text-container{
+    //     height: 300px;
+    // }
 }
 </style>

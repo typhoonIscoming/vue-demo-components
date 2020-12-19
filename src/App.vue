@@ -77,8 +77,8 @@ body,
 .nav-bar {
     position: absolute;
     width: 100%;
-    height: 60px;
-    line-height: 60px;
+    height: 40px;
+    line-height: 40px;
     top: 0;
     background: white;
     display: flex;

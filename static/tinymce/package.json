@@ -1,0 +1,54 @@
+{
+  "_from": "tinymce",
+  "_id": "tinymce@5.6.2",
+  "_inBundle": false,
+  "_integrity": "sha1-TCDCLjKMXQuqsgSSjbwrDsvtGLQ=",
+  "_location": "/tinymce",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "tinymce",
+    "name": "tinymce",
+    "escapedName": "tinymce",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/",
+    "/@packy-tang/vue-tinymce"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/tinymce/download/tinymce-5.6.2.tgz?cache=0&sync_timestamp=1607412273328&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftinymce%2Fdownload%2Ftinymce-5.6.2.tgz",
+  "_shasum": "4c20c22e328c5d0baab204928dbc2b0ecbed18b4",
+  "_spec": "tinymce",
+  "_where": "/Users/xiehang/Documents/products/saas-qrcode-generator-front",
+  "author": {
+    "name": "Tiny Technologies, Inc"
+  },
+  "bugs": {
+    "url": "https://github.com/tinymce/tinymce/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Web based JavaScript HTML WYSIWYG editor control.",
+  "homepage": "https://github.com/tinymce/tinymce-dist#readme",
+  "keywords": [
+    "editor",
+    "wysiwyg",
+    "tinymce",
+    "richtext",
+    "javascript",
+    "html"
+  ],
+  "license": "LGPL-2.1",
+  "main": "tinymce.js",
+  "name": "tinymce",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinymce/tinymce-dist.git"
+  },
+  "types": "tinymce.d.ts",
+  "version": "5.6.2"
+}
