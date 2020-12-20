@@ -69,13 +69,15 @@ export default {
                         const headerHeight = getVisibleHeight(headerContent[0])
                         // const styles = window.getComputedStyle(parent)
                         // console.log('parent', scrollTop, visiableTop, headerHeight)
-                        if (scrollTop > headerHeight) {
-                            header[0].style.paddingTop = `${visiableTop}px;`
+                        if (scrollTop > 0) {
+                            header[0].style.paddingTop = `${headerHeight}px`
+                            headerContent[0].style.borderTop = '1px solid #ccc'
                             headerContent[0].style.position = 'fixed';
                             headerContent[0].style.top = `${visiableTop}px`;
                         } else {
                             header[0].style.paddingTop = 0
                             headerContent[0].style.position = 'initial';
+                            headerContent[0].style.borderTop = 'initial'
                         }
                     }
                     const fn = throttle(scrollHandler)

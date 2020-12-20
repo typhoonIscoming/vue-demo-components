@@ -31,7 +31,7 @@ export default {
                 toolbar2: '',
                 toolbar_mode: 'sliding', // floating / sliding / scrolling / wrap 菜单是自动换行还是放进抽屉
                 quickbars_selection_toolbar: 'removeformat | bold italic underline strikethrough | fontsizeselect forecolor backcolor',
-                plugins: 'link image media table lists fullscreen quickbars autoresize',
+                plugins: 'image media table lists fullscreen quickbars autoresize',
                 forced_root_block: '',
                 elementpath: false,
                 statusbar: false,
