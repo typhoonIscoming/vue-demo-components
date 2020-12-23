@@ -21,6 +21,12 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ```javascript
+"devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.0",
+}
 "husky": {
         "hooks": {
             "pre-commit": "npm run lint:staged"
