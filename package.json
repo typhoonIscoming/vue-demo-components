@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@antv/g6": "^3.2.4",
-        "axios": "^0.19.0",
+        "axios": "^0.21.1",
         "element-ui": "^2.13.0",
         "exif-js": "^2.3.0",
         "gulp.spritesmith": "^6.9.0",
