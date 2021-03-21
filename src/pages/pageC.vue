@@ -2,28 +2,6 @@
     <div class="C common c-page">
         <common title="c"></common>
         <div class="content">
-            <!-- <quill-editor
-            class="myQuillEditor"
-            v-model="content"
-            ref="myQuillEditor"
-            :options="editorOption"
-            @blur="onEditorBlur($event)"
-            @focus="onEditorFocus($event)"
-            @change="onEditorChange($event)"
-            />-->
-            <!-- <textarea type="textarea" class="c-textarea" wrap="hard"
-                v-model="inputContent"
-                @keyup="keyup"
-            >
-            </textarea> -->
-            <!-- <pre v-html="preContent" /> -->
-            <!-- <div class="stack-wrapper">
-                <stack
-                    :pages="someList"
-                    :stackinit="stackinit"
-                >
-                </stack>
-            </div> -->
             <swiper ref="mySwiper" :options="swiperOptions">
                 <swiper-slide>Slide 1</swiper-slide>
                 <swiper-slide>Slide 2</swiper-slide>

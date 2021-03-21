@@ -5,9 +5,9 @@
         </div>
         <div class="editor-container">
             <div class="editor-content">
-                <TseEditor
+                <!-- <TseEditor
                     :setting="init"
-                />
+                /> -->
             </div>
         </div>
     </div>
@@ -50,11 +50,16 @@ export default {
         }
     },
     mounted() {
-        // const editorContent = document.getElementsByClassName('editor-content')[0]
-        // editorContent.addEventListener('scroll', () => {
-        //     console.log(234)
-        // })
-        // console.log('editorContent', editorContent)
+        console.log('window.navigator.serviceWorke', window.navigator)
+        window.navigator.serviceWorker.register('../../static/sw.js')
+        .then(reg => console.log('SW registered!', reg))
+        .catch(err => console.log('Boo!', err));
+
+        setTimeout(() => {
+            const img = new Image();
+            img.src = '../assets/images/sw.jpg';
+            document.body.appendChild(img);
+        }, 3000);
     },
     methods: {
         editorScroll() {
