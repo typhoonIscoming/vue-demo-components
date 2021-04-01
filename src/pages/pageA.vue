@@ -52,6 +52,7 @@
                 <p @click="$router.push('/subA')">跳转subA</p>
                 <p @click="$router.push('/subAa')">跳转subAa</p>
                 <p @click="$router.push('/draggable')">跳转draggable</p>
+                <p @click="changeLanguage">切换语言</p>
             </div>
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
