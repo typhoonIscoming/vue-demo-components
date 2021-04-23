@@ -1,10 +1,14 @@
 <template>
     <div class="container common f-page">
         <xh-common title="f" />
-        <!-- <pdf :src="src" /> -->
-        <div class="content">
-
-        </div>
+        <pdf :src="src" />
+        <!-- <div class="content">
+            <child-one
+                v-for="(item, index) in list"
+                :key="index"
+                :item="item"
+            />
+        </div> -->
     </div>
 </template>
 
@@ -19,6 +23,7 @@ export default {
             currentPage: 0,
             pageCount: 0,
             src: '',
+            list: [{ name: 1 }, { name: 2 }],
         }
     },
     components: {
@@ -26,8 +31,8 @@ export default {
         pdf,
     },
     created() {
-        // const src = `https://ecard-test.95505.cn:8082/upload/20200525/2fbc872ac4cc4e42b383aa95c3fa679c.pdf?v=${+new Date()}`
-        // this.src = pdf.createLoadingTask(src)
+        const src = 'http://47.108.206.236:60035/loanapp/sign_contract/税金贷-个人征信授权_1618231562836.pdf'
+        this.src = pdf.createLoadingTask(src)
         // this.regRgba()
         // this.regRgb()
         // this.regHex()
