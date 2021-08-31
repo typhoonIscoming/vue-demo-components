@@ -27,12 +27,26 @@
                 </draggable>
             </div>
         </div>
+        <DragVerifyImg
+            ref="dragVerify"
+            :imgsrc="img"
+            :isPassing.sync="isPassing"
+            :showRefresh="true"
+            text="请按住滑块拖动"
+            successText="验证通过"
+            handlerIcon="el-icon-d-arrow-right"
+            successIcon="el-icon-circle-check"
+            @refresh="refreshImg"
+            @passcallback="handleSuccess"
+        />
     </div>
 </template>
 
 <script>
 import draggable from 'vuedraggable';
 import { mapGetters, mapActions } from 'vuex';
+import DragVerifyImg from '@/components/dragImg';
+import bgImage from '@/assets/images/sw2.jpg';
 
 let idGlobal = 8;
 
@@ -53,6 +67,8 @@ export default {
                 disabled: false,
                 ghostClass: 'ghost',
             },
+            isPassing: false,
+            img: bgImage,
         }
     },
     computed: {
@@ -69,10 +85,13 @@ export default {
     },
     components: {
         draggable,
+        DragVerifyImg,
     },
     created() {},
     methods: {
         ...mapActions('dragList', ['updateList']),
+        refreshImg() {},
+        handleSuccess() {},
         clone({ name }) {
             idGlobal += 1
             return ({ name, id: idGlobal })
