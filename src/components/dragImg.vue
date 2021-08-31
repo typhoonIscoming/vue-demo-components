@@ -106,7 +106,7 @@ export default {
         },
         radius: {
             type: String,
-            default: '8px',
+            default: '0px',
         },
         handlerIcon: {
             type: String,
