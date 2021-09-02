@@ -261,5 +261,21 @@ export default {
     .middle{
         background: url('../assets/svgsOutput/next.svg') no-repeat 50% 50%;
     }
+    .right{
+        progress{
+            height: 8px;
+            background: yellowgreen;
+            border-radius: 20px;
+            vertical-align: baseline;
+            &::-webkit-progress-bar{
+                background-color: yellowgreen;
+                border-radius: 20px;
+            }
+            &::-webkit-progress-value{
+                background: red;
+                border-radius: 20px;
+            }
+        }
+    }
 }
 </style>
