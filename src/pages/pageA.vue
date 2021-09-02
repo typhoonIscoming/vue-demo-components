@@ -38,21 +38,33 @@
                     </div>
                 </div>
             </div> -->
-            <div class="left">
-                <p v-for="(value, key) in getAllAttribute" :key="key">
-                    <span >{{ key }} = {{ value }}</span>
-                </p>
-                <p @click="operator">
-                    <span v-for="(item, index) in arrayList" :key="index">{{ item }}</span>
-                </p>
-                <p @click="changeStorage">chnage localstorage's value</p>
-            </div>
-            <div class="right">
-                <svg-icon class-name="download-icon" icon-class="download" />
-                <p @click="$router.push('/subA')">跳转subA</p>
-                <p @click="$router.push('/subAa')">跳转subAa</p>
-                <p @click="$router.push('/draggable')">跳转draggable</p>
-                <p @click="changeLanguage">切换语言</p>
+            <div class="flex-row">
+                <div class="left">
+                    <p v-for="(value, key) in getAllAttribute" :key="key">
+                        <span >{{ key }} = {{ value }}</span>
+                    </p>
+                    <p @click="operator">
+                        <span v-for="(item, index) in arrayList" :key="index">{{ item }}</span>
+                    </p>
+                    <p @click="changeStorage">chnage localstorage's value</p>
+                </div>
+                <div class="middle">
+                    <svg-icon class-name="download-icon" icon-class="download" />
+                    <p @click="$router.push('/subA')">跳转subA</p>
+                    <p @click="$router.push('/subAa')">跳转subAa</p>
+                    <p @click="$router.push('/draggable')">跳转draggable</p>
+                    <p @click="changeLanguage">切换语言</p>
+                </div>
+                <div class="right">
+                    <p>测试enterkeyhint属性</p>
+                    <input enterkeyhint="go" value="go">
+                    <input enterkeyhint="enter" value="enter">
+                    <input enterkeyhint="done" value="done">
+                    <input enterkeyhint="next" value="next">
+                    <input enterkeyhint="previous" value="previous">
+                    <input enterkeyhint="search" value="search">
+                    <input enterkeyhint="send" value="send">
+                </div>
             </div>
         </div>
         <div class="bottom" @click="selectEvent">{{ $t('m.bottom') }}</div>
@@ -244,7 +256,7 @@ export default {
             }
         }
     }
-    .right{
+    .middle{
         background: url('../assets/svgsOutput/next.svg') no-repeat 50% 50%;
     }
 }

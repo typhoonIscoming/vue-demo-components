@@ -25,6 +25,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import './assets/styles/index.css';
+
 Vue.use(ElementUI);
 Vue.use(VueAwesomeSwiper)
 Vue.use(webpackComponents)
