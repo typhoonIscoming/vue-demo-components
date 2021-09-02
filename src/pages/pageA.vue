@@ -57,13 +57,15 @@
                 </div>
                 <div class="right">
                     <p>测试enterkeyhint属性</p>
-                    <input enterkeyhint="go" value="go">
-                    <input enterkeyhint="enter" value="enter">
-                    <input enterkeyhint="done" value="done">
-                    <input enterkeyhint="next" value="next">
-                    <input enterkeyhint="previous" value="previous">
-                    <input enterkeyhint="search" value="search">
-                    <input enterkeyhint="send" value="send">
+                    <p lang="en-GB">This paragraph is defined as British English. tabindex定义tab键聚焦顺序</p>
+                    <progress value="70" max="100">70 %</progress>
+                    <input enterkeyhint="go" value="go tabindex=0" tabindex="0">
+                    <input enterkeyhint="enter" value="enter tabindex=3" tabindex="3">
+                    <input enterkeyhint="done" value="done tabindex=5" tabindex="5">
+                    <input enterkeyhint="next" value="next tabindex=2" tabindex="2">
+                    <input enterkeyhint="previous" value="previous tabindex=1" tabindex="1">
+                    <input enterkeyhint="search" value="search tabindex=6" tabindex="6">
+                    <input enterkeyhint="send" value="send tabindex=4" tabindex="4">
                 </div>
             </div>
         </div>
