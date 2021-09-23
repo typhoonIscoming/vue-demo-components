@@ -1,6 +1,6 @@
 <template>
     <div class="sub-a-container common">
-        <div class="page-container">
+        <div class="page-container" v-show="false">
             <div class="left-container">
                 <draggable
                     class="dragArea list-group"
@@ -28,6 +28,7 @@
             </div>
         </div>
         <DragVerifyImg
+            v-show="false"
             ref="dragVerify"
             :imgsrc="img"
             :isPassing.sync="isPassing"
@@ -39,6 +40,10 @@
             @refresh="refreshImg"
             @passcallback="handleSuccess"
         />
+        <div class="VerifyContainer">
+            <el-button type="primary" size="mini" @click="handleVerify">验证</el-button>
+        </div>
+        <VerifyDialog v-model="showDialog" />
     </div>
 </template>
 
@@ -47,6 +52,7 @@ import draggable from 'vuedraggable';
 import { mapGetters, mapActions } from 'vuex';
 import DragVerifyImg from '@/components/dragImg';
 import bgImage from '@/assets/images/sw2.jpg';
+import VerifyDialog from '@/components/verifyImg/verifyDialog';
 
 let idGlobal = 8;
 
@@ -69,6 +75,7 @@ export default {
             },
             isPassing: false,
             img: bgImage,
+            showDialog: false,
         }
     },
     computed: {
@@ -86,6 +93,7 @@ export default {
     components: {
         draggable,
         DragVerifyImg,
+        VerifyDialog,
     },
     created() {},
     methods: {
@@ -103,6 +111,9 @@ export default {
             this.drag = true
             this.controlOnStart = originalEvent.ctrlKey;
         },
+        handleVerify() {
+            this.showDialog = true
+        },
     },
 }
 </script>
@@ -110,10 +121,8 @@ export default {
 @import "~@/css/common.scss";
 
 .sub-a-container {
-    height: 100%;
     width: 100%;
     .page-container{
-        height: 100%;
         width: 100%;
     }
     .left-container, .right-container{
