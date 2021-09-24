@@ -7,7 +7,8 @@
             >
                 <img
                     :src="backImgBase ? 'data:image/png;base64,' + backImgBase : defaultImg"
-                    style="width: 100%; height: 100%; display: block"
+                    style="width: 100%; height: 100%; display: block;"
+                    draggable="false"
                 >
                 <div
                     v-show="showRefresh"
@@ -56,6 +57,8 @@
                     }"
                     @touchstart="start"
                     @mousedown="start"
+                    @touchend="end"
+                    @mouseup="end"
                 >
                     <div
                         class="VerifySubBlock"
@@ -80,6 +83,7 @@
 <script>
 /* eslint-disable guard-for-in, no-restricted-syntax */
 import { resetSize } from '@/utils/resetSize'
+import api from '@/api';
 
 export default {
     name: 'Verify',
@@ -224,6 +228,7 @@ export default {
             }
         },
         init() {
+            this.getPictrue()
             this.text = this.explain;
             this.$nextTick(() => {
                 const setSize = this.resetSize(this) // 重新设置宽度高度
@@ -259,7 +264,7 @@ export default {
             this.moveBlockBackgroundColor = '#fff'
 
             this.isEnd = false
-
+            this.getPictrue()
             setTimeout(() => {
                 this.transitionWidth = '';
                 this.transitionLeft = '';
@@ -267,6 +272,25 @@ export default {
             }, 300)
         },
         getPictrue() {
+            const data = {
+                captchaType: 'blockPuzzle',
+                clientUid: localStorage.getItem('slider'),
+                ts: Date.now(), // 现在的时间戳
+            }
+            api.getPicture(data).then((res) => {
+                console.log('+++', res)
+                if (res.repCode === '0000') {
+                    this.backImgBase = res.repData.originalImageBase64
+                    this.blockBackImgBase = res.repData.jigsawImageBase64
+                } else {
+                    this.tipWords = res.repMsg
+                }
+                // 判断接口请求次数是否失效
+                if (res.repCode === '6201') {
+                    this.backImgBase = null
+                    this.blockBackImgBase = null
+                }
+            })
         },
     },
 }
