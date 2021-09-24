@@ -1,0 +1,25 @@
+
+.VerifyBarArea{
+    position: relative;
+    background: #FFFFFF;
+    text-align: center;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    .VerifyLeftBar{
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        background: #f0fff0;
+        cursor: pointer;
+        box-sizing: content-box;
+        border: 1px solid #ddd;
+    }
+    .VerifySubBlock{
+        position: absolute;
+        text-align: center;
+        z-index: 3;
+    }
+}

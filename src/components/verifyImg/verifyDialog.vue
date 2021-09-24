@@ -3,25 +3,36 @@
         title="提示"
         append-to-body
         :visible.sync="dialogVisible"
-        width="80%"
+        width="fit-content"
     >
         <div class="DialogContent">
-            :before-close="handleClose"
+            <Verify
+                :defaultImg="defaultImg"
+            />
         </div>
     </el-dialog>
 </template>
 
 <script>
+import defaultImg from '@/assets/images/default.jpg';
+import Verify from './verify';
+
 export default {
     name: 'VerifyDialog',
     data() {
-        return {}
+        return {
+            defaultImg,
+            isMobile: false,
+        }
     },
     props: {
         value: {
             type: Boolean,
             default: false,
         },
+    },
+    components: {
+        Verify,
     },
     computed: {
         dialogVisible: {
