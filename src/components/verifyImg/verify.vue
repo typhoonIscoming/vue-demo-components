@@ -45,7 +45,7 @@
                     transaction: transitionWidth,
                 }"
             >
-                <span class="VerifyMsg">{{ finishText }}</span>
+                <span class="VerifyMsg finishText">{{ finishText }}</span>
                 <div
                     class="VerifyMoveBlock"
                     :style="{
@@ -57,8 +57,6 @@
                     }"
                     @touchstart="start"
                     @mousedown="start"
-                    @touchend="end"
-                    @mouseup="end"
                 >
                     <div
                         class="VerifySubBlock"
@@ -203,10 +201,12 @@ export default {
         end() {
             this.endMovetime = +new Date()
             if (this.status && !this.isEnd) {
-                // let moveLeftDistance = parseInt((this.moveBlockLeft || '').replace('px', ''))
-                // moveLeftDistance = moveLeftDistance * 310 / parseInt(this.setSize.imgWidth)
+                this.status = false
+                let moveLeftDistance = parseInt((this.moveBlockLeft || '').replace('px', ''))
+                moveLeftDistance = moveLeftDistance * 310 / parseInt(this.setSize.imgWidth)
 
                 const random = Math.random().toFixed(1)
+                console.log('random', random)
                 setTimeout(() => {
                     if (random > 0.5) {
                         this.moveBlockBackgroundColor = '#5cb85c'
@@ -214,44 +214,27 @@ export default {
                         this.showRefresh = false
                         this.isEnd = true
                         this.passFlag = true
+                        this.tipWords = `${((this.endMovetime - this.startMoveTime) / 1000).toFixed(2)}s验证成功`
+                        this.$emit('success', moveLeftDistance)
+                        setTimeout(() => {
+                            this.tipWords = ''
+                            this.refresh()
+                        }, 1500)
                     } else {
                         this.moveBlockBackgroundColor = '#d9534f'
                         this.leftBarBorderColor = '#d9534f'
                         this.passFlag = false
                         this.tipWords = '验证失败'
+                        this.$emit('error')
                         setTimeout(() => {
                             this.tipWords = '';
-                            this.refresh()
+                            this.refresh(true)
                         }, 1000)
                     }
                 }, 1000)
             }
         },
-        init() {
-            this.getPictrue()
-            this.text = this.explain;
-            this.$nextTick(() => {
-                const setSize = this.resetSize(this) // 重新设置宽度高度
-                for (const key in setSize) {
-                    this.$set(this.setSize, key, setSize[key])
-                }
-                // this.$parent.$emit('ready', this)
-            })
-            window.removeEventListener('touchmove', this.move)
-            window.removeEventListener('mousemove', this.move)
-
-            // 鼠标松开
-            window.removeEventListener('touchend', this.end)
-            window.removeEventListener('mouseup', this.end)
-
-            window.addEventListener('touchmove', this.move)
-            window.addEventListener('mousemove', this.move)
-
-            // 鼠标松开
-            window.addEventListener('touchend', this.end)
-            window.addEventListener('mouseup', this.end)
-        },
-        refresh() {
+        refresh(needNewPic) {
             this.showRefresh = true;
             this.finishText = '';
             this.transitionLeft = 'left .3s';
@@ -264,7 +247,9 @@ export default {
             this.moveBlockBackgroundColor = '#fff'
 
             this.isEnd = false
-            this.getPictrue()
+            if (needNewPic) {
+                this.getPictrue()
+            }
             setTimeout(() => {
                 this.transitionWidth = '';
                 this.transitionLeft = '';
@@ -290,6 +275,46 @@ export default {
                     this.backImgBase = null
                     this.blockBackImgBase = null
                 }
+            })
+        },
+        init() {
+            this.getPictrue()
+            this.text = this.explain;
+            this.$nextTick(() => {
+                const setSize = this.resetSize(this) // 重新设置宽度高度
+                for (const key in setSize) {
+                    this.$set(this.setSize, key, setSize[key])
+                }
+                this.$emit('ready')
+            })
+            window.removeEventListener('touchmove', () => {
+                this.move()
+            })
+            window.removeEventListener('mousemove', () => {
+                this.move()
+            })
+
+            // 鼠标松开
+            window.removeEventListener('touchend', () => {
+                this.end()
+            })
+            window.removeEventListener('mouseup', () => {
+                this.end()
+            })
+
+            window.addEventListener('touchmove', () => {
+                this.move()
+            })
+            window.addEventListener('mousemove', () => {
+                this.move()
+            })
+
+            // 鼠标松开
+            window.addEventListener('touchend', () => {
+                this.end()
+            })
+            window.addEventListener('mouseup', () => {
+                this.end()
             })
         },
     },

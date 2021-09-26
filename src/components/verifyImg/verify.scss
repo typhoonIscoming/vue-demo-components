@@ -22,4 +22,16 @@
         text-align: center;
         z-index: 3;
     }
+    .VerifyMoveBlock{
+        position: absolute;
+        top: 0px;
+        left: 0;
+        background: #fff;
+        cursor: pointer;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        box-shadow: 0 0 2px #888888;
+        border-radius: 1px;
+    }
 }

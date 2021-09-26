@@ -8,6 +8,7 @@
         <div class="DialogContent">
             <Verify
                 :defaultImg="defaultImg"
+                @success="handleVerifySuccess"
             />
         </div>
     </el-dialog>
@@ -70,6 +71,10 @@ export default {
                 localStorage.setItem('point', point)
             }
             /* eslint-enable */
+        },
+        handleVerifySuccess(distance) {
+            this.dialogVisible = false;
+            console.log('distance', distance)
         },
     },
 }
