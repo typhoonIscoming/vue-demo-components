@@ -44,6 +44,7 @@
             <el-button type="primary" size="mini" @click="handleVerify">验证</el-button>
         </div>
         <VerifyDialog v-model="showDialog" />
+        <MacMenu />
     </div>
 </template>
 
@@ -53,6 +54,7 @@ import { mapGetters, mapActions } from 'vuex';
 import DragVerifyImg from '@/components/dragImg';
 import bgImage from '@/assets/images/sw2.jpg';
 import VerifyDialog from '@/components/verifyImg/verifyDialog';
+import MacMenu from '@/modules/subAaPage/MacMenu';
 
 let idGlobal = 8;
 
@@ -94,6 +96,7 @@ export default {
         draggable,
         DragVerifyImg,
         VerifyDialog,
+        MacMenu,
     },
     created() {},
     methods: {
