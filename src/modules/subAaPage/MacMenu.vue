@@ -26,7 +26,6 @@ export default {
         move(e) {
             const { x, y } = e;
             const container = document.querySelector('.MacMenuContainer')
-            // const children = e.target;
             const children = [].slice.call(container.children)
             children.forEach((item) => {
                 console.log('item', item.offsetLeft)
