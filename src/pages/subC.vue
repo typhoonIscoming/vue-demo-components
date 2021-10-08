@@ -1,6 +1,5 @@
 <template>
     <div class="sub-c-page common">
-
     </div>
 </template>
 
@@ -8,8 +7,12 @@
 export default {
     data() {
         return {
-
+            iframeHeight: 800,
         }
+    },
+    methods: {
+        handleOnload() {
+        },
     },
 }
 </script>
