@@ -56,3 +56,7 @@ new Vue({
     components: { App },
     template: '<App/>',
 })
+
+if (!window.__POWERED_BY_QIANKUN__) {
+    console.log('none')
+}
