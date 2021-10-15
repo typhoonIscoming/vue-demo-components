@@ -20,7 +20,6 @@ const createLintingRule = () => ({
         emitWarning: !config.dev.showEslintErrorsInOverlay
     }
 })
-
 const webpackConfig = {
     context: path.resolve(__dirname, "../"),
     entry: {
@@ -32,7 +31,10 @@ const webpackConfig = {
         publicPath:
             process.env.NODE_ENV === "production"
                 ? config.build.assetsPublicPath
-                : config.dev.assetsPublicPath
+                : config.dev.assetsPublicPath,
+        library: `microvue-[name]`,
+        libraryTarget: "umd",
+        jsonpFunction: `webpackJsonp_microvue`
     },
     resolve: {
         extensions: [".js", ".vue", ".json"],

@@ -6,7 +6,7 @@ Vue.use(Router)
 
 export default new Router({
     mode: 'hash',
-    base: '/home',
+    base: '/microvue/',
     linkActiveClass: 'is-active',
     routes: [
         {

@@ -1,3 +1,5 @@
+import './public-path'
+/* eslint-disable import/first */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import 'babel-polyfill'
@@ -47,16 +49,48 @@ const i18n = new VueI18n({
 
 Vue.config.productionTip = false
 
+let root = null;
 /* eslint-disable no-new */
-new Vue({
-    el: '#app',
-    router,
-    i18n,
-    store,
-    components: { App },
-    template: '<App/>',
-})
+const microController = {
+    initialApp: () => {
+        window.__globalVueEntity = new Vue({
+            router,
+            i18n,
+            store,
+            components: { App },
+            template: '<App/>',
+        })
+        return window.__globalVueEntity
+    },
+    microAppRender: (props) => {
+        root.$mount('#root')
+        console.log('微应用的子应用渲染页面', props)
+    },
+    injectMainAppDate: (props) => {
+        console.log('微应用框架传递的数据', props)
+    },
+}
 
+// 不在微应用框架环境中
 if (!window.__POWERED_BY_QIANKUN__) {
-    console.log('none')
+    console.log('not in microapplication')
+    root = microController.initialApp()
+    microController.microAppRender()
+}
+
+export async function bootstrap() {
+    console.log('vue app bootstraped');
+}
+
+export async function mount(props) {
+    console.log('props from main framework', props.data);
+    root = microController.initialApp()
+    microController.injectMainAppDate(props)
+    microController.microAppRender(props)
+}
+
+export async function unmount() {
+    root.$destroy();
+    root.$el.innerHTML = '';
+    root = undefined;
 }
