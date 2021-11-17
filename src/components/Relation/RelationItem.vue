@@ -1,6 +1,5 @@
 <template>
     <div class="RelationItem">
-        RelationItem
         <slot />
     </div>
 </template>

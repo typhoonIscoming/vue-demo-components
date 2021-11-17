@@ -1,8 +1,10 @@
 <template>
     <div class="sub-c-page common">
         <div class="RelationDemoBox">
-            <Relation>
-                <RelationItem />
+            <Relation :value="relation" type="connect" @click="handleClick">
+                <RelationItem>child relation</RelationItem>
+                <RelationItem>child relation</RelationItem>
+                <RelationItem>child relation</RelationItem>
             </Relation>
         </div>
     </div>
@@ -19,10 +21,13 @@ export default {
     },
     data() {
         return {
+            rules: [],
+            relation: 1,
         }
     },
     methods: {
-        handleOnload() {
+        handleClick() {
+            this.relation = +(!this.relation)
         },
     },
 }
