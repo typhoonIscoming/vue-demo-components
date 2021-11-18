@@ -1,12 +1,18 @@
 <template>
     <div class="RelationItem">
+        <DatePicker />
         <slot />
     </div>
 </template>
 
 <script>
+import DatePicker from './packages/DatePicker';
+
 export default {
     name: 'RelationItem',
+    components: {
+        DatePicker,
+    },
     data() {
         return {}
     },
