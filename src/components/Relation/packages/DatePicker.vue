@@ -5,12 +5,17 @@
             <el-date-picker
                 ref="dataPicker"
                 v-model="value2"
+                v-show="false"
                 type="datetimerange"
                 :picker-options="pickerOptions"
                 range-separator="至"
+                size="mini"
+                :unlink-panels="true"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
-                align="right">
+                align="left"
+                class="DefindPicker"
+            >
             </el-date-picker>
         </div>
     </div>
@@ -60,12 +65,13 @@ export default {
         }
     },
     mounted() {
-        // this.$refs.dataPicker.focus()
     },
     methods: {
         handleFocus() {
-            console.log('focus')
-            this.show = true
+            console.log('focus', this.$refs.dataPicker.$el)
+            if (this.$refs.dataPicker.$el) {
+                this.$refs.dataPicker.$el.click()
+            }
         },
         clickDay() {},
         changeDate() {},
@@ -75,5 +81,11 @@ export default {
 <style lang='scss' scoped>
 .DataPikerContent{
     width: 800px;
+}
+.DefindPicker{
+    position: fixed;
+    top: 30%;
+    left: 70%;
+    z-index: -1;
 }
 </style>
