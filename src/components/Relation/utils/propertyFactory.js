@@ -6,6 +6,7 @@ export const behaviorFactory = () => {
             value: '',
         },
         done: {
+            type: 1,
         },
     }
 }
