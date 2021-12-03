@@ -15,7 +15,7 @@ export default {
         handleAdd() {
             this.isCollapsed = false;
             // this.initConfig是各个引用了此mixin中的组件的自定义初始化数据的方法
-            this.config.children = this.config.children.concat([ { ...this.initConfig() } ])
+            this.config.children = this.config.children.concat([{ ...this.initConfig() }])
         },
         handleAddChild(type, index) {
             const temp = { ...this.initConfig(), children: [] }
@@ -23,10 +23,10 @@ export default {
                 const current = this.config.children[index];
                 this.config.children = this.config.children.map((item, i) => {
                     if (i === index) {
-                        return  {...current, children: [ ...current.children, temp ] } 
+                        return { ...current, children: [...current.children, temp] }
                     }
                     return item
-                }) 
+                })
             } else {
                 const current = this.config.children[index];
                 // 变成一个包含子规则的节点，需要加上relation字段来描述子规则的关系
