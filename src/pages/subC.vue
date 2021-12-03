@@ -15,7 +15,7 @@ import Relation from '@/components/Relation';
 import UserAttribute from '../components/Relation/userAttribute';
 import UserAction from '../components/Relation/userAction';
 import UserOrder from '../components/Relation/userOrder';
-import { initUserAttributeConfig, initOrderConfig } from '../components/Relation/configFactory';
+import { initUserAttributeConfig, initActionConfig, initOrderConfig } from '../components/Relation/configFactory';
 
 export default {
     name: 'SubCpage',
@@ -35,7 +35,9 @@ export default {
             },
             userActionConfig: {
                 relation: 1,
-                children: [],
+                children: [
+                    { ...initActionConfig() },
+                ],
             },
             userOrderConfig: {
                 relation: 1,

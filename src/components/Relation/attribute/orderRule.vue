@@ -56,7 +56,7 @@
             </div>
         </template>
         <div class="actionsContainer">
-            <el-button type="text" icon="el-icon-plus" @click="handleAddEvent">添加事件</el-button>
+            <el-button type="text" icon="el-icon-circle-plus-outline" @click="handleAddEvent">添加事件</el-button>
         </div>
     </div>
 </template>

@@ -8,7 +8,7 @@ export const initUserAttributeConfig = (initCondition = 0, initMark = 1, initVal
 // 用户行为
 export const initActionConfig = () => ({
     date: { tag: 1, value: '' }, // 日期值包含了两部分，今日|昨日...，以及具体日期值
-    isDone: 1, // 是否做过
+    isDone: 'done', // 是否做过
     event: 1, // 做过某件事
     children: [], // 筛选条件(这里的筛选事件就可以使用 initUserAttributeConfig 来初始化)
     frequency: [], // 做过的频率
