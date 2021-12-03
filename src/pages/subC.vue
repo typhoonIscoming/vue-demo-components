@@ -56,9 +56,11 @@ export default {
 
 .sub-c-page{
     height: 100%;
+    overflow-y: scroll;
     .RelationDemoBox{
-        width: 800px;
+        width: 960px;
         margin: 0 auto;
+        padding: 20px 0;
     }
 }
 </style>

@@ -97,7 +97,7 @@ export default {
     flex-wrap: wrap;
     align-items: flex-start;
     flex-basis: content;
-    /deep/.el-select {
+    .el-select {
         &:not(:first-child){
             margin-left: 4px;
         }

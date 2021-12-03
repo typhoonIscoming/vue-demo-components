@@ -35,7 +35,7 @@
 <script>
 import Relation from '@/components/Relation';
 import DictionaryMixin from '../dictionaryMixins';
-import BaseRule from './rule';
+// import BaseRule from './rule';
 import RelationMixin from '../relationMixins';
 import { initActionConfig } from '../configFactory';
 
@@ -82,6 +82,9 @@ export default {
                 ],
             },
         }
+    },
+    components: {
+        Relation,
     },
     methods: {
         handleChangeCondition() {
