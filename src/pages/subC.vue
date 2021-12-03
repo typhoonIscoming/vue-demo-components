@@ -2,9 +2,9 @@
     <div class="sub-c-page common">
         <div class="RelationDemoBox">
             <Relation :value="relation" type="connect" @click="handleClick">
-                <RelationItem>child relation</RelationItem>
-                <RelationItem>child relation</RelationItem>
-                <RelationItem>child relation</RelationItem>
+                <UserAttribute :config="userAttributeConfig" />
+                <UserAction :config="userActionConfig" />
+                <UserOrder :config="userOrderConfig">child relation</UserOrder>
             </Relation>
         </div>
     </div>
@@ -12,17 +12,35 @@
 
 <script>
 import Relation from '@/components/Relation';
-import RelationItem from '@/components/Relation/RelationItem';
+import UserAttribute from '../components/Relation/userAttribute';
+import UserAction from '../components/Relation/userAction';
+import UserOrder from '../components/Relation/userOrder';
+import { initUserAttributeConfig, initOrderConfig } from '../components/Relation/configFactory';
 
 export default {
     name: 'SubCpage',
     components: {
-        Relation, RelationItem,
+        Relation, UserAttribute, UserAction, UserOrder,
     },
     data() {
         return {
-            rules: [],
             relation: 1,
+            userAttributeConfig: {
+                relation: 1,
+                children: [
+                    { relation: 1, children: [{ ...initUserAttributeConfig() }, { ...initUserAttributeConfig() }] },
+                    { ...initUserAttributeConfig() },
+                    { ...initUserAttributeConfig() },
+                ],
+            },
+            userActionConfig: {
+                relation: 1,
+                children: [],
+            },
+            userOrderConfig: {
+                relation: 1,
+                children: [{ ...initOrderConfig() }],
+            },
         }
     },
     methods: {

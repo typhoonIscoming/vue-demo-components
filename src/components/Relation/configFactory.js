@@ -18,7 +18,6 @@ export const initActionConfig = () => ({
 })
 
 
-
 // 用户行为依次做过的事件(即initOrderConfig中children中的对象)
 export const initOrderEvent = () => ({
     event: 1,
