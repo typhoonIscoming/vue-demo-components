@@ -1,0 +1,56 @@
+.UserAttribute{
+    border: 1px solid #E0E6ED;
+    padding: 12px 13px;
+    border-radius: 3px;
+    .Header{
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .actions{
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .collapsedBtn{
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 1px solid black;
+        font-size: 12px;
+        text-align: center;
+        line-height: 14px;
+        cursor: pointer;
+        margin-right: 8px;
+    }
+    .rulesContainer{
+        transition: all 0.2s;
+        &.hide{
+            height: 0;
+            overflow: hidden;
+        }
+        .AttributeRow{
+            display: flex;
+        }
+        .ruleActions{
+            width: 120px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .AttributeContent{
+            flex: 1;
+        }
+        /deep/ .RelationItemContainer{
+            &:first-child{
+                .AttributeRuleContainer{
+                    align-items: flex-start;
+                }
+            }
+            &:last-child{
+                .AttributeRuleContainer{
+                    align-items: flex-end;
+                }
+            }
+        }
+    }
+}
