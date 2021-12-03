@@ -85,7 +85,7 @@ export default {
                 tempValue = []
             }
             this.bindingConfig = {
-                ...initUserAttributeConfig(condition, mark, tempValue)
+                ...initUserAttributeConfig(condition, mark, tempValue),
             }
         },
     },

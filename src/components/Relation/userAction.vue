@@ -47,6 +47,7 @@ export default {
     methods: {
         handleChangeNextLevel(index) {
             // 修改配置中的第二级的关系
+            console.log('index', index)
         },
         initConfig() {
             // 配置给mixin中使用
