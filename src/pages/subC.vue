@@ -39,7 +39,7 @@ export default {
             },
             userOrderConfig: {
                 relation: 1,
-                children: [{ ...initOrderConfig() }],
+                children: [{ ...initOrderConfig(), ...initOrderConfig() }],
             },
         }
     },

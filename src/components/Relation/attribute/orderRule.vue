@@ -56,7 +56,7 @@
             </div>
         </template>
         <div class="actionsContainer">
-            <el-button type="text" icon="el-icon-plus" @click="handleAdd">添加事件</el-button>
+            <el-button type="text" icon="el-icon-plus" @click="handleAddEvent">添加事件</el-button>
         </div>
     </div>
 </template>
@@ -66,7 +66,7 @@ import Relation from '@/components/Relation';
 import DictionaryMixin from '../dictionaryMixins';
 import BaseRule from './rule';
 import RelationMixin from '../relationMixins';
-import { initUserAttributeConfig, initOrderConfig } from '../configFactory';
+import { initUserAttributeConfig, initOrderEvent } from '../configFactory';
 
 export default {
     name: 'OrderRule',
@@ -119,9 +119,6 @@ export default {
     components: {
         Relation, BaseRule,
     },
-    created() {
-        console.log('rule', this.config);
-    },
     methods: {
         handleChangeCondition(index) {
             this.config.children = this.config.children.map((item, i) => {
@@ -150,9 +147,8 @@ export default {
         handleDeleteRow() {
             this.$emit('onDelete')
         },
-        initConfig() {
-            // 配置给mixin中使用
-            return { ...initOrderConfig() }
+        handleAddEvent() {
+            this.config.children = this.config.children.concat([{ ...initOrderEvent() }])
         },
     },
 };
