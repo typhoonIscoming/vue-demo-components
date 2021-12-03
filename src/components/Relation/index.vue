@@ -138,10 +138,10 @@ $LineHeight: 25px;
         cursor: pointer;
         user-select: none;
         width: auto;
-        min-width: 20px;
-        height: 20px;
-        font-size: 13px;
-        line-height: 20px;
+        // min-width: 20px;
+        // height: 20px;
+        // font-size: 13px;
+        // line-height: 20px;
     }
     .RelationConnect{
         display: flex;
