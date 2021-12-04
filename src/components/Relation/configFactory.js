@@ -11,7 +11,7 @@ export const initActionConfig = () => ({
     isDone: 'done', // 是否做过
     event: 1, // 做过某件事
     children: [], // 筛选条件(这里的筛选事件就可以使用 initUserAttributeConfig 来初始化)
-    frequency: [], // 做过的频率
+    frequency: [1], // 做过的频率
     mark: 1, // 大于等于等等...
     times: {}, // 次数(大于、区间、topN三种取值类型)
     relation: 1,

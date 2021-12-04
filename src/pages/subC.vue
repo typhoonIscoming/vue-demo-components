@@ -4,7 +4,7 @@
             <Relation :value="relation" type="connect" @click="handleClick">
                 <UserAttribute :config="userAttributeConfig" />
                 <UserAction :config="userActionConfig" />
-                <UserOrder :config="userOrderConfig">child relation</UserOrder>
+                <UserOrder :config="userOrderConfig" />
             </Relation>
         </div>
     </div>

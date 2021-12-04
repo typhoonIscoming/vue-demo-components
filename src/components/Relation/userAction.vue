@@ -12,12 +12,12 @@
         <div class="rulesContainer" :class="{ hide: isCollapsed }">
             <Relation :value="config.relation" @click="handleChangeRelation('parent')">
                 <template v-for="(item, index) in config.children">
-                    <div :key="index">
+                    <div :key="index" class="RuleRow">
                         <template v-if="item.children && item.children.length">
                             <Relation :value="item.relation" @click="handleChangeNextLevel(index)">
                                 <template v-for="(oItem, i) in item.children">
-                                    <div :key="i">
-                                        <ActionRule :config.sync="config.children[index]" :oIndex="i" />
+                                    <div :key="i" class="ChildRule">
+                                        <ActionRule :config.sync="item.children[i]" :oIndex="i" />
                                     </div>
                                 </template>
                             </Relation>
@@ -58,4 +58,14 @@ export default {
 </script>
 <style lang='scss' scoped>
 @import './userRuleCommon.scss';
+
+.userAction{
+    .RelationItemContainer{
+        &:not(:last-child){
+            .ActionRule{
+                margin-bottom: 30px;
+            }
+        }
+    }
+}
 </style>

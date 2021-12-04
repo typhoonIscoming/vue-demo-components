@@ -6,6 +6,6 @@
     flex-direction: column;
 }
 
-.width160{
-    width: 160px;
-}
+.width160{ width: 160px; }
+.width120{ width: 120px; }
+.width80{ width: 80px; }
