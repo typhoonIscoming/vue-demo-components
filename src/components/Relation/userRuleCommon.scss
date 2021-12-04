@@ -24,10 +24,11 @@
         margin-right: 8px;
     }
     .rulesContainer{
-        transition: all 0.2s;
+        transition: all 0.2s linear;
+        height: auto;
+        overflow: hidden;
         &.hide{
             height: 0;
-            overflow: hidden;
         }
         .AttributeRow{
             display: flex;
