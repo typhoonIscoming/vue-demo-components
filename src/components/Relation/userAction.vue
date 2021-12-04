@@ -15,7 +15,7 @@
                     <div :key="index" class="RuleRow">
                         <!--第三级规则如果是chidlren-->
                         <template v-if="item.children && item.children.length">
-                            <Relation :value="item.relation" @click="handleChangeRelation('parent', index)">
+                            <Relation :value="item.relation" @click="handleChangeRelation('child', index)">
                                 <template v-for="(oItem, i) in item.children">
                                     <div :key="i" class="ChildRule flex-row">
                                         <div class="RuleContent">
@@ -98,10 +98,12 @@ export default {
 @import './userRuleCommon.scss';
 
 .userAction{
-    .RelationItemContainer{
-        &:not(:last-child){
-            .ActionRule{
-                margin-bottom: 20px;
+    .RuleRow{
+        .RelationItemContainer{
+            &:not(:last-child){
+                .ActionRule{
+                    margin-bottom: 20px;
+                }
             }
         }
     }

@@ -48,7 +48,7 @@
         >
             <span class="description">并且满足</span>
             <div class="RuleContent">
-                <Relation :value="config.relation" @click="handleChangeRelation('child', oIndex)">
+                <Relation :value="config.relation" @click="handleChangeRelation('parent', oIndex)">
                     <template v-for="(oItem, i) in config.filterCondition">
                         <div :key="i">
                             <div style="display:inline-block;">
