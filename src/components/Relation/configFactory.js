@@ -10,7 +10,7 @@ export const initActionConfig = () => ({
     date: { tag: 1, value: '' }, // 日期值包含了两部分，今日|昨日...，以及具体日期值
     isDone: 'done', // 是否做过
     event: 1, // 做过某件事
-    children: [], // 筛选条件(这里的筛选事件就可以使用 initUserAttributeConfig 来初始化)
+    filterCondition: [], // 筛选条件(这里的筛选事件就可以使用 initUserAttributeConfig 来初始化)
     frequency: [1], // 做过的频率
     mark: 1, // 大于等于等等...
     times: {}, // 次数(大于、区间、topN三种取值类型)

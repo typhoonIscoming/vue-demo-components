@@ -15,7 +15,7 @@
                     <div :key="index" class="RuleRow">
                         <!--第三级规则如果是chidlren-->
                         <template v-if="item.children && item.children.length">
-                            <Relation :value="item.relation" @click="handleChangeNextLevel(index)">
+                            <Relation :value="item.relation" @click="handleChangeRelation('parent', index)">
                                 <template v-for="(oItem, i) in item.children">
                                     <div :key="i" class="ChildRule flex-row">
                                         <div class="RuleContent">

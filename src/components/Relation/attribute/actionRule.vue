@@ -43,16 +43,16 @@
             </div>
         </div>
         <div
-            v-if="config.children && config.children.length"
+            v-if="config.filterCondition && config.filterCondition.length"
             class="childConditionContainer flex-row"
         >
             <span class="description">并且满足</span>
             <div class="RuleContent">
-                <Relation :value="config.relation" @click="handleChangeRelation('child', index)">
-                    <template v-for="(oItem, i) in config.children">
+                <Relation :value="config.relation" @click="handleChangeRelation('child', oIndex)">
+                    <template v-for="(oItem, i) in config.filterCondition">
                         <div :key="i">
                             <div style="display:inline-block;">
-                                <BaseRule :config.sync="config.children[i]" />
+                                <BaseRule :config.sync="config.filterCondition[i]" />
                             </div>
                             <el-button type="text" icon="el-icon-circle-close" @click="handleCurrentDelete(i)"></el-button>
                         </div>
@@ -78,7 +78,7 @@ import Relation from '@/components/Relation';
 import DictionaryMixin from '../dictionaryMixins';
 import BaseRule from './rule';
 import RelationMixin from '../relationMixins';
-import { initActionConfig, initUserAttributeConfig } from '../configFactory';
+import { initUserAttributeConfig } from '../configFactory';
 
 export default {
     name: 'ActionRule',
@@ -148,15 +148,11 @@ export default {
         },
         handleChangeFrequency() {},
         handleAddChildCondition() {
-            this.config.children = this.config.children.concat([{ ...initUserAttributeConfig() }])
+            this.config.filterCondition = this.config.filterCondition.concat([{ ...initUserAttributeConfig() }])
         },
         handleCurrentDelete(index) {
             // 删除筛选条件的row
-            this.config.children.splice(index, 1)
-        },
-        initConfig() {
-            // 配置给mixin中使用
-            return { ...initActionConfig() }
+            this.config.filterCondition.splice(index, 1)
         },
     },
 }
@@ -171,7 +167,7 @@ export default {
         margin-top: 12px;
     }
     .childConditionContainer{
-        margin-top: 8px;
+        margin-top: 10px;
         .description{
             width: 100px;
             height: 32px;
