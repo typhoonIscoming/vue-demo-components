@@ -16,7 +16,7 @@
                 <el-select
                     v-model="config.isDone"
                     placeholder="请选择"
-                    class="width160"
+                    class="width80"
                     @change="handleChangeCondition"
                 >
                     <el-option
@@ -41,9 +41,6 @@
                 </el-select>
                 <el-button type="text" icon="el-icon-plus" @click="handleAddChildCondition">添加筛选</el-button>
             </div>
-            <div class="RowAction flex-row">
-                <el-button type="text" icon="el-icon-close" @click="handleDeleteRow"></el-button>
-            </div>
         </div>
         <div
             v-if="config.children && config.children.length"
@@ -57,7 +54,7 @@
                             <div style="display:inline-block;">
                                 <BaseRule :config.sync="config.children[i]" />
                             </div>
-                            <el-button type="text" icon="el-icon-circle-close" @click="handleCurrentDelete"></el-button>
+                            <el-button type="text" icon="el-icon-circle-close" @click="handleCurrentDelete(i)"></el-button>
                         </div>
                     </template>
                 </Relation>
@@ -81,7 +78,7 @@ import Relation from '@/components/Relation';
 import DictionaryMixin from '../dictionaryMixins';
 import BaseRule from './rule';
 import RelationMixin from '../relationMixins';
-import { initActionConfig } from '../configFactory';
+import { initActionConfig, initUserAttributeConfig } from '../configFactory';
 
 export default {
     name: 'ActionRule',
@@ -145,15 +142,17 @@ export default {
         handleChangeCondition() {
 
         },
-        handleDeleteRow() {},
         handleChangeThing() {
             // 重置数据
             this.$set(this.config, 'frequency', [1])
         },
         handleChangeFrequency() {},
-        handleAddChildCondition() {},
-        handleCurrentDelete() {
+        handleAddChildCondition() {
+            this.config.children = this.config.children.concat([{ ...initUserAttributeConfig() }])
+        },
+        handleCurrentDelete(index) {
             // 删除筛选条件的row
+            this.config.children.splice(index, 1)
         },
         initConfig() {
             // 配置给mixin中使用
@@ -170,6 +169,25 @@ export default {
     }
     .frequency{
         margin-top: 12px;
+    }
+    .childConditionContainer{
+        margin-top: 8px;
+        .description{
+            width: 100px;
+            height: 32px;
+            line-height: 32px;
+            margin-top: 2px;
+            text-align: right;
+            align-self: flex-start;
+            color: #5e6d82;
+            font-size: 13px;
+            padding-right: 8px;
+        }
+        .RuleContent{
+            border-left: 2px solid #6fd2b2;
+            padding-left: 18px;
+            flex: 1;
+        }
     }
 }
 </style>
