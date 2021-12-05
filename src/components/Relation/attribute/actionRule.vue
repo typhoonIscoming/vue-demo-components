@@ -102,7 +102,7 @@
                     controls-position="right"
                     class="width120"
                 />
-                <template v-if="config.times.frontValueMark === 'range' || config.mark === 7">
+                <template v-if="config.mark === 8 || config.mark === 7">
                     <span>至</span>
                     <el-input-number
                         v-model="config.times.endValue"
@@ -218,10 +218,22 @@ export default {
             // 重置数据
             this.$set(this.config, 'frequency', [1])
         },
-        handleChangeFrequency() {},
+        handleChangeFrequency() {
+            // 选择频率类型是分布 且 之前已经选择了TOP N，那么就需要重置数据
+            if (this.frequencyType === '2' && this.config.mark === 8) {
+                this.config.mark = 1;
+                this.config.times = {
+                    ...initTimesRangeValue(1),
+                    frontValue: this.config.times.frontValue, // 将已经有的前值保存起来
+                }
+            }
+        },
         handleChangeOperator() {},
         handleChangeMark() {
-            this.config.times = { ...initTimesRangeValue(this.config.mark) }
+            this.config.times = {
+                ...initTimesRangeValue(this.config.mark),
+                frontValue: this.config.times.frontValue, // 将已经有的前值保存起来
+            }
         },
         handleAddChildCondition() {
             this.config.filterCondition = this.config.filterCondition.concat([{ ...initUserAttributeConfig() }])
