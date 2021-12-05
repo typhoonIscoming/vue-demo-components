@@ -261,7 +261,6 @@ export default {
                 ...initTimesRangeValue(this.config.mark),
                 frontValue: val >= 1 ? val : 1, // 将已经有的前值保存起来
             }
-            
         },
         handleAddChildCondition() {
             this.config.filterCondition = this.config.filterCondition.concat([{ ...initUserAttributeConfig() }])
