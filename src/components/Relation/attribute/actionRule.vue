@@ -62,6 +62,7 @@
         </div>
         <template v-if="config.isDone === 'done'">
             <div class="frequency">
+                <!--频率类型-->
                 <el-cascader
                     v-model="config.frequency"
                     :options="frequencyList"
@@ -71,6 +72,7 @@
                 <template v-if="frequencyType === '2'">
                     <span>天数</span>
                 </template>
+                <!--符号 = > < ≠ TOPN 区间 值-->
                 <el-select
                     v-model="config.mark"
                     placeholder="请选择"
@@ -84,6 +86,7 @@
                         :value="item.value" />
                 </el-select>
                 <template v-if="config.mark === 8">
+                    <!--前值符号-->
                     <el-select
                         v-model="config.times.frontValueMark"
                         placeholder="请选择"
@@ -97,20 +100,25 @@
                             :value="item.value" />
                     </el-select>
                 </template>
+                <!--前值-->
                 <el-input-number
                     v-model="config.times.frontValue"
+                    :min="numberMinValue"
                     controls-position="right"
                     class="width120"
                 />
                 <template v-if="config.mark === 8 || config.mark === 7">
                     <span>至</span>
+                    <!--后值-->
                     <el-input-number
                         v-model="config.times.endValue"
+                        :min="numberMinValue"
                         controls-position="right"
                         class="width120"
                     />
                 </template>
                 <template v-if="config.mark === 8">
+                    <!--后值符号-->
                     <el-select
                         v-model="config.times.endValueMark"
                         placeholder="请选择"
@@ -180,6 +188,7 @@ export default {
                     },
                 ],
             },
+            // numberMinValue: -Infinity,
         }
     },
     computed: {
@@ -206,6 +215,20 @@ export default {
             }
             return this.operatorOptions
         },
+        numberMinValue() {
+            const type = this.frequencyType;
+            // 第一层级的判断
+            if (type === '1' || type === '2') {
+                // 如果选择总次数或分布
+                return 1;
+            }
+            let val = -Infinity
+            if (this.config.times.frontValueMark === 8) {
+                // 如果是选择了TOPN，那么最小值也是1
+                val = 1
+            }
+            return val
+        },
     },
     components: {
         Relation, BaseRule,
@@ -222,18 +245,23 @@ export default {
             // 选择频率类型是分布 且 之前已经选择了TOP N，那么就需要重置数据
             if (this.frequencyType === '2' && this.config.mark === 8) {
                 this.config.mark = 1;
+                const val = this.config.times.frontValue;
                 this.config.times = {
                     ...initTimesRangeValue(1),
-                    frontValue: this.config.times.frontValue, // 将已经有的前值保存起来
+                    frontValue: val >= 1 ? val : 1, // 将已经有的前值保存起来
                 }
             }
         },
-        handleChangeOperator() {},
+        handleChangeOperator() {
+            console.log('numberMinValue', this.numberMinValue)
+        },
         handleChangeMark() {
+            const val = this.config.times.frontValue;
             this.config.times = {
                 ...initTimesRangeValue(this.config.mark),
-                frontValue: this.config.times.frontValue, // 将已经有的前值保存起来
+                frontValue: val >= 1 ? val : 1, // 将已经有的前值保存起来
             }
+            
         },
         handleAddChildCondition() {
             this.config.filterCondition = this.config.filterCondition.concat([{ ...initUserAttributeConfig() }])
