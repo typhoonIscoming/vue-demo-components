@@ -68,6 +68,18 @@
                     class="width160"
                     @change="handleChangeFrequency"
                 />
+                <el-select
+                    v-model="config.mark"
+                    placeholder="请选择"
+                    class="width80"
+                    @change="handleChangeOperator"
+                >
+                    <el-option
+                        v-for="item in operatorOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value" />
+                </el-select>
             </div>
         </template>
     </div>
@@ -147,6 +159,7 @@ export default {
             this.$set(this.config, 'frequency', [1])
         },
         handleChangeFrequency() {},
+        handleChangeOperator() {},
         handleAddChildCondition() {
             this.config.filterCondition = this.config.filterCondition.concat([{ ...initUserAttributeConfig() }])
         },
