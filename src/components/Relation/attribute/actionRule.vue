@@ -68,18 +68,35 @@
                     class="width160"
                     @change="handleChangeFrequency"
                 />
+                <template v-if="frequencyType === '2'">
+                    <span>天数</span>
+                </template>
                 <el-select
                     v-model="config.mark"
                     placeholder="请选择"
                     class="width80"
-                    @change="handleChangeOperator"
+                    @change="handleChangeMark"
                 >
                     <el-option
-                        v-for="item in operatorOptions"
+                        v-for="item in showOperatorList"
                         :key="item.value"
                         :label="item.label"
                         :value="item.value" />
                 </el-select>
+                <template v-if="config.mark === 8">
+                    <el-select
+                        v-model="config.times"
+                        placeholder="请选择"
+                        class="width80"
+                        @change="handleChangeOperator"
+                    >
+                        <el-option
+                            v-for="item in valuePositionOptions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" />
+                    </el-select>
+                </template>
             </div>
         </template>
     </div>
@@ -137,14 +154,28 @@ export default {
         }
     },
     computed: {
-        frequencyList() {
+        frequencyList() { // 最后显示的频率类型列表
             const event = this.config.event;
+            // 选择当前事件中被允许的频率的下拉列表
             const currentItem = this.somethingOptions.find(item => item.value === event);
             if (currentItem) {
                 const allowFrequency = currentItem.frequencyList;
+                // 过滤被允许的列表
                 return this.frequencyConditionOptions.filter(item => allowFrequency.includes(item.value))
             }
             return []
+        },
+        frequencyType() {
+            // 当前用户选择的频率类型
+            // 将数组转换成字符串判断
+            return this.config.frequency.join('-')
+        },
+        showOperatorList() {
+            // 当选择了是频率类型是“分布”,就不显示符号列表的“TOP N”
+            if (this.frequencyType === '2') {
+                return this.operatorOptions.filter(item => item.value !== 8)
+            }
+            return this.operatorOptions
         },
     },
     components: {
@@ -160,6 +191,9 @@ export default {
         },
         handleChangeFrequency() {},
         handleChangeOperator() {},
+        handleChangeMark() {
+
+        },
         handleAddChildCondition() {
             this.config.filterCondition = this.config.filterCondition.concat([{ ...initUserAttributeConfig() }])
         },

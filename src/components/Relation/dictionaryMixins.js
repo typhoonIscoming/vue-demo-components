@@ -95,6 +95,18 @@ export default {
                     ],
                 },
             ],
+            // valuePosition
+            // 值的范围列表
+            valuePositionOptions: [
+                { value: 'front', label: '前' },
+                { value: 'end', label: '后' },
+                { value: 'range', label: '区间' },
+            ],
+            // 最后一个值的类型
+            endValueOptions: [
+                { value: 'ranking', label: '名' },
+                { value: 'percent', label: '百分比' },
+            ],
         }
     },
 }
