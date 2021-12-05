@@ -85,7 +85,7 @@
                 </el-select>
                 <template v-if="config.mark === 8">
                     <el-select
-                        v-model="config.times"
+                        v-model="config.times.frontValueMark"
                         placeholder="请选择"
                         class="width80"
                         @change="handleChangeOperator"
@@ -97,6 +97,35 @@
                             :value="item.value" />
                     </el-select>
                 </template>
+                <el-input-number
+                    v-model="config.times.frontValue"
+                    controls-position="right"
+                    class="width120"
+                />
+                <template v-if="config.times.frontValueMark === 'range' || config.mark === 7">
+                    <span>至</span>
+                    <el-input-number
+                        v-model="config.times.endValue"
+                        controls-position="right"
+                        class="width120"
+                    />
+                </template>
+                <template v-if="config.mark === 8">
+                    <el-select
+                        v-model="config.times.endValueMark"
+                        placeholder="请选择"
+                        class="width100"
+                    >
+                        <el-option
+                            v-for="item in endValueOptions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" />
+                    </el-select>
+                </template>
+                <template v-if="(frequencyType === '1' || frequencyType === '2') && config.mark !== 8">
+                    <span>{{ frequencyType === '1' ? '次' : '天' }} </span>
+                </template>
             </div>
         </template>
     </div>
@@ -107,7 +136,7 @@ import Relation from '@/components/Relation';
 import DictionaryMixin from '../dictionaryMixins';
 import BaseRule from './rule';
 import RelationMixin from '../relationMixins';
-import { initUserAttributeConfig } from '../configFactory';
+import { initUserAttributeConfig, initTimesRangeValue } from '../configFactory';
 
 export default {
     name: 'ActionRule',
@@ -192,7 +221,7 @@ export default {
         handleChangeFrequency() {},
         handleChangeOperator() {},
         handleChangeMark() {
-
+            this.config.times = { ...initTimesRangeValue(this.config.mark) }
         },
         handleAddChildCondition() {
             this.config.filterCondition = this.config.filterCondition.concat([{ ...initUserAttributeConfig() }])
