@@ -1,6 +1,6 @@
 
 const initState = {
-
+    list: [],
 }
 
 
