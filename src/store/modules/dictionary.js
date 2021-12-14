@@ -4,7 +4,9 @@ const initState = {
 }
 
 
-const getters = {}
+const getters = {
+    getList: state => state.list,
+}
 
 const actions = {}
 
