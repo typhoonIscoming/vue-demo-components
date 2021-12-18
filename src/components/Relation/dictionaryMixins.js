@@ -1,4 +1,9 @@
+import { mapGetters } from 'vuex';
+
 export default {
+    computed: {
+        ...mapGetters('dictionary', ['getList']),
+    },
     data() {
         return {
             conditionOptions: [
