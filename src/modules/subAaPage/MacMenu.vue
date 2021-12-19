@@ -1,8 +1,8 @@
 <template>
-    <div class="MacMenuContainer" @mousemove.stop="handleHover">
+    <div class="MacMenuContainer" @mousemove.stop="handleHover" @mouseout.stop="handleOut">
         <div class="content">
-            <div class="MenuItem" v-for="item in 8" :key="item">
-                {{ item }}
+            <div class="MenuItem" v-for="item in 12" :key="item" @click="handleClick(item)">
+                <div class="ItemContent">{{ item }}</div>
             </div>
         </div>
     </div>
@@ -11,6 +11,7 @@
 <script>
 import throttle from 'lodash/throttle';
 
+// eslint-disable-next-line
 let moveFn = null;
 
 export default {
@@ -21,9 +22,14 @@ export default {
     created() {
         moveFn = throttle(this.move, 300)
     },
+    render(h) {
+        // return <div>我是render出来的</div>
+        return h('div', null, '我是render出来的')
+    },
     methods: {
         handleHover(e) {
-            moveFn(e)
+            // moveFn(e)
+            this.move(e)
         },
         move(e) {
             const { x } = e;
@@ -33,8 +39,22 @@ export default {
                 const { width, x: itemX } = item.getBoundingClientRect();
                 const itemCenterXPola = itemX + width / 2;
                 const diff = Math.abs(x - itemCenterXPola);
-                console.log('itemCenterXPola', diff)
+                if (diff < 200) {
+                    let rate = 1 + (200 - diff) / 200 * 0.5;
+                    rate = rate.toFixed(3);
+                    item.style = `transform: scale(${rate});`;
+                }
             })
+        },
+        handleOut() {
+            const container = document.querySelector('.content')
+            const children = [].slice.call(container.children)
+            children.forEach((item) => {
+                item.style = 'transform: scale(1)'
+            })
+        },
+        handleClick(item) {
+            console.log(item)
         },
     },
 }
@@ -46,24 +66,38 @@ export default {
     position: relative;
     cursor: pointer;
     padding: 10px;
-    background: #F3D7D1;
-    border-radius: 20px;
+    position: relative;
+    $itemWidth: 50px;
+    &::before{
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #575656;
+        opacity: 0.6;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 20px;
+    }
     .content{
         display: flex;
+        z-index: 2;
     }
     .MenuItem{
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
+        width: $itemWidth;
+        height: $itemWidth;
+        line-height: $itemWidth;
         text-align: center;
-        margin: 0 13px;
-        transition: all .2s linear;
+        margin: 0 12px;
         background: greenyellow;
         border-radius: 10px;
         transform-origin: bottom center;
-        &:hover{
-            transform: scale(1.5);
-        }
+        transform: scale(1);
+    }
+    .ItemContent{
+        width: $itemWidth;
+        height: $itemWidth;
     }
 }
 </style>
