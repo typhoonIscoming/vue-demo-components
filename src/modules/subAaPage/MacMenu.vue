@@ -22,10 +22,6 @@ export default {
     created() {
         moveFn = throttle(this.move, 300)
     },
-    render(h) {
-        // return <div>我是render出来的</div>
-        return h('div', null, '我是render出来的')
-    },
     methods: {
         handleHover(e) {
             // moveFn(e)
