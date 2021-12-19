@@ -37,7 +37,7 @@ export default {
                 const diff = Math.abs(x - itemCenterXPola);
                 if (diff < 200) {
                     let rate = 1 + (200 - diff) / 200 * 0.5;
-                    rate = rate.toFixed(3);
+                    rate = rate.toFixed(2);
                     item.style = `transform: scale(${rate});`;
                 }
             })
