@@ -45,6 +45,7 @@
         </div>
         <VerifyDialog v-model="showDialog" />
         <MacMenu />
+        <Calendar />
     </div>
 </template>
 
@@ -55,6 +56,7 @@ import DragVerifyImg from '@/components/dragImg';
 import bgImage from '@/assets/images/sw2.jpg';
 import VerifyDialog from '@/components/verifyImg/verifyDialog';
 import MacMenu from '@/modules/subAaPage/MacMenu';
+import Calendar from '@/components/calendar';
 
 let idGlobal = 8;
 
@@ -97,6 +99,7 @@ export default {
         DragVerifyImg,
         VerifyDialog,
         MacMenu,
+        Calendar,
     },
     created() {},
     methods: {
