@@ -152,9 +152,9 @@ wh_content_item_tag {
                 </li>
                 <!-- year month -->
                 <li class="wh_content_li">{{ dateTop }}</li>
-                <!-- <li @click="NextMonth(myDate,false)">
-          <div class="wh_jiantou2"></div>
-        </li> -->
+                <li @click="NextMonth(myDate,false)">
+                    <div class="wh_jiantou2"></div>
+                </li>
             </div>
             <div class="wh_content">
                 <!-- week -->
@@ -268,9 +268,11 @@ export default {
                 this.getList(this.myDate);
             }
         },
-        PreMonth: function(date, isChosedDay = true) {
+        PreMonth: function(date, isChosedDay = false) {
+            console.log('date', date, isChosedDay)
             date = timeUtil.dateFormat(date);
             this.myDate = timeUtil.getOtherMonth(this.myDate, "preMonth");
+            console.log('this.myDate', this.myDate)
             this.$emit("changeMonth", timeUtil.dateFormat(this.myDate));
             if (isChosedDay) {
                 this.getList(this.myDate, date, isChosedDay);
@@ -279,9 +281,11 @@ export default {
             }
         },
         NextMonth: function(date, isChosedDay = true) {
-            console.log("clickMonth");
+            console.log('datedate', date)
             date = timeUtil.dateFormat(date);
+            console.log('date', date)
             this.myDate = timeUtil.getOtherMonth(this.myDate, "nextMonth");
+            console.log('NextMonth', this.myDate)
             this.$emit("changeMonth", timeUtil.dateFormat(this.myDate));
             if (isChosedDay) {
                 this.getList(this.myDate, date, isChosedDay);
@@ -312,7 +316,7 @@ export default {
                 k.chooseDay = false;
                 const nowTime = k.date;
                 const t = new Date(nowTime).getTime() / 1000;
-                console.log("print this.mydate in getlist", this.myDate);
+                // console.log("print this.mydate in getlist", this.myDate);
                 //看每一天的class
                 for (const c of markDateMore) {
                     if (c.date === nowTime) {
