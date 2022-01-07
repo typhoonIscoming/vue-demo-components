@@ -26,6 +26,8 @@ module.exports = {
     },
     // add your custom rules here
     rules: {
+        "consistent-return": 0,
+        "array-callback-return": 0,
         "no-underscore-dangle": 0,
         "radix": 0,
         "no-param-reassign": 0,
