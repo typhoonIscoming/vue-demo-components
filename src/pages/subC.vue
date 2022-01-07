@@ -18,7 +18,19 @@ import UserAction from '../components/Relation/userAction';
 import UserOrder from '../components/Relation/userOrder';
 import { initUserAttributeConfig, initActionConfig, initOrderConfig } from '../components/Relation/configFactory';
 
-const getType = str => Object.prototype.toString.call(str).slice(8, -1)
+const getType = str => Object.prototype.toString.call(str).slice(8, -1);
+const trimStr = str => (str ? str.replace(/(^\s*)|(\s*$)/g, '') : '');
+const isNotEmpty = (val) => {
+    const type = getType(val);
+    if (type === 'String') {
+        return !!trimStr(val)
+    } else if (type === 'Number') {
+        return true
+    } else if (type === 'Null' || type === 'undefined') {
+        return false
+    }
+    return true
+}
 
 export default {
     name: 'SubCpage',
@@ -51,19 +63,31 @@ export default {
             this.relation = +(!this.relation)
         },
         handleVerify() {
-            console.log('userAttributeConfig===', this.userAttributeConfig)
+            const newList = this.removeEmpty(
+                this.userAttributeConfig.children,
+                item => item.children,
+            )
+            const actionList = this.removeEmpty(
+                this.userActionConfig.children,
+                item => item.children || item.filterCondition,
+            )
+            console.log('actionList', actionList)
+            this.userAttributeConfig = { ...this.userAttributeConfig, children: newList }
+            console.log('userAttributeConfig', this.userAttributeConfig)
+        },
+        removeEmpty(children) {
             const recursion = (list) => {
                 for (let i = 0; i < list.length;) {
                     const item = list[i];
                     if (item.children && item.children.length) {
                         recursion(item.children)
                     } else {
-                        console.log('item', item)
                         const type = getType(item.value);
-                        console.log('type', type)
-                        if (type === 'Array' && item.value.length === 0) {
+                        if (
+                            type === 'Array'
+                            && (item.value.length === 0 || item.value.find(val => !isNotEmpty(val)))
+                        ) {
                             list.splice(i, 1)
-                            console.log('list', list)
                             i -= 1;
                         }
                     }
@@ -71,15 +95,14 @@ export default {
                 }
                 return list
             }
-            const tempList = recursion(this.userAttributeConfig.children);
-            console.log('tempList', tempList)
+            const tempList = recursion(children);
             // 去除空children
             const clearEmpty = (list) => {
                 for (let i = 0; i < list.length;) {
                     const item = list[i];
-                    if (item && item.children && item.children.length > 0) {
+                    if (item.children && item.children.length) {
                         clearEmpty(item.children)
-                    } else if (item && item.children && item.children.length === 0) {
+                    } else if (item.children && item.children.length === 0) {
                         // 清除这个item
                         list.splice(i, 1)
                         i -= 1
@@ -88,10 +111,8 @@ export default {
                 }
                 return list
             }
-            const newList = clearEmpty(JSON.parse(JSON.stringify(tempList)))
-            console.log('newList', newList)
-            this.userAttributeConfig = { ...this.userAttributeConfig, children: newList }
-            console.log('list===', this.userAttributeConfig)
+            const newList = clearEmpty(tempList)
+            return newList
         },
     },
 }
