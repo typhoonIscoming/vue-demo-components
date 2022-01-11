@@ -1,14 +1,9 @@
 <template>
     <div class="container common f-page">
         <xh-common title="f" />
-        <pdf :src="src" />
-        <!-- <div class="content">
-            <child-one
-                v-for="(item, index) in list"
-                :key="index"
-                :item="item"
-            />
-        </div> -->
+        <!-- <pdf :src="src" /> -->
+        <div class="content">
+        </div>
     </div>
 </template>
 
@@ -31,17 +26,45 @@ export default {
         pdf,
     },
     created() {
-        const src = 'http://47.108.206.236:60035/loanapp/sign_contract/税金贷-个人征信授权_1618231562836.pdf'
-        this.src = pdf.createLoadingTask(src)
+        // const src = 'http://47.108.206.236:60035/loanapp/sign_contract/税金贷-个人征信授权_1618231562836.pdf'
+        // this.src = pdf.createLoadingTask(src)
         // this.regRgba()
         // this.regRgb()
         // this.regHex()
         // this.regHsl()
         // this.regHsla()
-        const result = this.rgbaToHex('rgba(20,30,40)')
-        console.log('result=', result)
+        // const result = this.rgbaToHex('rgba(20,30,40)')
+        // console.log('result=', result)
+    },
+    mounted() {
+        window.addEventListener('devicemotion', (e) => {
+            this.deviceMotionEvent(e)
+        })
+        // navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+        const supportsVibrate = 'vibrate' in navigator;
+        console.log('supportsVibrate', supportsVibrate)
+        if (supportsVibrate) {
+            setInterval(() => {
+                this.shake()
+            }, 3000)
+        }
     },
     methods: {
+        deviceMotionEvent(e) {
+            console.log('e', e)
+        },
+        shake() {
+            console.log('shake')
+            // 让手机震动
+            window.navigator.vibrate(2000) // 震动2s
+            // 震动出莫尔斯电码的"SOS"效果
+            // window.navigator.vibrate([
+            //     100, 30, 100, 30, 100, 200, 200, 30, 200, 30, 200, 200, 100, 30, 100, 30, 100,
+            // ]);
+            setTimeout(() => {
+                window.navigator.vibrate(0)
+            }, 2000)
+        },
         rgbaToHex(rgba) {
             if (!rgba) return '#000000';
             rgba = rgba.replace(/\s/g, '')
@@ -82,7 +105,7 @@ export default {
             // eslint-disable-next-line
             const hslareg = new RegExp(/^[hH][Ss][Ll][Aa][\(]([\s]*(2[0-9][0-9]|360|3[0-5][0-9]|[01]?[0-9][0-9]?)[\s]*,)([\s]*((100|[0-9][0-9]?)%|0)[\s]*,){2}([\s]*(1|1.0|0|0?\.[0-9]{1,2})[\s]*)[\)]$/);
             const isHsla = hsla => hslareg.test(hsla)
-            console.log('isHsla', isHsla('hsla(360,20%,30%,0.5)'))
+            return isHsla('hsla(360,20%,30%,0.5)')
         },
     },
 }
