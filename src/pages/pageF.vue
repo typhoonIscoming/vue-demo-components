@@ -42,7 +42,8 @@ export default {
         })
         // navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
         const supportsVibrate = 'vibrate' in navigator;
-        console.log('supportsVibrate', supportsVibrate)
+        const connection = navigator.connection; // 网络连接状态
+        console.log('supportsVibrate', supportsVibrate, connection)
         if (supportsVibrate) {
             setInterval(() => {
                 this.shake()
