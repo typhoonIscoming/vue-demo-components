@@ -38,6 +38,7 @@
             <div>
                 <button @click="$router.push('/subC')">跳转subC</button>
             </div>
+            <TseCircle />
         </div>
         <div class="bottom">c页面</div>
     </div>
@@ -52,6 +53,7 @@ import 'quill/dist/quill.bubble.css';
 import content from '@/utils/mock'
 import stack from 'vue-tantan-stack'
 import getImageTag from '@/utils/origination';
+import TseCircle from '@/components/circle';
 
 const initList = () => ([
 ])
@@ -83,6 +85,7 @@ export default {
         common,
         quillEditor,
         stack,
+        TseCircle,
     },
     created() {
         this.preContent = this.parse2(content)
