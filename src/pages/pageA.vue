@@ -83,6 +83,7 @@ import XhTransition from '@/components/transition/transition'
 import ruler from '@/components/rule';
 import camera from '@/components/camera';
 // import { getUrlPrams } from '@/utils/hashString';
+import { curry } from '@/utils/tool';
 
 export default {
     data() {
@@ -121,6 +122,11 @@ export default {
         // a ^= b;
         const a = '123'
         console.log(a.padStart(4, '$'))
+
+        const fn = (aa, bb, cc) => aa + bb + cc;
+        const curryFn = curry(fn);
+        const result = curryFn(1, 2)(3);
+        console.log('result', result)
     },
     mounted() {
         // document.addEventListener("visibilitychange", this.linsteningEvent);
