@@ -66,6 +66,7 @@
                     <input enterkeyhint="previous" value="previous tabindex=1" tabindex="1">
                     <input enterkeyhint="search" value="search tabindex=6" tabindex="6">
                     <input enterkeyhint="send" value="send tabindex=4" tabindex="4">
+                    <span class="tag">教育局</span>
                 </div>
             </div>
         </div>
@@ -281,6 +282,13 @@ export default {
                 background: red;
                 border-radius: 20px;
             }
+        }
+        .tag{
+            padding: 2px 14px;
+            background: linear-gradient(to right, #2864F9, #49A9FF);
+            border-radius: 20px;
+            font-size: 14px;
+            color: white;
         }
     }
 }
