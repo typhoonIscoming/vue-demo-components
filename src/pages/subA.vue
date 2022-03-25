@@ -36,7 +36,33 @@ export default {
             clientY: null,
         }
     },
+    mounted() {
+        this.$refs.containerItem.forEach((item) => {
+            item.style.top = `${item.offsetTop}px`
+            item.style.left = `${item.offsetLeft}px`
+            item.style.margin = '0 5px 5px 0';
+        })
+        this.$refs.containerItem.forEach((item) => {
+            item.style.position = 'absolute'
+        })
+        this.sort()
+    },
     methods: {
+        sort() {
+            const data = [
+                { label: 'a成都', count: 2695 },
+                { label: '绵阳', count: 2693 },
+                { label: '南充', count: 2697 },
+                { label: '德阳', count: 2698 },
+                { label: '内江', count: 2692 },
+                { label: '自贡', count: 2694 },
+            ];
+            const sortAscllCode = (list) => {
+                list.sort((a, b) => a.label.charCodeAt(0) - b.label.charCodeAt(0))
+                return list
+            }
+            console.log('sortAscllCode', sortAscllCode(data))
+        },
         handleMouseDown(event) {
             const target = event.target;
             const disX = event.clientX - target.offsetLeft;
@@ -69,16 +95,6 @@ export default {
             this.clientX = clientX
             this.clientY = clientY
         }, 100),
-    },
-    mounted() {
-        this.$refs.containerItem.forEach((item) => {
-            item.style.top = `${item.offsetTop}px`
-            item.style.left = `${item.offsetLeft}px`
-            item.style.margin = '0 5px 5px 0';
-        })
-        this.$refs.containerItem.forEach((item) => {
-            item.style.position = 'absolute'
-        })
     },
 }
 </script>
