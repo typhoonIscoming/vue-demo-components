@@ -10,7 +10,9 @@
 
 <script>
 import common from '@/components/common';
-import pdf from 'vue-pdf'
+import pdf from 'vue-pdf';
+
+let timer = null;
 
 export default {
     data() {
@@ -45,9 +47,14 @@ export default {
         const connection = navigator.connection; // 网络连接状态
         console.log('supportsVibrate', supportsVibrate, connection)
         if (supportsVibrate) {
-            setInterval(() => {
+            timer = setInterval(() => {
                 this.shake()
             }, 3000)
+        }
+    },
+    beforeDestroy() {
+        if (timer) {
+            clearInterval(timer);
         }
     },
     methods: {
@@ -62,8 +69,9 @@ export default {
             // window.navigator.vibrate([
             //     100, 30, 100, 30, 100, 200, 200, 30, 200, 30, 200, 200, 100, 30, 100, 30, 100,
             // ]);
-            setTimeout(() => {
-                window.navigator.vibrate(0)
+            const t = setTimeout(() => {
+                window.navigator.vibrate(0);
+                clearTimeout(t)
             }, 2000)
         },
         rgbaToHex(rgba) {

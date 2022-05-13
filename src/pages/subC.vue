@@ -1,5 +1,9 @@
 <template>
     <div class="sub-c-page common">
+        <div class="actions">
+            <el-button @click="handleVerify">验证</el-button>
+            <el-button type="primary" @click="handleGetValue">取值</el-button>
+        </div>
         <div class="RelationDemoBox">
             <Relation :value="relation" type="connect" @click="handleClick">
                 <UserAttribute :config="userAttributeConfig" />
@@ -7,7 +11,6 @@
                 <UserOrder :config="userOrderConfig" />
             </Relation>
         </div>
-        <el-button @click="handleVerify">验证</el-button>
     </div>
 </template>
 
@@ -43,7 +46,7 @@ export default {
             userAttributeConfig: {
                 relation: 1,
                 children: [
-                    { relation: 1, children: [{ ...initUserAttributeConfig() }] },
+                    { ...initUserAttributeConfig() },
                 ],
             },
             userActionConfig: {
@@ -114,6 +117,9 @@ export default {
             const newList = clearEmpty(tempList)
             return newList
         },
+        handleGetValue() {
+            console.log('===', this.userAttributeConfig)
+        },
     },
 }
 </script>
@@ -124,6 +130,11 @@ export default {
 .sub-c-page{
     height: 100%;
     overflow-y: scroll;
+    .actions{
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 40px;
+    }
     .RelationDemoBox{
         width: 960px;
         margin: 0 auto;
