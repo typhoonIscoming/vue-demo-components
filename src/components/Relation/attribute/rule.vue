@@ -1,44 +1,54 @@
 <template>
     <div class="AttributeRuleContainer">
-        <el-select
-            v-model="bindingConfig.condition"
-            placeholder="请选择"
-            class="width160"
-            @change="handleChangeCondition"
-        >
-            <el-option
-                v-for="item in conditionOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-            </el-option>
-        </el-select>
-        <el-select
-            v-model="bindingConfig.mark"
-            placeholder="请选择"
-            class="width160"
-            @change="handleChangeMark"
-        >
-            <el-option
-                v-for="item in operationOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-            </el-option>
-        </el-select>
-        <template v-if="showLastInputerType === 'select'">
-            <el-select v-model="bindingConfig.value" multiple allow-create placeholder="请选择" class="width160">
-                <el-option
-                    v-for="item in valueOptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                </el-option>
-            </el-select>
-        </template>
-        <template v-else-if="showLastInputerType === 'input'">
-            <el-input v-model="bindingConfig.value" placeholder="请输入内容" class="Inputer width160" />
-        </template>
+        <el-form ref="ruleForm" :model="bindingConfig" :rules="rules">
+            <el-form-item prop="condition">
+                <el-select
+                    v-model="bindingConfig.condition"
+                    placeholder="请选择"
+                    class="width160"
+                    @change="handleChangeCondition"
+                >
+                    <el-option
+                        v-for="item in conditionOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item prop="mark">
+                <el-select
+                    v-model="bindingConfig.mark"
+                    placeholder="请选择"
+                    class="width160"
+                    @change="handleChangeMark"
+                >
+                    <el-option
+                        v-for="item in operationOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <template v-if="showLastInputerType === 'select'">
+                <el-form-item prop="value">
+                    <el-select v-model="bindingConfig.value" multiple allow-create placeholder="请选择" class="width160">
+                        <el-option
+                            v-for="item in valueOptions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+            </template>
+            <template v-else-if="showLastInputerType === 'input'">
+                <el-form-item prop="value">
+                    <el-input v-model="bindingConfig.value" placeholder="请输入内容" class="Inputer width160" />
+                </el-form-item>
+            </template>
+        </el-form>
     </div>
 </template>
 
@@ -50,6 +60,10 @@ export default {
     name: 'AttributeRule',
     props: {
         config: {
+            type: Object,
+            default: () => {},
+        },
+        rules: {
             type: Object,
             default: () => {},
         },
@@ -110,6 +124,13 @@ export default {
     .Inputer{
         display: inline-block;
         margin-left: 4px;
+    }
+    .el-form{
+        width: 100%;
+        .el-form-item{
+            display: inline-block;
+            margin: 0;
+        }
     }
 }
 </style>
