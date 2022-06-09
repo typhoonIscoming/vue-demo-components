@@ -15,6 +15,8 @@ import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 
+import { ValidationProvider } from 'vee-validate';
+
 // 工程化引入所有的组件
 import webpackComponents from '@/webpackComponents'
 
@@ -36,6 +38,11 @@ Vue.use(webpackComponents)
 
 Vue.use(ConfirmPlugin)
 Vue.use(VueI18n)
+
+// 全局引入验证器组件，vee-validate3已经抛弃了v-validate指令，必须使用此组件来验证
+import './utils/extendsValidate';
+
+Vue.component('ValidationProvider', ValidationProvider)
 
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
 

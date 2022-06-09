@@ -3,6 +3,23 @@
         <xh-common title="f" />
         <!-- <pdf :src="src" /> -->
         <div class="content">
+            <!-- <div class="example-container">
+                <audio
+                    src="https://oss.oact.net/BgMusic/0-1645774162380006527.mp3"
+                    id="MusicPlay"
+                    class="media-audio"
+                    loop
+                    autoplay
+                    preload
+                    controls
+                    ref="MusicPlay"
+                ></audio>
+            </div> -->
+            <div class="row flex-row">
+                <Sketch :value="color" />
+                <Chrome :value="color" />
+                <Input v-model="mobile" rules="isMobile|required" />
+            </div>
         </div>
     </div>
 </template>
@@ -11,6 +28,8 @@
 <script>
 import common from '@/components/common';
 import pdf from 'vue-pdf';
+import { Sketch, Chrome } from 'vue-color';
+import Input from '@/components/Input';
 
 let timer = null;
 
@@ -21,11 +40,16 @@ export default {
             pageCount: 0,
             src: '',
             list: [{ name: 1 }, { name: 2 }],
+            color: '',
+            mobile: '',
         }
     },
     components: {
         'xh-common': common,
         pdf,
+        Sketch,
+        Chrome,
+        Input,
     },
     created() {
         // const src = 'http://47.108.206.236:60035/loanapp/sign_contract/税金贷-个人征信授权_1618231562836.pdf'
@@ -48,9 +72,10 @@ export default {
         console.log('supportsVibrate', supportsVibrate, connection)
         if (supportsVibrate) {
             timer = setInterval(() => {
-                this.shake()
+                // this.shake()
             }, 3000)
         }
+        // this.playAudio();
     },
     beforeDestroy() {
         if (timer) {
@@ -58,6 +83,18 @@ export default {
         }
     },
     methods: {
+        playAudio() {
+            const audio = document.querySelector('#MusicPlay');
+            document.body.click()
+            audio.oncanplay = () => {
+                console.log('===')
+                audio.play()
+            }
+            document.addEventListener('WeixinJSBridgeReady', () => {
+                audio.load();
+                audio.play();
+            }, false);
+        },
         deviceMotionEvent(e) {
             console.log('e', e)
         },
@@ -126,6 +163,24 @@ export default {
     // background-color: #07c160;
     .content{
         background: white;
+    }
+    .example-container{
+        height: 400px;
+    }
+    .example-one{
+        float: left;
+        clear: both;
+        height: 200px;
+    }
+    .example-second{
+        // float: right;
+        clear: both;
+        height: 200px;
+        line-height: 400px;
+    }
+    .rightBox{
+        float: right;
+        height: 100%;
     }
 }
 </style>
