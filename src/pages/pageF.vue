@@ -19,6 +19,7 @@
                 <Sketch :value="color" />
                 <Chrome :value="color" />
                 <Input v-model="mobile" rules="isMobile|required" />
+                <Semicircle />
             </div>
         </div>
     </div>
@@ -30,6 +31,7 @@ import common from '@/components/common';
 import pdf from 'vue-pdf';
 import { Sketch, Chrome } from 'vue-color';
 import Input from '@/components/Input';
+import Semicircle from '@/components/Semicircle';
 
 let timer = null;
 
@@ -50,6 +52,7 @@ export default {
         Sketch,
         Chrome,
         Input,
+        Semicircle,
     },
     created() {
         // const src = 'http://47.108.206.236:60035/loanapp/sign_contract/税金贷-个人征信授权_1618231562836.pdf'
