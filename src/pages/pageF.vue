@@ -20,6 +20,29 @@
                 <Chrome :value="color" />
                 <Input v-model="mobile" rules="isMobile|required" />
                 <Semicircle />
+                <div class="verifyContainer">
+                    <DragVerifyImgChip
+                        ref="verifyImgChip"
+                        :isPassing.sync="isPassing"
+                        :imgsrc="verifyImg"
+                        :showRefresh="true"
+                        text="请按住滑块拖动"
+                        successText="验证通过"
+                        refreshIcon="el-icon-refresh-right"
+                        handlerIcon="el-icon-d-arrow-right"
+                        successIcon="el-icon-circle-check"
+                        @passcallback="pass"
+                        @refresh="reimg"
+                    />
+                    <div>
+                        <span
+                            class="refreshBtn"
+                            @click="handleRefresh"
+                        >
+                            还原
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -32,6 +55,8 @@ import pdf from 'vue-pdf';
 import { Sketch, Chrome } from 'vue-color';
 import Input from '@/components/Input';
 import Semicircle from '@/components/Semicircle';
+import DragVerifyImgChip from '@/components/verify/verifyClip';
+import verifyImg from '@/assets/images/default.jpg';
 
 let timer = null;
 
@@ -44,6 +69,8 @@ export default {
             list: [{ name: 1 }, { name: 2 }],
             color: '',
             mobile: '',
+            verifyImg,
+            isPassing: false,
         }
     },
     components: {
@@ -53,6 +80,7 @@ export default {
         Chrome,
         Input,
         Semicircle,
+        DragVerifyImgChip,
     },
     created() {
         // const src = 'http://47.108.206.236:60035/loanapp/sign_contract/税金贷-个人征信授权_1618231562836.pdf'
@@ -86,6 +114,13 @@ export default {
         }
     },
     methods: {
+        pass(status) {
+            console.log('status', status)
+        },
+        reimg() {},
+        handleRefresh() {
+            this.$refs.verifyImgChip.reset()
+        },
         playAudio() {
             const audio = document.querySelector('#MusicPlay');
             document.body.click()
@@ -184,6 +219,17 @@ export default {
     .rightBox{
         float: right;
         height: 100%;
+    }
+    .verifyContainer{
+        padding: 10px 50px;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .refreshBtn{
+        padding: 6px 12px;
+        background-color: #409eff;
+        color: white;
+        font-size: 14px;
+        border-radius: 4px;
     }
 }
 </style>
