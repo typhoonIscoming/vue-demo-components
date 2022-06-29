@@ -18,17 +18,18 @@
             <div class="row flex-row">
                 <Sketch :value="color" />
                 <Chrome :value="color" />
-                <Input v-model="mobile" rules="isMobile|required" />
-                <Semicircle />
+                <!-- <Input v-model="mobile" rules="isMobile|required" /> -->
+                <!-- <Semicircle /> -->
                 <div class="verifyContainer">
                     <DragVerifyImgChip
                         ref="verifyImgChip"
                         :isPassing.sync="isPassing"
                         :imgsrc="verifyImg"
                         :showRefresh="true"
+                        :diffWidth="4"
                         text="请按住滑块拖动"
                         successText="验证通过"
-                        refreshIcon="el-icon-refresh-right"
+                        refreshIcon="el-icon-refresh-refresh"
                         handlerIcon="el-icon-d-arrow-right"
                         successIcon="el-icon-circle-check"
                         @passcallback="pass"

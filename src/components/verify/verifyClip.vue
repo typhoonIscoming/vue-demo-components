@@ -242,7 +242,7 @@ export default {
             ctx.lineTo(x, y + l);
             ctx.arc(x + r - 2, y + l / 2, r + 0.4, 2.76 * PI, 1.24 * PI, true);
             ctx.lineTo(x, y);
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 1;
             ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
             ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
             ctx.stroke();
@@ -334,8 +334,8 @@ export default {
             var handler = this.$refs.handler;
             handler.children[0].className = this.successIcon;
             this.$refs.progressBar.style.background = this.completedBg;
-            this.$refs.message.style["-webkit-text-fill-color"] = "unset";
-            this.$refs.message.style.animation = "slidetounlock2 3s infinite";
+            // this.$refs.message.style["-webkit-text-fill-color"] = "unset";
+            // this.$refs.message.style.animation = "slidetounlock2 3s infinite";
             this.$refs.progressBar.style.color = "#fff";
             this.$refs.progressBar.style.fontSize = this.textSize;
             this.isKeep = true;
@@ -366,12 +366,13 @@ export default {
             handler.style.left = "0";
             this.$refs.progressBar.style.width = "0";
             handler.children[0].className = this.handlerIcon;
-            message.style["-webkit-text-fill-color"] = "transparent";
-            message.style.animation = "slidetounlock 3s infinite";
+            // message.style["-webkit-text-fill-color"] = "transparent";
+            // message.style.animation = "slidetounlock 3s infinite";
             message.style.color = this.background;
             this.$refs.movecanvas.style.left = "0px";
         },
         refreshimg() {
+            this.reset()
             this.$emit('refresh');
         },
     },
