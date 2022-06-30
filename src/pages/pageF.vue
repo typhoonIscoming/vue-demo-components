@@ -98,7 +98,7 @@ export default {
         window.addEventListener('devicemotion', (e) => {
             this.deviceMotionEvent(e)
         })
-        // navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+        // window.navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
         const supportsVibrate = 'vibrate' in navigator;
         const connection = navigator.connection; // 网络连接状态
         console.log('supportsVibrate', supportsVibrate, connection)
@@ -142,9 +142,9 @@ export default {
             // 让手机震动
             window.navigator.vibrate(2000) // 震动2s
             // 震动出莫尔斯电码的"SOS"效果
-            // window.navigator.vibrate([
-            //     100, 30, 100, 30, 100, 200, 200, 30, 200, 30, 200, 200, 100, 30, 100, 30, 100,
-            // ]);
+            window.navigator.vibrate([
+                100, 30, 100, 30, 100, 200, 200, 30, 200, 30, 200, 200, 100, 30, 100, 30, 100,
+            ]);
             const t = setTimeout(() => {
                 window.navigator.vibrate(0);
                 clearTimeout(t)

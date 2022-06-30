@@ -10,6 +10,9 @@
             <div class="operator">
                 <button @click="getData">get Json</button>
                 <button @click="$router.push('/subB')">to subB page</button>
+                <div style="width: 200px;">
+                    <el-input v-model="input" placeholder="请输入内容"></el-input>
+                </div>
             </div>
         </div>
         <div class="bottom">
@@ -29,6 +32,7 @@ export default {
         return {
             linkPeople: '18502178364',
             editor: null,
+            input: '',
         };
     },
     components: {
