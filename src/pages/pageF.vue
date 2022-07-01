@@ -45,6 +45,14 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <DragVerifyRotate
+                    ref="verifyRotate"
+                    :isPassing.sync="isRotatePassing"
+                    :imgsrc="verifyImg"
+                    :showRefresh="true"
+                />
+            </div>
         </div>
     </div>
 </template>
@@ -57,10 +65,11 @@ import { Sketch, Chrome } from 'vue-color';
 import Input from '@/components/Input';
 import Semicircle from '@/components/Semicircle';
 import DragVerifyImgChip from '@/components/verify/verifyClip';
+import DragVerifyRotate from '@/components/verify/verifyRotate';
 import verifyImg from '@/assets/images/default.jpg';
 
 let timer = null;
-
+/* eslint-disable */
 export default {
     data() {
         return {
@@ -72,16 +81,12 @@ export default {
             mobile: '',
             verifyImg,
             isPassing: false,
+            isRotatePassing: false,
         }
     },
     components: {
-        'xh-common': common,
-        pdf,
-        Sketch,
-        Chrome,
-        Input,
-        Semicircle,
-        DragVerifyImgChip,
+        'xh-common': common, pdf, Sketch, Chrome,
+        Input, Semicircle, DragVerifyImgChip, DragVerifyRotate,
     },
     created() {
         // const src = 'http://47.108.206.236:60035/loanapp/sign_contract/税金贷-个人征信授权_1618231562836.pdf'
@@ -108,6 +113,7 @@ export default {
             }, 3000)
         }
         // this.playAudio();
+        this.getValues();
     },
     beforeDestroy() {
         if (timer) {
@@ -115,6 +121,47 @@ export default {
         }
     },
     methods: {
+        getValues() {
+            const obj = {
+                2: [1, 7],
+                7: [3, 6],
+                10: [11],
+                6: [5, 4],
+            }
+            // 打印出来[2,10,1,7,11,3,6,5,4]
+            const keys = Object.keys(obj);
+            const keysNum = keys.map(i => Number(i));
+            const values = Object.values(obj).flat();
+            const allLen = [...(new Set(keysNum.concat(values)))];
+            
+            let result = [], indicators = [], temp = [];
+            console.log('values', values);
+            console.log('keys', keys);
+            // while (result.length !== allLen.length) {
+
+            // }
+            // keys.forEach(item => {
+            //     const num = Number(item);
+            //     // 如果存在
+            //     if (!values.includes(num)) {
+            //         result.push(num)
+            //         temp.push(item)
+            //     } else {
+            //         indicators.push(item)
+            //     }
+            // });
+            // console.log('indicators', indicators)
+            // temp.forEach(item => {
+            //     const value = obj[item];
+            //     result.push(...value)
+            // })
+            // indicators.forEach(item => {
+            //     const value = obj[item];
+            //     result.push(...value)
+            // })
+            console.log('result', result)
+
+        },
         pass(status) {
             console.log('status', status)
         },
