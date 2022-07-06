@@ -2,6 +2,13 @@
     <div class="A page-a common">
         <common title="a"></common>
         <div class="content">
+            <template v-for="item in ballList">
+                <FallingBall
+                    :key="item.key"
+                    :left="item.left"
+                    :delay="item.delay"
+                />
+            </template>
             <button @click="isExpand = !isExpand">展开</button>
             <xh-transition
                 class="define"
@@ -85,6 +92,8 @@ import ruler from '@/components/rule';
 import camera from '@/components/camera';
 // import { getUrlPrams } from '@/utils/hashString';
 import { curry } from '@/utils/tool';
+import { generateUUID as uuid } from '@/utils/getUUId'
+import FallingBall from '@/components/fallingDown';
 
 export default {
     data() {
@@ -107,6 +116,7 @@ export default {
                 address: 'shanghai',
             },
             arrayList: [1, 2, 3],
+            ballList: [],
         };
     },
     components: {
@@ -114,6 +124,7 @@ export default {
         [XhTransition.name]: XhTransition,
         'cus-ruler': ruler,
         'cus-camera': camera,
+        FallingBall,
     },
     created() {
         // let a = 9,
@@ -135,7 +146,15 @@ export default {
         // console.log('getparams', getparams)
         window.addEventListener('storage', (e) => {
             console.log('e', e)
-        })
+        });
+        const random = (val, suffix = 0) => Number((Math.random() * (val || 100)).toFixed(suffix));
+        const wid = window.innerWidth - 30;
+        const arr = [];
+        for (let i = 0; i < 10; i += 1) {
+            arr.push({ key: uuid(), left: random(wid), delay: random(10) })
+        }
+        this.ballList = arr;
+        console.log(this.ballList)
     },
     methods: {
         changeStorage() {
