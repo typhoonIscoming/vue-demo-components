@@ -14,6 +14,11 @@
                     <el-input v-model="input" placeholder="请输入内容"></el-input>
                 </div>
             </div>
+            <Table>
+                <template slot="id" >
+                    <div>123dwdw{{ 123 }}</div>
+                </template>
+            </Table>
         </div>
         <div class="bottom">
             b{{ $t('m.page') }}
@@ -25,7 +30,7 @@
 import E from 'wangeditor'
 import common from '@/components/common';
 import selectItem from '@/components/pageB/selected'
-
+import Table from '../modules/Table';
 
 export default {
     data() {
@@ -38,6 +43,7 @@ export default {
     components: {
         common,
         'select-item': selectItem,
+        Table,
     },
     created() {
         const str = '13558513096'
