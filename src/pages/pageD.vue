@@ -2,11 +2,12 @@
     <div class="D common page-d-container">
         <common title="d"></common>
         <div class="content">
+            <span @click="handleAdd">添加弹幕</span>
             <!-- <xh-scroll-index>
             </xh-scroll-index> -->
             <!-- <input id="file" type="file" @change="selectedImage" />
             <img v-if="file" :src="file" /> -->
-            <div class="list-content grid">
+            <!-- <div class="list-content grid">
                 <div
                     v-for="item in 20"
                     :key="item"
@@ -15,6 +16,13 @@
                         {{ item }} : {{ width }}
                     </div>
                 </div>
+            </div> -->
+            <div class="Barrage">
+                <VueBaberrage
+                    :isShow="barrageIsShow"
+                    :barrageList="barrageList"
+                    :loop="barrageLoop"
+                />
             </div>
         </div>
         <div class="bottom">D页面</div>
@@ -22,8 +30,14 @@
 </template>
 
 <script>
+/* eslint-disable */
+// import { VueBaberrage, MESSAGE_TYPE } from 'vue-baberrage'
 import common from '@/components/common';
 import scrollIndex from '@/components/scrollIndex';
+
+const VueBaberrage = require('vue-baberrage').vueBaberrage;
+
+console.log('VueBaberrage', VueBaberrage)
 
 export default {
     data() {
@@ -31,24 +45,42 @@ export default {
             list: [],
             file: '',
             width: null,
+            barrageLoop: false,
+            barrageList: [],
+            barrageIsShow: true,
+            currentId: 0,
         };
     },
     components: {
         common,
         'xh-scroll-index': scrollIndex,
+        VueBaberrage,
     },
     created() {
-
+        this.addToList();
     },
     mounted() {
-        const el = document.getElementsByClassName('item');
-        this.width = el[0].getBoundingClientRect().width;
-        this.width = this.width.toFixed(2)
-        window.addEventListener('resize', () => {
-            this.width = el[0].getBoundingClientRect().width.toFixed(2)
-        })
+        // const el = document.getElementsByClassName('item');
+        // this.width = el[0].getBoundingClientRect().width;
+        // this.width = this.width.toFixed(2)
+        // window.addEventListener('resize', () => {
+        //     this.width = el[0].getBoundingClientRect().width.toFixed(2)
+        // })
     },
     methods: {
+        handleAdd() {
+            const msg = Math.random().toString().slice(2).toString(36);
+            this.addToList(msg)
+        },
+        addToList(msg) {
+            this.barrageList.push({
+                id: this.currentId += 1,
+                // avatar: "./static/avatar.jpg",
+                msg,
+                time: 5,
+                // type: MESSAGE_TYPE.NORMAL,
+            })
+        },
         selectedImage(event) {
             const file = event.target.files[0];
             this.compressFile(file, (files) => {
@@ -147,6 +179,10 @@ export default {
         // grid-template-columns: minmax(100px, 200px) repeat(auto-fill, 200px) 20%;
         // grid-template-columns: 1fr 2fr 3fr;
         grid-gap: 20px;
+    }
+    .Barrage{
+        height: 300px;
+        position: relative;
     }
 }
 </style>
