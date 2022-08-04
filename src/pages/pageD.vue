@@ -1,8 +1,9 @@
 <template>
-    <div class="D common page-d-container">
+    <div class="D common page-d-container" ref="pageContent">
         <common title="d"></common>
         <div class="content">
-            <span @click="handleAdd">添加弹幕</span>
+            <span @click="getPictrue">添加弹幕</span>
+            <img class="ImagePic" :src="imageUrl" />
             <!-- <xh-scroll-index>
             </xh-scroll-index> -->
             <!-- <input id="file" type="file" @change="selectedImage" />
@@ -17,23 +18,40 @@
                     </div>
                 </div>
             </div> -->
-            <div class="Barrage">
+            <!-- <div class="Barrage">
                 <VueBaberrage
                     :isShow="barrageIsShow"
                     :barrageList="barrageList"
                     :loop="barrageLoop"
                 />
-            </div>
+            </div> -->
         </div>
         <div class="bottom">D页面</div>
+
+        <el-dialog
+            title="显示图片"
+            :visible.sync="dialogVisible"
+            width="90%"
+            custom-class="showShotPicture"
+        >
+            <div class="ShotPictureContent">
+                <img class="imageShot" :src="shotPicture" alt="">
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
 <script>
+import html2canvas from 'html2canvas';
 /* eslint-disable */
 // import { VueBaberrage, MESSAGE_TYPE } from 'vue-baberrage'
 import common from '@/components/common';
 import scrollIndex from '@/components/scrollIndex';
+import { getBase64 } from '@/utils/compress';
 
 const VueBaberrage = require('vue-baberrage').vueBaberrage;
 
@@ -49,6 +67,9 @@ export default {
             barrageList: [],
             barrageIsShow: true,
             currentId: 0,
+            shotPicture: null,
+            dialogVisible: false,
+            imageUrl: null,
         };
     },
     components: {
@@ -58,6 +79,10 @@ export default {
     },
     created() {
         this.addToList();
+        getBase64('http://lanhai.oss-cn-chengdu.aliyuncs.com/images/member-data/111/20220804/11193024013173120.jpg')
+        .then((base) => {
+            this.imageUrl = base;
+        })
     },
     mounted() {
         // const el = document.getElementsByClassName('item');
@@ -68,6 +93,15 @@ export default {
         // })
     },
     methods: {
+        getPictrue() {
+            html2canvas(
+                this.$refs.pageContent,
+                { width:375, height:750, allowTaint: true, useCORS:true}
+            ).then((canvas) => {
+                this.dialogVisible = true;
+                this.shotPicture = canvas.toDataURL();
+            })
+        },
         handleAdd() {
             const msg = Math.random().toString().slice(2).toString(36);
             this.addToList(msg)
@@ -183,6 +217,21 @@ export default {
     .Barrage{
         height: 300px;
         position: relative;
+    }
+    .ImagePic{
+        max-width: 100%;
+        object-fit: contain;
+    }
+}
+</style>
+<style lang="scss">
+.showShotPicture{
+    .ShotPictureContent{
+        width: 100%;
+    }
+    .imageShot{
+        max-width: 100%;
+        object-fit: contain;
     }
 }
 </style>
