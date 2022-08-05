@@ -51,7 +51,6 @@ export function getBase64(imgUrl) {
                 let oFileReader = new FileReader();
                 oFileReader.onloadend = function(e){
                     // 此处拿到的已经是base64的图片了,可以赋值做相应的处理
-                    console.log(e.target.result)
                     resolve(e.target.result)
                 }
                 oFileReader.readAsDataURL(blob);
@@ -60,4 +59,23 @@ export function getBase64(imgUrl) {
         xhr.send();
     })
     
+}
+
+
+export function getImgBase64(api) {
+    return new Promise((resove, reject) => {
+        var img = new Image();
+        img.setAttribute('crossorigin', 'anonymous')
+        img.onload = () => {
+            function getBase64Image(img) {
+                var canvas = document.createElement('canvas')
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0)
+                return canvas.toDataURL()
+            }
+            resove(getBase64Image(img))
+        }
+        img.onerror = err => reject(err)
+        img.src = api
+    })
 }

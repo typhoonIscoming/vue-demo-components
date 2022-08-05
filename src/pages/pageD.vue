@@ -3,7 +3,12 @@
         <common title="d"></common>
         <div class="content">
             <span @click="getPictrue">添加弹幕</span>
-            <img class="ImagePic" :src="imageUrl" />
+            <div>
+                <img class="ImagePic" :src="imageUrl1" />
+            </div>
+            <div>
+                <img class="ImagePic" :src="imageUrl2" />
+            </div>
             <!-- <xh-scroll-index>
             </xh-scroll-index> -->
             <!-- <input id="file" type="file" @change="selectedImage" />
@@ -51,7 +56,8 @@ import html2canvas from 'html2canvas';
 // import { VueBaberrage, MESSAGE_TYPE } from 'vue-baberrage'
 import common from '@/components/common';
 import scrollIndex from '@/components/scrollIndex';
-import { getBase64 } from '@/utils/compress';
+import { getBase64, getImgBase64 } from '@/utils/compress';
+import jsonp from 'jsonp';
 
 const VueBaberrage = require('vue-baberrage').vueBaberrage;
 
@@ -69,7 +75,8 @@ export default {
             currentId: 0,
             shotPicture: null,
             dialogVisible: false,
-            imageUrl: null,
+            imageUrl1: null,
+            imageUrl2: null,
         };
     },
     components: {
@@ -79,9 +86,15 @@ export default {
     },
     created() {
         this.addToList();
-        getBase64('http://lanhai.oss-cn-chengdu.aliyuncs.com/images/member-data/111/20220804/11193024013173120.jpg')
+        const img1 = 'http://lanhai.oss-cn-chengdu.aliyuncs.com/images/member-data/111/20220804/11193024013173120.jpg';
+        const img2 = 'http://lanhai.oss-cn-chengdu.aliyuncs.com/images/member-data/111/20220804/11192938074243456.jpg';
+        getBase64(img2)
         .then((base) => {
-            this.imageUrl = base;
+            this.imageUrl2 = base;
+        });
+
+        getImgBase64(img1).then((base) => {
+            this.imageUrl1 = base;
         })
     },
     mounted() {
@@ -96,10 +109,18 @@ export default {
         getPictrue() {
             html2canvas(
                 this.$refs.pageContent,
-                { width:375, height:750, allowTaint: true, useCORS:true}
+                {
+                    width: 375,
+                    height: 750,
+                    allowTaint: true,
+                    useCORS: true,
+                    taintTest: true, // 在渲染前测试图片
+                    timeout: 1000, // 加载延时
+                    backgroundColor: 'transparent',
+                }
             ).then((canvas) => {
                 this.dialogVisible = true;
-                this.shotPicture = canvas.toDataURL();
+                this.shotPicture = canvas.toDataURL('image/png');
             })
         },
         handleAdd() {
