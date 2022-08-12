@@ -3,6 +3,7 @@
         <common title="d"></common>
         <div class="content">
             <span @click="getPictrue">添加弹幕</span>
+            <span @click="handleRoute">跳转到SubD页面</span>
             <div>
                 <img class="ImagePic" :src="imageUrl1" />
             </div>
@@ -58,10 +59,11 @@ import common from '@/components/common';
 import scrollIndex from '@/components/scrollIndex';
 import { getBase64, getImgBase64 } from '@/utils/compress';
 import jsonp from 'jsonp';
+import api from '@/api';
 
 const VueBaberrage = require('vue-baberrage').vueBaberrage;
 
-console.log('VueBaberrage', VueBaberrage)
+// console.log('VueBaberrage', VueBaberrage)
 
 export default {
     data() {
@@ -104,6 +106,12 @@ export default {
         // window.addEventListener('resize', () => {
         //     this.width = el[0].getBoundingClientRect().width.toFixed(2)
         // })
+        const params = {
+            types: ['cms_image_tag']
+        };
+        api.test(params).then((res) => {
+            console.log('===', res)
+        })
     },
     methods: {
         getPictrue() {
@@ -178,6 +186,9 @@ export default {
                     callback(files) // 回调
                 }
             }
+        },
+        handleRoute() {
+            this.$router.push('/subD')
         },
     },
 };
