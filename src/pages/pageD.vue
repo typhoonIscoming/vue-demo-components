@@ -4,12 +4,14 @@
         <div class="content">
             <span @click="getPictrue">添加弹幕</span>
             <span @click="handleRoute">跳转到SubD页面</span>
-            <div>
+            <!-- <Uploader /> -->
+            <input type="file" webkitdirectory @change="handleChange" />
+            <!-- <div>
                 <img class="ImagePic" :src="imageUrl1" />
             </div>
             <div>
                 <img class="ImagePic" :src="imageUrl2" />
-            </div>
+            </div> -->
             <!-- <xh-scroll-index>
             </xh-scroll-index> -->
             <!-- <input id="file" type="file" @change="selectedImage" />
@@ -60,6 +62,7 @@ import scrollIndex from '@/components/scrollIndex';
 import { getBase64, getImgBase64 } from '@/utils/compress';
 import jsonp from 'jsonp';
 import api from '@/api';
+import Uploader from 'vue-simple-uploader'
 
 const VueBaberrage = require('vue-baberrage').vueBaberrage;
 
@@ -85,6 +88,7 @@ export default {
         common,
         'xh-scroll-index': scrollIndex,
         VueBaberrage,
+        Uploader,
     },
     created() {
         this.addToList();
@@ -114,6 +118,9 @@ export default {
         })
     },
     methods: {
+        handleChange(e) {
+            console.log(e.target.files)
+        },
         getPictrue() {
             html2canvas(
                 this.$refs.pageContent,

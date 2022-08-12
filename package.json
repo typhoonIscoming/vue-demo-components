@@ -39,6 +39,7 @@
         "vue-pdf": "^4.0.7",
         "vue-quill-editor": "^3.0.6",
         "vue-router": "^3.0.1",
+        "vue-simple-uploader": "^0.7.6",
         "vue-tantan-stack": "^1.0.0",
         "vuedraggable": "^2.24.3",
         "vuex": "^3.1.2",
