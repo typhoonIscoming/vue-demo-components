@@ -1,7 +1,7 @@
 <template>
     <div class="pageG">
         <iframe
-            src="http://192.168.1.203:9552/imageLib?origin=outer"
+            src="https://ad.huaat.com/node-marketing/marketing/breakthroughQuestion/index.html#/home?activityCode=1594966040712843265&token=0158fa6ca3de4919bfe67f18a7120e6c"
             width="100%"
             height="100%"
             frameborder="0"

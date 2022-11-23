@@ -4,8 +4,9 @@
         <div class="content">
             <span @click="getPictrue">添加弹幕</span>
             <span @click="handleRoute">跳转到SubD页面</span>
+            <span style="position:fixed;left:50px;top:100px">这是固定定位元素</span>
             <!-- <Uploader /> -->
-            <input type="file" webkitdirectory @change="handleChange" />
+            <!-- <input type="file" webkitdirectory @change="handleChange" /> -->
             <!-- <div>
                 <img class="ImagePic" :src="imageUrl1" />
             </div>
@@ -16,7 +17,7 @@
             </xh-scroll-index> -->
             <!-- <input id="file" type="file" @change="selectedImage" />
             <img v-if="file" :src="file" /> -->
-            <!-- <div class="list-content grid">
+            <div class="list-content grid">
                 <div
                     v-for="item in 20"
                     :key="item"
@@ -25,7 +26,7 @@
                         {{ item }} : {{ width }}
                     </div>
                 </div>
-            </div> -->
+            </div>
             <!-- <div class="Barrage">
                 <VueBaberrage
                     :isShow="barrageIsShow"
@@ -40,6 +41,7 @@
             title="显示图片"
             :visible.sync="dialogVisible"
             width="90%"
+            top="5vh"
             custom-class="showShotPicture"
         >
             <div class="ShotPictureContent">
@@ -267,6 +269,10 @@ export default {
 .showShotPicture{
     .ShotPictureContent{
         width: 100%;
+        height: 400px;
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
     }
     .imageShot{
         max-width: 100%;
