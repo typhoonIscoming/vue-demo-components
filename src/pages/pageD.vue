@@ -4,7 +4,7 @@
         <div class="content">
             <span @click="getPictrue">添加弹幕</span>
             <span @click="handleRoute">跳转到SubD页面</span>
-            <span style="position:fixed;left:50px;top:100px">这是固定定位元素</span>
+            <UserCascader />
             <!-- <Uploader /> -->
             <!-- <input type="file" webkitdirectory @change="handleChange" /> -->
             <!-- <div>
@@ -17,7 +17,7 @@
             </xh-scroll-index> -->
             <!-- <input id="file" type="file" @change="selectedImage" />
             <img v-if="file" :src="file" /> -->
-            <div class="list-content grid">
+            <!-- <div class="list-content grid">
                 <div
                     v-for="item in 20"
                     :key="item"
@@ -26,7 +26,7 @@
                         {{ item }} : {{ width }}
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="Barrage">
                 <VueBaberrage
                     :isShow="barrageIsShow"
@@ -67,6 +67,7 @@ import api from '@/api';
 import Uploader from 'vue-simple-uploader'
 
 const VueBaberrage = require('vue-baberrage').vueBaberrage;
+import UserCascader from './pageD/useCascader';
 
 // console.log('VueBaberrage', VueBaberrage)
 
@@ -91,6 +92,7 @@ export default {
         'xh-scroll-index': scrollIndex,
         VueBaberrage,
         Uploader,
+        UserCascader,
     },
     created() {
         this.addToList();
@@ -115,9 +117,9 @@ export default {
         const params = {
             types: ['cms_image_tag']
         };
-        api.test(params).then((res) => {
-            console.log('===', res)
-        })
+        // api.test(params).then((res) => {
+        //     console.log('===', res)
+        // })
     },
     methods: {
         handleChange(e) {
