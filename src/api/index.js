@@ -9,4 +9,5 @@ export default {
             token: '1e5811547d1442b986a0c5d13116fb62',
         },
     }),
+    getAddress: () => axiosInstance('https://testapi.jshdata.com/api').get('/espier/address'),
 }

@@ -7,4 +7,4 @@ svgToString.js
 src/assets/tinyIcon.js
 /src/tinymce
 /static
-
+/src/api/token.js

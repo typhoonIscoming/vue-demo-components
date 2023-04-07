@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
+import token from './token';
 
 console.log(' process.env.BASE_API', process.env.BASE_API)
 
@@ -18,7 +19,10 @@ const createInstance = (base = '') => {
             },
         })
         service.interceptors.request.use(
-            config => config,
+            (config) => {
+                config.headers.Authorization = `Bearer ${token}`;
+                return config
+            },
             error => Promise.reject(error),
         )
         // response interceptor

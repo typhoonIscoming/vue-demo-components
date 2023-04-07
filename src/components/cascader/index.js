@@ -1,7 +1,7 @@
 import Main from './main';
 
 const inst = (Vue) => {
-    Vue.components(Main.name, Main)
+    Vue.components('Cascader', Main)
 }
 
 /* istanbul ignore if */
