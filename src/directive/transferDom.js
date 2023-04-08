@@ -6,6 +6,7 @@
  * @param {(Node|string|Boolean)} [node=document.body] DOM Node, CSS selector, or Boolean
  * @return {Node} The target that the el will be appended to
  */
+/* eslint-disable */
  function getTarget (node) {
     if (node === void 0) {
         node = document.body
@@ -15,7 +16,7 @@
 }
 
 const directive = {
-    inserted (el, { value }, vnode) {
+    inserted(el, { value }, vnode) {
         if ( el.dataset && el.dataset.transfer !== 'true') return false;
         el.className = el.className ? el.className + ' v-transfer-dom' : 'v-transfer-dom';
         const parentNode = el.parentNode;

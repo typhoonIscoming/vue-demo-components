@@ -47,8 +47,7 @@ export default {
     width: 50%;
 }
 html,
-body,
-#app {
+body{
     height: 100%;
 }
 #app {
