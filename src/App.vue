@@ -83,7 +83,7 @@ body{
     top: 0;
     background: white;
     display: flex;
-    z-index: 10;
+    z-index: 100;
     a {
         flex: 1;
         text-align: center;

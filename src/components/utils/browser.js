@@ -38,12 +38,10 @@ export const isWindow = val => val === window;
 
 export function on(target, event, handler, passive = false) {
     if (!isServer) {
+        // console.log('target', target)
         target.addEventListener(
             event,
-            (e) => {
-                console.log('addEventListener')
-                handler(e)
-            },
+            handler,
             supportsPassive ? { capture: false, passive } : false
         );
     }

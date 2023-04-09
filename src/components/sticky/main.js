@@ -13,7 +13,7 @@ export default createComponent({
             if (!this.scroller) {
                 this.scroller = getScroller(this.$el);
             }
-            console.log('isBind', this.$el)
+            // console.log('isBind', this.scroller)
             if (this.observer) {
                 const method = isBind ? 'observe' : 'unobserve';
                 this.observer[method](this.$el);
@@ -24,7 +24,7 @@ export default createComponent({
     ],
     props: {
         zIndex: [Number, String],
-        c: null,
+        container: null,
         offsetTop: {
             type: [Number, String],
             default: 0,
@@ -70,12 +70,12 @@ export default createComponent({
             this.observer = new IntersectionObserver(
                 (entries) => {
                     // trigger scroll when visibility changed
-                    console.log('intersectionRatio', entries[0].intersectionRatio)
+                    // console.log('intersectionRatio', entries[0].intersectionRatio)
                     if (entries[0].intersectionRatio > 0) {
                         this.onScroll();
                     }
                 },
-                { root: this.container || document.body },
+                { root: document.body },
             );
         }
     },
@@ -88,7 +88,6 @@ export default createComponent({
             const { container, offsetTopPx } = this;
             const scrollTop = getScrollTop(window);
             const topToPageTop = getElementTop(this.$el);
-            console.log('===', topToPageTop)
             const emitScrollEvent = () => {
                 this.$emit('scroll', {
                     scrollTop,
@@ -99,11 +98,9 @@ export default createComponent({
             // The sticky component should be kept inside the container element
             if (container) {
                 const bottomToPageTop = topToPageTop + container.offsetHeight;
-                console.log('distanceToBottom', scrollTop + offsetTopPx + this.height > bottomToPageTop)
                 if (scrollTop + offsetTopPx + this.height > bottomToPageTop) {
                     const distanceToBottom =
                         this.height + scrollTop - bottomToPageTop;
-                    console.log('distanceToBottom', distanceToBottom)
                     if (distanceToBottom < this.height) {
                         this.fixed = true;
                         this.transform = -(distanceToBottom + offsetTopPx);
@@ -115,7 +112,6 @@ export default createComponent({
                     return;
                 }
             }
-            console.log('++++', scrollTop + offsetTopPx > topToPageTop)
             if (scrollTop + offsetTopPx > topToPageTop) {
                 this.fixed = true;
                 this.transform = 0;

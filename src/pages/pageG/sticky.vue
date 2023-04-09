@@ -1,14 +1,13 @@
 <template>
     <div class="StickyDemo">
-        <!-- <div v-for="item in 3" :key="item" class="StickyBoxItem"> -->
-            <div ref="container" class="container">
-                <Sticky :container="container" :offset-top="20">
-                    <div class="StickyItem">
-                        StickyItem{{ 1 }}
-                    </div>
-                </Sticky>
-            </div>
-        <!-- </div> -->
+        <div class="container" style="height:200px;" ref="container">
+            <Sticky :container="container">
+                <div class="StickyItem">
+                    StickyItem{{ 1 }}
+                </div>
+            </Sticky>
+        </div>
+        <div style="height:500px;"></div>
     </div>
 </template>
 
@@ -37,19 +36,18 @@ export default {
 .StickyDemo{
     display: inline-block;
     width: 100%;
-    // height: 1300px;
+    height: 200px;
     border: 1px solid black;
     position: relative;
     overflow-y: auto;
     .StickyBoxItem{
         height: 600px;
-        background-color: greenyellow;
         &~.StickyBoxItem{
             margin-top: 20px;
         }
     }
     .container{
-        height: 200px;
+        background-color: greenyellow;
     }
     .StickyItem{
         width: 50%;
