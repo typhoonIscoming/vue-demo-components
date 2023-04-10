@@ -13,18 +13,22 @@ export default createComponent({
             if (!this.scroller) {
                 this.scroller = getScroller(this.$el);
             }
-            // console.log('isBind', this.scroller)
+            console.log('BindEventMixin', this.scroller)
             if (this.observer) {
                 const method = isBind ? 'observe' : 'unobserve';
                 this.observer[method](this.$el);
             }
-            bind(this.scroller, 'scroll', this.onScroll, true);
+            bind(this.scroller, 'scroll', () => {
+                // console.log('bind', e)
+                this.onScroll()
+            }, true);
             this.onScroll();
         }),
     ],
     props: {
         zIndex: [Number, String],
         container: null,
+        scroll: null,
         offsetTop: {
             type: [Number, String],
             default: 0,
@@ -74,8 +78,9 @@ export default createComponent({
                     if (entries[0].intersectionRatio > 0) {
                         this.onScroll();
                     }
+                    console.log('created scroll', entries[0].intersectionRatio)
                 },
-                { root: document.body },
+                { root: this.scroll || document.body },
             );
         }
     },
@@ -86,8 +91,11 @@ export default createComponent({
             }
             this.height = this.$el.offsetHeight;
             const { container, offsetTopPx } = this;
-            const scrollTop = getScrollTop(window);
-            const topToPageTop = getElementTop(this.$el);
+            const scrollTop = getScrollTop(this.scroll || window);
+            // console.log('scrollTop', scrollTop)
+            // console.log('el', this.$el)
+            // console.log('this.scroll', this.scroll)
+            const topToPageTop = getElementTop(this.$el, this.scroll);
             const emitScrollEvent = () => {
                 this.$emit('scroll', {
                     scrollTop,

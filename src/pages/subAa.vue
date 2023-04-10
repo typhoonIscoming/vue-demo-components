@@ -13,7 +13,7 @@
                     @end="drag = false"
                 >
                     <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-                        <div class="list-group-item" v-for="(element, index) in list" :key="index">
+                        <div class="list-group-item" v-for="(element, index) in list" :key="`element_${index}`">
                             {{ element.name }}
                         </div>
                     </transition-group>

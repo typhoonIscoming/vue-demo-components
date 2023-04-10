@@ -4,15 +4,12 @@ function gen(name, mods) {
     if (!mods) {
         return "";
     }
-
     if (typeof mods === "string") {
         return ` ${name}--${mods}`;
     }
-
     if (Array.isArray(mods)) {
         return mods.reduce((ret, item) => ret + gen(name, item), "");
     }
-
     return Object.keys(mods).reduce(
         (ret, key) => ret + (mods[key] ? gen(name, key) : ""),
         ""
@@ -87,14 +84,15 @@ function install(that, Vue) {
 
 export function createComponent(name) {
     return function(sfc) {
+        console.log('sfc', sfc)
         if (isFunction(sfc)) {
+            console.log('functional')
             sfc = transformFunctionComponent(sfc);
         }
         if (!sfc.functional) {
             sfc.mixins = sfc.mixins || [];
             sfc.mixins.push(SlotsMixin);
         }
-        console.log('name', name)
         sfc.name = name;
         sfc.install = install;
 

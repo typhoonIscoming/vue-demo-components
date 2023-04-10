@@ -1,13 +1,13 @@
 <template>
-    <div class="StickyDemo">
-        <div class="container" style="height:200px;" ref="container">
-            <Sticky :container="container">
+    <div class="StickyDemo" ref="container">
+        <!-- <div class="container" style="height:200px;" > -->
+            <Sticky :container="container" :scroll="scroll">
                 <div class="StickyItem">
                     StickyItem{{ 1 }}
                 </div>
             </Sticky>
-        </div>
-        <div style="height:500px;"></div>
+        <!-- </div> -->
+        <!-- <div style="height:500px;"></div> -->
     </div>
 </template>
 
@@ -22,13 +22,17 @@ export default {
     data() {
         return {
             container: null,
+            scroll: null,
         }
     },
     components: {
         Sticky,
     },
     mounted() {
-        this.container = this.$refs.container;
+        setTimeout(() => {
+            this.container = this.$refs.container;
+            this.scroll = document.querySelector('.stickyBox')
+        }, 200)
     },
 }
 </script>
@@ -39,7 +43,7 @@ export default {
     height: 200px;
     border: 1px solid black;
     position: relative;
-    overflow-y: auto;
+    // overflow-y: auto;
     .StickyBoxItem{
         height: 600px;
         &~.StickyBoxItem{

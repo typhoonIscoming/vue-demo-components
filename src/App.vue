@@ -49,8 +49,10 @@ export default {
 html,
 body{
     height: 100%;
+    width: 100%;
 }
 #app {
+    height: 100%;
     position: relative;
     box-sizing: border-box;
 }
