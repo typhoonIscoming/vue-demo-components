@@ -1,10 +1,10 @@
 <template>
     <div class="pageG">
         <!-- <div style="height:300px;background-color:#fff;"></div> -->
-        <div class="stickyBox" style="height:300px;overflow:auto;">
+        <!-- <div class="stickyBox" style="height:300px;overflow:auto;border:1px solid black;"> -->
             <StickyDemo />
-            <div style="height:300px"></div>
-        </div>
+            <!-- <div style="height:300px"></div> -->
+        <!-- </div> -->
         <!-- <Sticky>
             <div class="vantStickyItem" >vantItem</div>
         </Sticky> -->

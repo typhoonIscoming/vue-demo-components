@@ -1,13 +1,13 @@
 <template>
     <div class="StickyDemo" ref="container">
-        <!-- <div class="container" style="height:200px;" > -->
-            <Sticky :container="container" :scroll="scroll">
+        <div class="container" style="height:200px;" ></div>
+            <Sticky :container="container" :scroll="scroll" :offset-top="40">
                 <div class="StickyItem">
                     StickyItem{{ 1 }}
                 </div>
             </Sticky>
         <!-- </div> -->
-        <!-- <div style="height:500px;"></div> -->
+        <div style="height:500px;background-color:yellow;"></div>
     </div>
 </template>
 
@@ -41,9 +41,9 @@ export default {
     display: inline-block;
     width: 100%;
     height: 200px;
-    border: 1px solid black;
+    // border: 1px solid black;
     position: relative;
-    // overflow-y: auto;
+    overflow-y: auto;
     .StickyBoxItem{
         height: 600px;
         &~.StickyBoxItem{
