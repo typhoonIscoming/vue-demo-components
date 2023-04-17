@@ -2,7 +2,7 @@
     <div class="pageG">
         <!-- <div style="height:300px;background-color:#fff;"></div> -->
         <!-- <div class="stickyBox" style="height:300px;overflow:auto;border:1px solid black;"> -->
-            <StickyDemo />
+            <StickyDemo v-for="item in 20" :key="item" :oIndex="item" />
             <!-- <div style="height:300px"></div> -->
         <!-- </div> -->
         <!-- <Sticky>

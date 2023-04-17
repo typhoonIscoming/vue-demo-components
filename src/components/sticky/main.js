@@ -13,7 +13,7 @@ export default createComponent({
             if (!this.scroller) {
                 this.scroller = getScroller(this.$el);
             }
-            console.log('BindEventMixin', this.scroller)
+            // console.log('BindEventMixin', this.scroller)
             if (this.observer) {
                 const method = isBind ? 'observe' : 'unobserve';
                 this.observer[method](this.$el);
@@ -72,13 +72,13 @@ export default createComponent({
         // compatibility: https://caniuse.com/#feat=intersectionobserver
         if (window.IntersectionObserver) {
             this.observer = new IntersectionObserver(
-                (entries) => {
+                (entries) => { // eslint-disable-line
                     // trigger scroll when visibility changed
                     // console.log('intersectionRatio', entries[0].intersectionRatio)
-                    if (entries[0].intersectionRatio > 0) {
+                    // if (entries[0].intersectionRatio > 0) {
                         this.onScroll();
-                    }
-                    console.log('created scroll', entries[0].intersectionRatio)
+                    // }
+                    // console.log('created scroll', this.$el)
                 },
                 { root: this.scroll || document.body },
             );

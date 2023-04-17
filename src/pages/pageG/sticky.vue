@@ -1,13 +1,13 @@
 <template>
     <div class="StickyDemo" ref="container">
-        <div class="container" style="height:200px;" ></div>
+        <!-- <div class="container" style="height:200px;" ref="container"> -->
             <Sticky :container="container" :scroll="scroll" :offset-top="40">
                 <div class="StickyItem">
-                    StickyItem{{ 1 }}
+                    StickyItem{{ oIndex || 1 }}
                 </div>
             </Sticky>
         <!-- </div> -->
-        <div style="height:500px;background-color:yellow;"></div>
+        <!-- <div style="height:500px;background-color:yellow;" /> -->
     </div>
 </template>
 
@@ -19,6 +19,12 @@ import Sticky from '@/components/sticky/main';
 
 export default {
     name: 'Main',
+    props: {
+        oIndex: {
+            type: Number,
+            default: 0,
+        },
+    },
     data() {
         return {
             container: null,
@@ -31,7 +37,9 @@ export default {
     mounted() {
         setTimeout(() => {
             this.container = this.$refs.container;
-            this.scroll = document.querySelector('.stickyBox')
+            this.scroll = document.querySelector('.pageG');
+            // this.scroll = this.$refs.scroll;
+            // console.log('container', this.container)
         }, 200)
     },
 }
@@ -41,9 +49,9 @@ export default {
     display: inline-block;
     width: 100%;
     height: 200px;
-    // border: 1px solid black;
+    border: 1px solid black;
     position: relative;
-    overflow-y: auto;
+    // overflow-y: auto;
     .StickyBoxItem{
         height: 600px;
         &~.StickyBoxItem{
