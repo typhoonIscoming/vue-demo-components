@@ -10,12 +10,12 @@
             </div>
         </div>
         <div class="rulesContainer" :class="{ hide: isCollapsed }">
-            <Relation :value="config.relation" @click="handleChangeRelation('parent')">
+            <Relation :value="config.relation" type="connect" @click="handleChangeRelation('parent')">
                 <template v-for="(item, index) in config.children">
                     <div :key="index">
                         <template v-if="item.children && item.children.length > 0">
                             <div class="hasChild">
-                                <Relation :value="item.relation" @click="handleChangeRelation('child', index)">
+                                <Relation :value="item.relation" type="connect" @click="handleChangeRelation('child', index)">
                                     <div v-for="(oItem, i) in item.children" :key="i" class="AttributeRow">
                                         <div class="AttributeContent">
                                             <AttributeRule :config.sync="item.children[i]" />
