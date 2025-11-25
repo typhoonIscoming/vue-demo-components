@@ -1,0 +1,6 @@
+{
+	"i18n-ally.localesPaths": [
+		"src/language",
+		"static/tinymce/langs"
+	]
+}

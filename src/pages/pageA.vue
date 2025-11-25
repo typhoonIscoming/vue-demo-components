@@ -246,13 +246,9 @@ export default {
     padding-bottom: 50px;
     box-sizing: border-box;
     .changeable-container{
-        height: 100px;
+        // min-height: 100px;
         width: 100%;
         background-color: greenyellow;
-        &.expend-changeable-container{
-            height: 500px;
-            background-color: red;
-        }
     }
     .content{
         overflow-y: auto;
